@@ -1,5 +1,4 @@
 public class LineStep implements ILineStep {
-
     ProductPart body = buildProductPart("body");
     ProductPart motherboard = buildProductPart("motherboard");
     ProductPart monitor = buildProductPart("monitor");
@@ -7,24 +6,23 @@ public class LineStep implements ILineStep {
     @Override
     public ProductPart buildProductPart(String part) {
         if (part == "body") {
-            ProductPart productPart = new ProductPart("Body", "contains all parts of computer");
-            System.out.println("body create");
-            return productPart;
+            ProductPart body = new ProductPart("Body", "contains all parts of computer");
+            System.out.println("body created");
+            return body;
         }
         else if (part == "motherboard") {
-            ProductPart productPart = new ProductPart("Motherboard", "realised computer architecture");
-            System.out.println("motherboard create");
-            return productPart;
+            ProductPart motherboard = new ProductPart("Motherboard", "realised computer architecture");
+            System.out.println("motherboard created");
+            return motherboard;
         }
         else if (part == "monitor") {
-            ProductPart productPart = new ProductPart("Monitor", "means for displaying information");
-            System.out.println("monitor create");
-            return productPart;
+            ProductPart monitor = new ProductPart("Monitor", "means for displaying information");
+            System.out.println("monitor created");
+            return monitor;
         }
         else {
             System.out.println("I can't to do this part");
             return null;
         }
     }
-
 }
