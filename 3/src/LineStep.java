@@ -1,7 +1,7 @@
 public class LineStep implements ILineStep {
-    ProductPart body = buildProductPart("body");
-    ProductPart motherboard = buildProductPart("motherboard");
-    ProductPart monitor = buildProductPart("monitor");
+    private ProductPart body = buildProductPart("body");
+    private ProductPart motherboard = buildProductPart("motherboard");
+    private ProductPart monitor = buildProductPart("monitor");
 
     @Override
     public ProductPart buildProductPart(String part) {
@@ -25,4 +25,17 @@ public class LineStep implements ILineStep {
             return null;
         }
     }
+
+    public ProductPart getBody() {
+        return body;
+    }
+
+    public ProductPart getMotherboard() {
+        return motherboard;
+    }
+
+    public ProductPart getMonitor() {
+        return monitor;
+    }
+
 }

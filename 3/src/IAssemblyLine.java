@@ -1,3 +1,3 @@
 public interface IAssemblyLine {
-    Product assembleProduct(Product product, LineStep lineStep);
+    Product assembleProduct(Product product);
 }

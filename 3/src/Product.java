@@ -1,4 +1,5 @@
 public class Product implements IProduct {
+
     @Override
     public void InstallFirstPart(ProductPart body) {
         System.out.println(body.getNameOfPart() + " " + body.Action());

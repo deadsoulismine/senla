@@ -16,5 +16,13 @@ public class Bouquet {
     }
 
 
+    public void getSum () {
+        int sum = 0;
+        System.out.print("Bouquet price: ");
+        for (Flower n : getFlowers()) {
+            sum += n.getPrice();
+        }
+        System.out.println(sum);
+    }
 
 }

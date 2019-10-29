@@ -22,12 +22,9 @@ public class Main {
             System.out.println("Title: " + n.getTitle() + " Price: " + n.getPrice());
         }
 
-        int sum = 0;
-        System.out.print("Bouquet price: ");
-        for (Flower n : bouquet.getFlowers()) {
-            sum += n.getPrice();
-        }
-        System.out.println(sum);
+        //Sum of bouquet
+        bouquet.getSum();
 
     }
+
 }

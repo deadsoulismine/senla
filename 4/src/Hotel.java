@@ -52,20 +52,18 @@ public class Hotel implements IHotel {
     //Заселение
     private Room getFreeRoom() {
         for (Room n : roomList()) {
-             if (n.getStatus() == true) {
-                 if (n.getFree() == true) {
-                     n.setFree(false);
-                     return n;
-                 }
-             }
+            if (n.getStatus() == true && n.getFree() == true) {
+                n.setFree(false);
+                return n;
+            }
         }
         return null;
     }
 
     public void roomSettle() {
-        Room temp_room = getFreeRoom();
-        if (temp_room != null) {
-            System.out.println("Вы заселены в комнату: " + temp_room.getNumber());
+        Room tempRoom = getFreeRoom();
+        if (tempRoom != null) {
+            System.out.println("Вы заселены в комнату: " + tempRoom.getNumber());
         }
         else {
             System.out.println("Нет свободных комнат!");

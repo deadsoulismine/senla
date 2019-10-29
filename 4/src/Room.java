@@ -47,8 +47,10 @@ public class Room {
         if (getStatus()) {
             return "обслуживаемый";
         }
-        else
+        else {
             return "ремонтируемый";
+        }
+
     }
 
 }
