@@ -1,15 +1,26 @@
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Hotel hotel = new Hotel("Гостиница");
-        Room room1 = new Room(true, 1500, true, 101);
-        Room room2 = new Room(true, 1500, true, 102);
-        Room room3 = new Room(true, 1500, true, 103);
+
+        File file = new File();
+        //Считывание данных из файла
+        file.fileRead(hotel.roomList());
+        Room room1 = new Room(true, 1500, true,105);
+
         Service service1 = new Service(1000, "Завтрак в постель");
 
         //Добавление номера
         hotel.addRoom(room1);
-        hotel.addRoom(room2);
-        hotel.addRoom(room3);
+
+        for (Room room : hotel.roomList()) {
+            System.out.println(room.status() + " | Стоймость номера: " + room.getPrice() + " | " + room.free() + " | Номер комнаты: " + room.getNumber());
+        }
+
+        //Запись данных в файл
+        file.fileSave(hotel.roomList(), hotel);
+
 
         //Добавление услуги
         hotel.addService(service1);

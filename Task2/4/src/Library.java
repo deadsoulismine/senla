@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Library {
@@ -49,10 +48,6 @@ public class Library {
 
     public ArrayList<Reader> readerList() {
         return getReaders();
-    }
-
-    public ArrayList<Record> bookList() {
-        return getRecords();
     }
 
 

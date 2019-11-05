@@ -4,6 +4,17 @@ public class Room {
     private int price;
     private int number;
 
+
+    //Конструктор для файла
+    public Room(String line) {
+        String[] room = line.split(" ");
+        this.status = Boolean.parseBoolean(room[0]);
+        this.price = Integer.parseInt(room[1]);
+        this.free = Boolean.parseBoolean(room[2]);
+        this.number = Integer.parseInt(room[3]);
+    }
+
+
     public Room(Boolean status, int price, Boolean free, int number) {
         this.status = status;
         this.price = price;
