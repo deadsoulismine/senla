@@ -12,7 +12,8 @@ public class Main {
         Service service1 = new Service(1000, "Завтрак в постель");
 
         //Добавление номера
-        hotel.addRoom(room1);
+
+            hotel.addRoom(room1);
 
         for (Room room : hotel.roomList()) {
             System.out.println(room.status() + " | Стоймость номера: " + room.getPrice() + " | " + room.free() + " | Номер комнаты: " + room.getNumber());
