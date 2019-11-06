@@ -3,13 +3,13 @@ import java.util.ArrayList;
 
 public class File {
 
-    public void fileSave(ArrayList<Room> roomList, Hotel hotel) {
+    public void fileSave(Hotel hotel) {
         try (FileWriter fileWriter = new FileWriter("roomSave.txt")) {
             for (Room room : hotel.roomList()) {
-                fileWriter.write(room.getFree().toString() + " ");
-                fileWriter.write(Integer.toString(room.getPrice()) + " ");
-                fileWriter.write(room.getStatus().toString() + " ");
                 fileWriter.write(Integer.toString(room.getNumber()) + " ");
+                fileWriter.write(Integer.toString(room.getPrice()) + " ");
+                fileWriter.write(room.getFree().toString() + " ");
+                fileWriter.write(room.getStatus().toString() + " ");
                 fileWriter.write("\n");
             }
         } catch (IOException e) {

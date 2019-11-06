@@ -7,16 +7,20 @@ public class MyCollection<T> implements Collection<T> {
     private T[] collectionArray;
     private int size;
 
-    public MyCollection(T[] collectionArray, int size) {
+    public MyCollection() {
+        collectionArray = (T[]) new Object[1500000];
+        size = 0;
+    }
+
+    public MyCollection(T[] collectionArray) {
         this.collectionArray = collectionArray;
-        size = size;
+        size = 0;
     }
 
     @Override
     public int size() {
         return this.collectionArray.length;
     }
-
 
     @Override
     public boolean isEmpty() {
@@ -31,11 +35,11 @@ public class MyCollection<T> implements Collection<T> {
     @Override
     public boolean contains(Object o) {
         for (T n : this.collectionArray) {
-            if (n != null) {
-                return false;
+            if (n == o) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -90,7 +94,7 @@ public class MyCollection<T> implements Collection<T> {
     public boolean addAll(java.util.Collection <? extends T> collection) {
         if (this.collectionArray.length + collection.size() >= this.size) {
             for (T o : collection) {
-                this.collectionArray[this.collectionArray.length + 1] = o;
+                this.collectionArray[this.collectionArray.length] = o;
             }
             return true;
         }
