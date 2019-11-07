@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 public class File {
 
+    /*AT
+        В данном случае рекомендую добавить проверку файла на существование,
+        дабы можно было добавлять данные. Проверка производится методом exists()
+    */
+
     public void fileSave(Hotel hotel) {
         try (FileWriter fileWriter = new FileWriter("roomSave.txt")) {
             for (Room room : hotel.roomList()) {
@@ -18,6 +23,11 @@ public class File {
     }
 
     public void fileRead(ArrayList<Room> roomList) throws IOException {
+        /*AT
+        Здесь также желательно использовать try with resources,
+        и, наверное, желательно перегрузить метод для всех типов считываемых данных.
+         */
+
         BufferedReader bufferedReader = new BufferedReader(new FileReader("roomRead.txt"));
         String currentLine;
 
