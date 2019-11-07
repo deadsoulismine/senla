@@ -2,40 +2,37 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.function.IntFunction;
+import java.util.stream.Stream;
 
 public class MyCollection<T> implements Collection<T> {
     private T[] collectionArray;
     private int size;
 
-    public MyCollection() {
-        collectionArray = (T[]) new Object[1500000];
-        size = 0;
-    }
+    private static final int CAPACITY = 10;
 
-    public MyCollection(T[] collectionArray) {
-        this.collectionArray = collectionArray;
+    public MyCollection(T[] bufArray) {
+        if (bufArray.length == 0) {
+            this.collectionArray = (T[]) new Object[CAPACITY];
+        } else {
+            this.collectionArray = bufArray;
+        }
         size = 0;
     }
 
     @Override
     public int size() {
-        return this.collectionArray.length;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        for (T n : this.collectionArray) {
-            if (n != null) {
-                return false;
-            }
-        }
-        return true;
+        return size == 0;
     }
 
     @Override
-    public boolean contains(Object o) {
+    public boolean contains(Object bufObject) {
         for (T n : this.collectionArray) {
-            if (n == o) {
+            if (n == bufObject) {
                 return true;
             }
         }
@@ -44,7 +41,8 @@ public class MyCollection<T> implements Collection<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return Arrays.stream(collectionArray).iterator();
+        Stream<T> temp = Arrays.stream(collectionArray).limit(size);
+        return temp.iterator();
     }
 
     @Override
@@ -66,13 +64,13 @@ public class MyCollection<T> implements Collection<T> {
             Object[] newCollectionArray = new Object[updatedLength];
 
             int i = 0;
-            for (i = 0; i < collectionArray.length; i++) {
+            for (i = 0; i < size; i++) {
                 newCollectionArray[i] = collectionArray[i];
             }
-            newCollectionArray[i] = object;
-
+            newCollectionArray[size] = object;
             collectionArray = (T[]) newCollectionArray;
         }
+        size++;
         return true;
     }
 
@@ -91,7 +89,7 @@ public class MyCollection<T> implements Collection<T> {
     }
 
     @Override
-    public boolean addAll(java.util.Collection <? extends T> collection) {
+    public boolean addAll(Collection <? extends T> collection) {
         if (this.collectionArray.length + collection.size() >= this.size) {
             for (T o : collection) {
                 this.collectionArray[this.collectionArray.length] = o;
@@ -107,7 +105,7 @@ public class MyCollection<T> implements Collection<T> {
     }
 
     @Override
-    public boolean retainAll(java.util.Collection collection) {
+    public boolean retainAll(Collection collection) {
         boolean another = false;
         for (int i = 0; i < collectionArray.length; i++) {
             if (!collection.contains((collectionArray[i]))) {
@@ -119,7 +117,7 @@ public class MyCollection<T> implements Collection<T> {
     }
 
     @Override
-    public boolean removeAll(java.util.Collection collection) {
+    public boolean removeAll(Collection collection) {
         boolean another = false;
         for (int i = 0; i < collectionArray.length; i++) {
             if (collection.contains((collectionArray[i]))) {
@@ -131,10 +129,9 @@ public class MyCollection<T> implements Collection<T> {
     }
 
     @Override
-    public boolean containsAll(java.util.Collection collection) {
+    public boolean containsAll(Collection collection) {
         for (int i = 0; i < collectionArray.length; i++) {
-            if (collection.contains((collectionArray[i]))) {
-                collectionArray[i] = null;
+            if (!collection.contains((collectionArray[i]))) {
                 return false;
             }
         }

@@ -4,14 +4,7 @@ public class Room {
     private int price;
     private int number;
 
-    //Конструктор для файла
-    public Room(String line) {
-        String[] room = line.split(" ");
-
-        this.number = Integer.parseInt(room[0]);
-        this.price = Integer.parseInt(room[1]);
-        this.free = Boolean.parseBoolean(room[2]);
-        this.status = Boolean.parseBoolean(room[3]);
+    public Room() {
     }
 
     public Room(int number, int price, Boolean free, Boolean status) {
@@ -56,8 +49,7 @@ public class Room {
     public String free() {
         if (getFree()) {
             return "свободно";
-        }
-        else {
+        } else {
             return "занято";
         }
     }
@@ -65,8 +57,7 @@ public class Room {
     public String status() {
         if (getStatus()) {
             return "обслуживаемый";
-        }
-        else {
+        } else {
             return "ремонтируемый";
         }
     }
