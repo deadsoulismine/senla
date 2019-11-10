@@ -1,11 +1,11 @@
 public class Main {
-    public static void main (String [] args) {
+    public static void main(String[] args) {
         Library library = new Library();
 
         //Create books
-        Book book1 = new Book ("Теремок", "Сказка");
-        Book book2 = new Book ("Колобок", "Сказка");
-        Book book3 = new Book ("Война и мир", "Роман");
+        Book book1 = new Book("Теремок", "Сказка");
+        Book book2 = new Book("Колобок", "Сказка");
+        Book book3 = new Book("Война и мир", "Роман");
 
         //Create readers list
         Reader reader1 = new Reader("Ваня", "Магадан");
@@ -35,7 +35,7 @@ public class Main {
 
         //book list
         for (Record n : library.bookList()) {
-            System.out.println(n.getFullName()+" "+n.getTitle());
+            System.out.println(n.getFullName() + " " + n.getTitle());
         }
 
         //reader list
@@ -48,8 +48,7 @@ public class Main {
         for (Record n : library.bookList()) {
             if (n.getFullName() == reader1.getFullName()) {
                 System.out.println(n.getTitle());
-            }
-            else {
+            } else {
                 System.out.println("У читателя нет книг!");
             }
         }
@@ -59,8 +58,7 @@ public class Main {
         for (Record n : library.bookList()) {
             if (n.getTitle() == book2.getTitle()) {
                 System.out.println(n.getFullName());
-            }
-            else {
+            } else {
                 System.out.println("Данная книга в библиотеке!");
             }
         }

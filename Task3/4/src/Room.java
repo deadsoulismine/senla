@@ -4,11 +4,14 @@ public class Room {
     private int price;
     private int number;
 
-    public Room(Boolean status, int price, Boolean free, int number) {
-        this.status = status;
+    public Room() {
+    }
+
+    public Room(int number, int price, Boolean free, Boolean status) {
+        this.number = number;
         this.price = price;
         this.free = free;
-        this.number = number;
+        this.status = status;
     }
 
     public Boolean getStatus() {
@@ -43,14 +46,20 @@ public class Room {
         this.number = number;
     }
 
-    public String Status() {
+    public String free() {
+        if (getFree()) {
+            return "свободно";
+        } else {
+            return "занято";
+        }
+    }
+
+    public String status() {
         if (getStatus()) {
             return "обслуживаемый";
-        }
-        else {
+        } else {
             return "ремонтируемый";
         }
-
     }
 
 }
