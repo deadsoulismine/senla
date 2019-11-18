@@ -52,7 +52,7 @@ public class Hotel implements IHotel {
     //Заселение
     private Room getFreeRoom() {
         for (Room n : roomList()) {
-            if (n.getStatus() == true && n.getFree() == true) {
+            if (n.getStatus().get() == true && n.getFree().get() == true) {
                 n.setFree(false);
                 return n;
             }
