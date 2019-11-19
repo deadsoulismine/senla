@@ -5,15 +5,8 @@ public class Hotel implements IHotel {
     private ArrayList<Room> rooms = new ArrayList<>();
     private ArrayList<Service> services = new ArrayList<>();
 
+
     public Hotel(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 
@@ -31,18 +24,6 @@ public class Hotel implements IHotel {
 
     public ArrayList<Room> getRooms() {
         return rooms;
-    }
-
-    public void setRooms(ArrayList<Room> rooms) {
-        this.rooms = rooms;
-    }
-
-    public ArrayList<Service> getServices() {
-        return services;
-    }
-
-    public void setServices(ArrayList<Service> services) {
-        this.services = services;
     }
 
     public ArrayList<Room> roomList() {
@@ -63,7 +44,7 @@ public class Hotel implements IHotel {
     public void roomSettle() {
         Room tempRoom = getFreeRoom();
         if (tempRoom != null) {
-            System.out.println("Вы заселены в комнату: " + tempRoom.getNumber());
+            System.out.println("Вы заселены в комнату: " + tempRoom.getNumber().get());
         }
         else {
             System.out.println("Нет свободных комнат!");
@@ -74,7 +55,7 @@ public class Hotel implements IHotel {
     @Override
     public void roomEvict(Room room) {
         room.setFree(true);
-        System.out.println("Вы выселены из комнаты: " + room.getNumber());
+        System.out.println("Вы выселены из комнаты: " + room.getNumber().get());
     }
 
 }

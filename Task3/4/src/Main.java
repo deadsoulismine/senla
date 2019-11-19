@@ -1,6 +1,4 @@
 import java.io.IOException;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -11,8 +9,6 @@ public class Main {
         file.fileRead(hotel.roomList());
         //Создание экземпляра класса комната и услуга вручную
         Room room1 = new Room(110, 3000, false, false);
-        Optional<Room> optionalRoom1 = Optional.ofNullable(room1);
-
         Service service1 = new Service(1000, "Завтрак в постель");
 
         //Добавление номера
@@ -21,7 +17,8 @@ public class Main {
         //Вывод существующих комнат на экран
         System.out.println("Список существующих номеров: ");
         for (Room room : hotel.roomList()) {
-            System.out.println("Номер: " + room.getNumber() + " | Стоимость: " + room.getPrice() + " | " + room.free() + " | " + room.status());
+            System.out.println("Номер: " + room.getNumber().get() + " | Стоимость: " + room.getPrice().get() +
+                    " | " + room.free() + " | " + room.status());
         }
 
         //Добавление услуги
@@ -35,20 +32,23 @@ public class Main {
 
         //Изменение статуса на "Ремонтируемый"
         room1.setStatus(false);
-        System.out.println("В данный момент номер " + room1.getNumber() + " имеет статус " + room1.status());
+        System.out.println("В данный момент номер " + room1.getNumber().get() + " имеет статус " + room1.status());
 
         //Изменение статуса на "Обслуживаемый"
         room1.setStatus(true);
-        System.out.println("В данный момент номер " + room1.getNumber() + " имеет статус " + room1.status());
+        System.out.println("В данный момент номер " + room1.getNumber().get() + " имеет статус " + room1.status());
 
         //Изменение цены номера
-        System.out.print("Произошло изменение цены номера " + room1.getNumber() + " с " + room1.getPrice() + " на ");
-        room1.setPrice(2000);
-        System.out.println(room1.getPrice());
+        System.out.print("Произошло изменение цены номера " + room1.getNumber().get() + " с " + room1.getPrice().get() + " на ");
+        int testPriceOne = 3000;
+        room1.setPrice(null);
+        System.out.println(room1.getPrice().get());
 
         //Изменение цены услуги
-        System.out.print("Произошло изменение цены услуги '" + service1.getName() + "' с " + service1.getPrice() + " на ");
-        service1.setPrice(1500);
+        System.out.print("Произошло изменение цены услуги '" + service1.getName() + "' с " +
+                service1.getPrice() + " на ");
+        int testPriceTwo = 1500;
+        service1.setPrice(testPriceTwo);
         System.out.println(service1.getPrice());
 
         //Вывести первые несколько номеров в отеле [Limit]
@@ -65,7 +65,6 @@ public class Main {
         }
 
         //Вывод уникальных стоймостей номеров [Distinct]
-        System.out.println("В отеле доступны номера со стоймостью:");
         myStream.useDistinct(hotel);
 
         //Поиск самой дорогого номера [Max]

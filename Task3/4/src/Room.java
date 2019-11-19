@@ -6,10 +6,6 @@ public class Room {
     private Optional<Integer> price;
     private Optional<Integer> number;
 
-    public Room() {
-
-    }
-
     public Room(int number, int price, boolean free, boolean status) {
         this.number = Optional.of(number);
         this.price = Optional.of(price);

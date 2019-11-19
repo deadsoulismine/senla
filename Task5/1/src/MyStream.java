@@ -7,19 +7,21 @@ public class MyStream {
 
     private void addPrices(Hotel hotel) {
         for(Room item : hotel.roomList()) {
-            prices.add(String.valueOf(item.getPrice()));
+            prices.add(String.valueOf(item.getPrice().get()));
         }
     }
 
     private void addNumbers(Hotel hotel) {
         for(Room item : hotel.roomList()) {
-            numbers.add(String.valueOf(item.getNumber()));
+            numbers.add(String.valueOf(item.getNumber().get()));
         }
     }
 
     //distinct
     //Вывод уникальных стоймостей
     public void useDistinct(Hotel hotel) {
+        System.out.println("В отеле доступны номера со стоймостью:");
+        prices.clear();
         addPrices(hotel);
         prices.stream().distinct().forEach(System.out::println);
     }
@@ -27,6 +29,7 @@ public class MyStream {
     //limit
     //Вывести количество указанных первых комнат в отеле
     public void useLimit(Hotel hotel, int limit) {
+        numbers.clear();
         addNumbers(hotel);
         numbers.stream().limit(limit).forEach(System.out::println);
     }
@@ -34,6 +37,7 @@ public class MyStream {
     //noneMatch
     //Искать комнату (в данном случае с ценой), с заданными критериями поиска
     public boolean useNoneMatch (Hotel hotel, String price) {
+        prices.clear();
         addPrices(hotel);
         return prices.stream().noneMatch(price::equals);
     }
@@ -41,6 +45,7 @@ public class MyStream {
     //max
     //Найти самую дорогую комнату
     public String useMax(Hotel hotel) {
+        prices.clear();
         addPrices(hotel);
         return prices.stream().max(String::compareTo).get();
     }
@@ -48,8 +53,9 @@ public class MyStream {
     //average
     //Средняя стоймость номера
     public double useAverage(Hotel hotel) {
+        prices.clear();
         addPrices(hotel);
-        return (prices.stream().mapToInt(Integer::parseInt).average()).getAsDouble();
+        return prices.stream().mapToInt(Integer::parseInt).average().getAsDouble();
     }
 
 }
