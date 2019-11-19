@@ -6,39 +6,55 @@ public class Room {
     private Optional<Integer> price;
     private Optional<Integer> number;
 
-    public Room(int number, int price, boolean free, boolean status) {
-        this.number = Optional.of(number);
-        this.price = Optional.of(price);
+    public Room(Integer number, Integer price, Boolean free, Boolean status) {
+        this.number = Optional.ofNullable(number);
+        this.price = Optional.ofNullable(price);
         this.free = Optional.of(free);
         this.status = Optional.of(status);
     }
 
-    public Optional<Boolean> getStatus() {
-        return status;
+    public Boolean getStatus() {
+        if (status.isPresent()) {
+            return status.get();
+        } else {
+            return null;
+        }
     }
 
     public void setStatus(Boolean status) {
         this.status = Optional.ofNullable(status);
     }
 
-    public Optional<Integer> getPrice() {
-        return price;
+    public Integer getPrice() {
+        if (price.isPresent()) {
+            return price.get();
+        } else {
+            return null;
+        }
     }
 
     public void setPrice(Integer price) {
         this.price = Optional.ofNullable(price);
     }
 
-    public Optional<Boolean> getFree() {
-        return free;
+    public Boolean getFree() {
+        if (free.isPresent()) {
+            return free.get();
+        } else {
+            return null;
+        }
     }
 
     public void setFree(Boolean free) {
         this.free = Optional.ofNullable(free);
     }
 
-    public Optional<Integer> getNumber() {
-        return number;
+    public Integer getNumber() {
+        if (price.isPresent()) {
+            return price.get();
+        } else {
+            return null;
+        }
     }
 
     public void setNumber(Integer number) {
@@ -46,7 +62,7 @@ public class Room {
     }
 
     public String free() {
-        if (getFree().get()) {
+        if (getFree()) {
             return "свободно";
         } else {
             return "занято";
@@ -54,7 +70,7 @@ public class Room {
     }
 
     public String status() {
-        if (getStatus().get()) {
+        if (getStatus()) {
             return "обслуживаемый";
         } else {
             return "ремонтируемый";

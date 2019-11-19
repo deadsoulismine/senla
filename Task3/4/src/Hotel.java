@@ -33,7 +33,7 @@ public class Hotel implements IHotel {
     //Заселение
     private Room getFreeRoom() {
         for (Room n : roomList()) {
-            if (n.getStatus().get() == true && n.getFree().get() == true) {
+            if (n.getStatus() == true && n.getFree() == true) {
                 n.setFree(false);
                 return n;
             }
@@ -44,7 +44,7 @@ public class Hotel implements IHotel {
     public void roomSettle() {
         Room tempRoom = getFreeRoom();
         if (tempRoom != null) {
-            System.out.println("Вы заселены в комнату: " + tempRoom.getNumber().get());
+            System.out.println("Вы заселены в комнату: " + tempRoom.getNumber());
         }
         else {
             System.out.println("Нет свободных комнат!");
@@ -55,7 +55,7 @@ public class Hotel implements IHotel {
     @Override
     public void roomEvict(Room room) {
         room.setFree(true);
-        System.out.println("Вы выселены из комнаты: " + room.getNumber().get());
+        System.out.println("Вы выселены из комнаты: " + room.getNumber());
     }
 
 }

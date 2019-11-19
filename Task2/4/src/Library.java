@@ -50,5 +50,8 @@ public class Library {
         return getReaders();
     }
 
+    public ArrayList<Record> bookList() {
+        return getRecords();
+    }
 
 }

@@ -7,13 +7,13 @@ public class MyStream {
 
     private void addPrices(Hotel hotel) {
         for(Room item : hotel.roomList()) {
-            prices.add(String.valueOf(item.getPrice().get()));
+            prices.add(String.valueOf(item.getPrice()));
         }
     }
 
     private void addNumbers(Hotel hotel) {
         for(Room item : hotel.roomList()) {
-            numbers.add(String.valueOf(item.getNumber().get()));
+            numbers.add(String.valueOf(item.getNumber()));
         }
     }
 

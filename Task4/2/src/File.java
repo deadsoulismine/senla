@@ -11,10 +11,10 @@ public class File {
     public void fileSave(Hotel hotel) {
         try (FileWriter fileWriter = new FileWriter("roomSave.txt")) {
             for (Room room : hotel.roomList()) {
-                fileWriter.write(Integer.toString(room.getNumber().get()) + " ");
-                fileWriter.write(Integer.toString(room.getPrice().get()) + " ");
-                fileWriter.write(room.getFree().get() + " ");
-                fileWriter.write(room.getStatus().get() + " ");
+                fileWriter.write(Integer.toString(room.getNumber()) + " ");
+                fileWriter.write(Integer.toString(room.getPrice()) + " ");
+                fileWriter.write(room.getFree() + " ");
+                fileWriter.write(room.getStatus() + " ");
                 fileWriter.write("\n");
             }
         } catch (IOException e) {
