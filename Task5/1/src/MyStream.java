@@ -23,7 +23,7 @@ public class MyStream {
         System.out.println("В отеле доступны номера со стоймостью:");
         prices.clear();
         addPrices(hotel);
-        prices.stream().distinct().forEach(System.out::println);
+        prices.stream().distinct().sorted().forEach(System.out::println);
     }
 
     //limit
@@ -35,7 +35,7 @@ public class MyStream {
     }
 
     //noneMatch
-    //Искать комнату (в данном случае с ценой), с заданными критериями поиска
+    //Искать комнату (в данном случае с ценой), с заданными критериями поиска, которой не должно быть
     public boolean useNoneMatch (Hotel hotel, String price) {
         prices.clear();
         addPrices(hotel);
@@ -47,7 +47,7 @@ public class MyStream {
     public String useMax(Hotel hotel) {
         prices.clear();
         addPrices(hotel);
-        return prices.stream().max(String::compareTo).get();
+        return prices.stream().max(String::compareTo).orElse("0");
     }
 
     //average
@@ -55,7 +55,14 @@ public class MyStream {
     public double useAverage(Hotel hotel) {
         prices.clear();
         addPrices(hotel);
-        return prices.stream().mapToInt(Integer::parseInt).average().getAsDouble();
+        return prices.stream().mapToInt(Integer::parseInt).average().orElse(0.0);
+    }
+
+    //remove + Optional
+    //Удалить комнату (с указанным номером)
+    public boolean removeRoomWithNumber(Hotel hotel, int id)  {
+        Arrays.asList(hotel.roomList());
+        return hotel.roomList().remove(hotel.roomList().stream().filter(i -> i.getNumber() == id).findFirst().orElse(null));
     }
 
 }

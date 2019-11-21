@@ -1,46 +1,46 @@
-import java.io.IOException;
+import java.util.Optional;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         Hotel hotel = new Hotel("Гостиница");
         File file = new File();
         MyStream myStream = new MyStream();
+        //Создание экземпляра класса комната и услуга вручную
+        Room room1 = new Room(110, 3000, false, false);
+        Service service1 = new Service(1000, "Завтрак в постель");
+        Guest guest1 = new Guest("Иванов", 25, 0);
         //Считывание данных из файла
         file.fileRead(hotel.roomList());
-        //Создание экземпляра класса комната и услуга вручную
-        Room room1 = new Room(110, null, false, false);
-        Service service1 = new Service(1000, "Завтрак в постель");
 
         //Добавление номера
         hotel.addRoom(room1);
 
-        //Вывод существующих комнат на экран
-        System.out.println("Список существующих номеров: ");
-        for (Room room : hotel.roomList()) {
-            System.out.println("Номер: " + room.getNumber() + " | Стоимость: " + room.getPrice() +
-                    " | " + room.free() + " | " + room.status());
-        }
+        //Вывод существующих номеров на экран
+        hotel.printRoomList();
 
         //Добавление услуги
         hotel.addService(service1);
 
         //Заселение
-        hotel.roomSettle();
+        hotel.roomSettle(guest1);
 
         //Выселение
-        hotel.roomEvict(room1);
+        hotel.roomEvict(guest1);
 
         //Изменение статуса на "Ремонтируемый"
         room1.setStatus(false);
-        System.out.println("В данный момент номер " + room1.getNumber() + " имеет статус " + room1.status());
+        System.out.println("В данный момент номер " + room1.getNumber() +
+                " имеет статус " + room1.status());
 
         //Изменение статуса на "Обслуживаемый"
         room1.setStatus(true);
-        System.out.println("В данный момент номер " + room1.getNumber() + " имеет статус " + room1.status());
+        System.out.println("В данный момент номер " + room1.getNumber() +
+                " имеет статус " + room1.status());
 
         //Изменение цены номера
-        System.out.print("Произошло изменение цены номера " + room1.getNumber() + " с " + room1.getPrice() + " на ");
-        int testPriceOne = 3000;
+        System.out.print("Произошло изменение цены номера " + room1.getNumber() +
+                " с " + room1.getPrice() + " на ");
+        int testPriceOne = 5000;
         room1.setPrice(testPriceOne);
         System.out.println(room1.getPrice());
 
@@ -53,15 +53,15 @@ public class Main {
 
         //Вывести первые несколько номеров в отеле [Limit]
         int testLimit = 3;
-        System.out.println("Первые " + testLimit + " комнаты имеют номера:");
+        System.out.println("Первые " + testLimit + " аппарартамента имеют номера:");
         myStream.useLimit(hotel, testLimit);
 
         //Узнать, есть ли номер с указанной стоймостью [NoneMatch]
         String testPrice = "2000";
         if (myStream.useNoneMatch(hotel, testPrice)) {
-            System.out.println("Нет ни одной комнаты со стоймостью " + testPrice + "!");
+            System.out.println("Нет ни одного номера со стоймостью " + testPrice + "!");
         } else {
-            System.out.println("В отеле есть комната со стоймостью " + testPrice + "!");
+            System.out.println("В отеле есть номер со стоймостью " + testPrice + "!");
         }
 
         //Вывод уникальных стоймостей номеров [Distinct]
@@ -72,6 +72,15 @@ public class Main {
 
         //Поиск средней стоймости номеров [Average]
         System.out.println("Средняя стоймость всех номеров: " + myStream.useAverage(hotel));
+
+        int testId = 105;
+        if (myStream.removeRoomWithNumber(hotel, testId)) {
+            System.out.println("Аппартаменты под номером " + testId + " удалены!");
+        } else {
+            System.out.println("Нельзя удалить аппартаменты под указанным номером, поскольку их нет!");
+        }
+
+        hotel.printRoomList();
 
         //Запись данных в файл
         file.fileSave(hotel);

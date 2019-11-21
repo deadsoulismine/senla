@@ -1,68 +1,60 @@
-import java.util.Optional;
-
 public class Room {
-    private Optional<Boolean> status;
-    private Optional<Boolean> free;
-    private Optional<Integer> price;
-    private Optional<Integer> number;
+    private boolean status;
+    private boolean free;
+    private int price;
+    private int number;
 
-    public Room(Integer number, Integer price, Boolean free, Boolean status) {
-        this.number = Optional.ofNullable(number);
-        this.price = Optional.ofNullable(price);
-        this.free = Optional.of(free);
-        this.status = Optional.of(status);
+    private int guestId;
+
+    public Room(int number, int price, boolean free, boolean status) {
+        this.number = number;
+        this.price = price;
+        this.free = free;
+        this.status = status;
     }
 
-    public Boolean getStatus() {
-        if (status.isPresent()) {
-            return status.get();
-        } else {
-            return null;
-        }
+    public int getGuestId() {
+        return guestId;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = Optional.ofNullable(status);
+    public void setGuestId(int guestId) {
+        this.guestId = guestId;
     }
 
-    public Integer getPrice() {
-        if (price.isPresent()) {
-            return price.get();
-        } else {
-            return null;
-        }
+    public boolean getStatus() {
+            return status;
     }
 
-    public void setPrice(Integer price) {
-        this.price = Optional.ofNullable(price);
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public Boolean getFree() {
-        if (free.isPresent()) {
-            return free.get();
-        } else {
-            return null;
-        }
+        return free;
     }
 
-    public void setFree(Boolean free) {
-        this.free = Optional.ofNullable(free);
+    public void setFree(boolean free) {
+        this.free = free;
     }
 
-    public Integer getNumber() {
-        if (price.isPresent()) {
-            return price.get();
-        } else {
-            return null;
-        }
+    public int getNumber() {
+        return number;
     }
 
-    public void setNumber(Integer number) {
-        this.number = Optional.ofNullable(number);
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public String free() {
-        if (getFree()) {
+        if (getFree() && getStatus()) {
             return "свободно";
         } else {
             return "занято";
