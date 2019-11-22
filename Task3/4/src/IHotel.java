@@ -1,6 +1,7 @@
 public interface IHotel {
     void addRoom(Room room);
     void addService(Service service);
-    void roomSettle();
-    void roomEvict(Room room);
+    void addGuest(Guest guest);
+    void roomSettle(Guest guest);
+    void roomEvict(Guest guest);
 }

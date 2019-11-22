@@ -1,24 +1,31 @@
 public class Room {
-    private Boolean status;
-    private Boolean free;
+    private boolean status;
+    private boolean free;
     private int price;
     private int number;
 
-    public Room() {
-    }
+    private int guestId;
 
-    public Room(int number, int price, Boolean free, Boolean status) {
+    public Room(int number, int price, boolean free, boolean status) {
         this.number = number;
         this.price = price;
         this.free = free;
         this.status = status;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public int getGuestId() {
+        return guestId;
     }
 
-    public void setStatus(Boolean status) {
+    public void setGuestId(int guestId) {
+        this.guestId = guestId;
+    }
+
+    public boolean getStatus() {
+            return status;
+    }
+
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -34,7 +41,7 @@ public class Room {
         return free;
     }
 
-    public void setFree(Boolean free) {
+    public void setFree(boolean free) {
         this.free = free;
     }
 
@@ -47,7 +54,7 @@ public class Room {
     }
 
     public String free() {
-        if (getFree()) {
+        if (getFree() && getStatus()) {
             return "свободно";
         } else {
             return "занято";

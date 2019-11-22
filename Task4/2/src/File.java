@@ -13,8 +13,8 @@ public class File {
             for (Room room : hotel.roomList()) {
                 fileWriter.write(Integer.toString(room.getNumber()) + " ");
                 fileWriter.write(Integer.toString(room.getPrice()) + " ");
-                fileWriter.write(room.getFree().toString() + " ");
-                fileWriter.write(room.getStatus().toString() + " ");
+                fileWriter.write(room.getFree() + " ");
+                fileWriter.write(room.getStatus() + " ");
                 fileWriter.write("\n");
             }
         } catch (IOException e) {
