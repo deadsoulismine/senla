@@ -38,4 +38,6 @@ public class MenuItem {
     public void setAction(IAction action) {
         this.action = action;
     }
+
+
 }

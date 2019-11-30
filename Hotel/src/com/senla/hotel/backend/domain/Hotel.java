@@ -3,13 +3,14 @@ package com.senla.hotel.backend.domain;
 import java.util.ArrayList;
 
 public class Hotel {
-    private String name;
-    private ArrayList<Room> rooms = new ArrayList<>();
-    private ArrayList<Service> services = new ArrayList<>();
-    private ArrayList<Guest> guests = new ArrayList<>();
+    private ArrayList<Room> rooms;
+    private ArrayList<Service> services;
+    private ArrayList<Guest> guests;
 
-    public Hotel(String name) {
-        this.name = name;
+    public Hotel(ArrayList<Room> rooms, ArrayList<Service> services, ArrayList<Guest> guests) {
+        this.rooms = rooms;
+        this.services = services;
+        this.guests = guests;
     }
 
     public ArrayList<Room> getRooms() {

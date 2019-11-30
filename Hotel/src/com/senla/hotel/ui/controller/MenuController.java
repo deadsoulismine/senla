@@ -7,8 +7,13 @@ import com.senla.hotel.ui.view.ViewController;
 import java.util.Scanner;
 
 public class MenuController {
-    Builder builder = new Builder();
-    Navigator navigator = new Navigator();
+    Builder builder;
+    Navigator navigator;
+
+    public MenuController(Builder builder, Navigator navigator) {
+        this.builder = builder;
+        this.navigator = navigator;
+    }
 
     public void run () {
         Scanner in = new Scanner(System.in);
@@ -18,9 +23,6 @@ public class MenuController {
             navigator.printMenu();
             choice = in.nextByte();
             navigator.navigate(choice);
-            if (choice == 0) {
-                break;
-            }
         } while (true);
     }
 

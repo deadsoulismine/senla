@@ -1,14 +1,24 @@
 package com.senla.hotel.backend.domain;
 
 public class Guest {
+    int id;
+    Integer roomId;
     String name;
     int age;
-    int roomId;
 
-    public Guest(String name, int age, int roomId) {
+    public Guest(int id, String name, int age, Integer roomId) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.roomId = roomId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -27,11 +37,11 @@ public class Guest {
         this.age = age;
     }
 
-    public int getRoomId() {
+    public Integer getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(int roomId) {
+    public void setRoomId(Integer roomId) {
         this.roomId = roomId;
     }
 

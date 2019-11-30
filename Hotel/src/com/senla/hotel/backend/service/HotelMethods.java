@@ -9,6 +9,12 @@ import java.util.Optional;
 
 public class HotelMethods implements IHotel {
 
+    //Добавляем новый номер в список
+    @Override
+    public void addRoom(Hotel hotel, Room room) {
+        Optional.ofNullable(room).ifPresent(hotel.roomList()::add);
+    }
+
     //Добавляем новую услугу в список
     @Override
     public void addGuest(Hotel hotel, Guest guest) {
@@ -52,6 +58,22 @@ public class HotelMethods implements IHotel {
                 hotel.guestList().remove(guest);
                 System.out.println("Постоялец " + guest.getName() + " выселен из номера: " + n.getNumber());
             }
+        }
+    }
+
+    public String free(Room room) {
+        if (room.getFree() && room.getStatus()) {
+            return "свободно";
+        } else {
+            return "занято";
+        }
+    }
+
+    public String status(Room room) {
+        if (room.getStatus()) {
+            return "обслуживаемый";
+        } else {
+            return "ремонтируемый";
         }
     }
 

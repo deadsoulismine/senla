@@ -23,10 +23,11 @@ public class Navigator implements INavigator {
 
     @Override
     public void navigate(byte index) {
+        index--;
         if (currentMenu.getItems().get(index).getNextMenu() != null) {
             currentMenu = currentMenu.getItems().get(index).getNextMenu();
         } else {
-            currentMenu.getItems().get(index).getAction();
+            currentMenu.getItems().get(index).getAction().execute();
         }
     }
 }

@@ -16,17 +16,6 @@ public class ViewController {
     }
 
     /*
-
-    public void printRoomList(Hotel hotel, RoomMethods roomMethods) {
-        Arrays.asList(hotel.roomList());
-        //Вывод существующих комнат на экран
-        System.out.println("Список существующих номеров: ");
-        for (Room room : hotel.roomList()) {
-            System.out.println("Номер: " + room.getNumber() + " | Стоимость: " + room.getPrice() +
-                    " | " + roomMethods.free(room) + " | " + roomMethods.status(room));
-        }
-    }
-
     public String checkPrint(Object object) {
         if (!Optional.ofNullable(object).isPresent()) {
             return "[Не указано]";
@@ -34,7 +23,6 @@ public class ViewController {
             return object.toString();
         }
     }
-
     */
 
 }

@@ -1,25 +1,16 @@
 package com.senla.hotel.backend.domain;
 
 public class Room {
+    private int number;
+    private int price;
     private boolean status;
     private boolean free;
-    private int price;
-    private int number;
-    private int guestId;
 
     public Room(int number, int price, boolean free, boolean status) {
         this.number = number;
         this.price = price;
         this.free = free;
         this.status = status;
-    }
-
-    public int getGuestId() {
-        return guestId;
-    }
-
-    public void setGuestId(int guestId) {
-        this.guestId = guestId;
     }
 
     public boolean getStatus() {

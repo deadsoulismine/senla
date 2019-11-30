@@ -1,33 +1,38 @@
 package com.senla.hotel.ui.model.builder;
 
+import com.senla.hotel.ui.model.action.Exit;
+import com.senla.hotel.ui.model.action.guest.*;
+import com.senla.hotel.ui.model.action.room.*;
+import com.senla.hotel.ui.model.action.service.*;
 import com.senla.hotel.ui.model.menu.Menu;
 import com.senla.hotel.ui.model.menu.MenuItem;
 
 public class Builder implements IBuilder {
     @Override
     public Menu buildMenu() {
-        Menu mainMenu = new Menu("Welcome, choose the action, please", null);
-        Menu objectsMenu = new Menu("Choose the item, please", mainMenu);
-        Menu addMenu = new Menu("Enter fields of the new item, please", objectsMenu);
-        Menu deleteMenu = new Menu("Enter the item for delete, please", objectsMenu);
-        Menu loadMenu = new Menu("Enter the name of file for read", mainMenu);
-        Menu saveMenu = new Menu("Enter the name of file for save", mainMenu);
+        Menu mainMenu = new Menu("| Welcome to menu for manage Hotel. Choose the action, please: |", null);
+        Menu objectsAddMenu = new Menu("Choose the item for add, please: ", mainMenu);
+        Menu objectsDeleteMenu = new Menu("Choose the item for delete, please: ", mainMenu);
+        Menu serialisation = new Menu("Menu for Load/Save data", mainMenu);
 
-        mainMenu.addMenuItem(new MenuItem("Add object", objectsMenu, null));
-        mainMenu.addMenuItem(new MenuItem("Delete object", objectsMenu, null));
-        mainMenu.addMenuItem(new MenuItem("Load data from file", loadMenu));
-        mainMenu.addMenuItem(new MenuItem("Save data to file", saveMenu));
-        mainMenu.addMenuItem(new MenuItem("Exit", null));
+        mainMenu.addMenuItem(new MenuItem("Add object", objectsAddMenu, null));
+        mainMenu.addMenuItem(new MenuItem("Delete object", objectsDeleteMenu, null));
+        mainMenu.addMenuItem(new MenuItem("Load/Save data", serialisation, null));
+        mainMenu.addMenuItem(new MenuItem("Exit", null, new Exit()));
 
-        objectsMenu.addMenuItem(new MenuItem("Room", addMenu, null));
-        objectsMenu.addMenuItem(new MenuItem("Guest", addMenu, null));
-        objectsMenu.addMenuItem(new MenuItem("Service",addMenu, null));
+        objectsAddMenu.addMenuItem(new MenuItem("Add new room", null, new AddRoomAction()));
+        objectsAddMenu.addMenuItem(new MenuItem("Add new guest", null, new AddGuestAction()));
+        objectsAddMenu.addMenuItem(new MenuItem("Add new service", null, new AddServiceAction()));
+        objectsAddMenu.addMenuItem(new MenuItem("Back", objectsAddMenu.getPrevMenu(), null));
 
-        objectsMenu.addMenuItem(new MenuItem("Room", deleteMenu, null));
-        objectsMenu.addMenuItem(new MenuItem("Guest", deleteMenu, null));
-        objectsMenu.addMenuItem(new MenuItem("Service", deleteMenu, null));
+        objectsDeleteMenu.addMenuItem(new MenuItem("Delete room", null, new DeleteRoomAction()));
+        objectsDeleteMenu.addMenuItem(new MenuItem("Delete guest", null, new DeleteGuestAction()));
+        objectsDeleteMenu.addMenuItem(new MenuItem("Delete service", null, new DeleteServiceAction()));
+        objectsDeleteMenu.addMenuItem(new MenuItem("Back", objectsDeleteMenu.getPrevMenu(), null));
 
-        objectsMenu.addMenuItem(new MenuItem("Back",null, null));
+        serialisation.addMenuItem(new MenuItem("Load file", null, null));
+        serialisation.addMenuItem(new MenuItem("Save file", null, null));
+        serialisation.addMenuItem(new MenuItem("Back", serialisation.getPrevMenu(), null));
 
         return mainMenu;
     }

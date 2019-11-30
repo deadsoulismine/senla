@@ -6,6 +6,7 @@ import com.senla.hotel.backend.domain.Room;
 import com.senla.hotel.backend.domain.Service;
 
 public interface IHotel {
+    void addRoom(Hotel hotel, Room room);
 
     void addGuest(Hotel hotel, Guest guest);
 

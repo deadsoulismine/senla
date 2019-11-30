@@ -6,6 +6,11 @@ import java.util.Optional;
 public class Menu {
     private ArrayList<MenuItem> items = new ArrayList<>();
     private String title;
+
+    public Menu getPrevMenu() {
+        return prevMenu;
+    }
+
     private Menu prevMenu;
 
     public Menu(String title, Menu prevMenu) {
