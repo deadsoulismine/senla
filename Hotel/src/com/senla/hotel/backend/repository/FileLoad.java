@@ -20,8 +20,8 @@ public class FileLoad {
             boolean free = Boolean.parseBoolean(room[2]);
             boolean status = Boolean.parseBoolean(room[3]);
 
-            Room roomObject = new Room(number, price, free, status);
-            roomList.add(roomObject);
+            //Room roomObject = new Room(number, price, free, status);
+            //roomList.add(roomObject);
         }
         bufferedReader.close();
     }

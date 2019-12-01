@@ -16,5 +16,4 @@ public class DeleteGuestAction implements IAction {
         Application.deleteGuest(id);
         Application.printGuestList();
     }
-
 }

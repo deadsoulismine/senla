@@ -10,6 +10,10 @@ public class AddServiceAction implements IAction {
     @Override
     public void execute() {
         Scanner in = new Scanner(System.in);
-        Application.addService(in.nextLine(), in.nextInt());
+        System.out.println("Enter title of new Service");
+        String title = in.nextLine();
+        System.out.println("Enter price of new Service");
+        int price = in.nextInt();
+        Application.addService(title, price);
     }
 }

@@ -11,9 +11,9 @@ public class DeleteRoomAction implements IAction {
     public void execute() {
         Scanner in = new Scanner(System.in);
         Application.printRoomList();
-        System.out.println("Enter Number of Room for delete");
-        Integer number = in.nextInt();
-        Application.deleteRoom(number);
+        System.out.println("Enter ID of Room for delete");
+        int id = in.nextInt();
+        Application.deleteRoom(id);
         Application.printRoomList();
     }
 }

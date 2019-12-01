@@ -5,12 +5,19 @@ public class Room {
     private int price;
     private boolean status;
     private boolean free;
+    private static int idRoom = 0;
 
     public Room(int number, int price, boolean free, boolean status) {
+        this.idRoom = idRoom;
+        idRoom++;
         this.number = number;
         this.price = price;
         this.free = free;
         this.status = status;
+    }
+
+    public int getId() {
+        return idRoom;
     }
 
     public boolean getStatus() {

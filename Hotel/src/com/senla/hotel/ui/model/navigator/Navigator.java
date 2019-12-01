@@ -3,6 +3,8 @@ package com.senla.hotel.ui.model.navigator;
 import com.senla.hotel.ui.model.menu.Menu;
 import com.senla.hotel.ui.view.ViewController;
 
+import java.io.IOException;
+
 public class Navigator implements INavigator {
     private Menu currentMenu;
     ViewController viewController = new ViewController();
@@ -22,7 +24,7 @@ public class Navigator implements INavigator {
     }
 
     @Override
-    public void navigate(byte index) {
+    public void navigate(byte index) throws IOException {
         index--;
         if (currentMenu.getItems().get(index).getNextMenu() != null) {
             currentMenu = currentMenu.getItems().get(index).getNextMenu();

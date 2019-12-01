@@ -1,7 +1,7 @@
 package com.senla.hotel.ui.model.action;
 
-import com.senla.hotel.backend.domain.Hotel;
+import java.io.IOException;
 
 public interface IAction {
-    void execute();
+    void execute() throws IOException;
 }

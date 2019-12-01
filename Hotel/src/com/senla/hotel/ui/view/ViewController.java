@@ -15,14 +15,4 @@ public class ViewController {
         }
     }
 
-    /*
-    public String checkPrint(Object object) {
-        if (!Optional.ofNullable(object).isPresent()) {
-            return "[Не указано]";
-        } else {
-            return object.toString();
-        }
-    }
-    */
-
 }
