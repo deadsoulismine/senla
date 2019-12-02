@@ -42,8 +42,4 @@ public class Guest {
         this.roomId = roomId;
     }
 
-    public String String () {
-        return"Игорь";
-    }
-
 }
