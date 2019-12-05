@@ -6,11 +6,6 @@ import java.util.Optional;
 public class Menu {
     private ArrayList<MenuItem> items = new ArrayList<>();
     private String title;
-
-    public Menu getPrevMenu() {
-        return prevMenu;
-    }
-
     private Menu prevMenu;
 
     public Menu(String title, Menu prevMenu) {
@@ -18,19 +13,19 @@ public class Menu {
         this.prevMenu = prevMenu;
     }
 
-    public String getTitle() {
-        return title;
+    public Menu getPrevMenu() {
+        return prevMenu;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getTitle() {
+        return title;
     }
 
     public ArrayList<MenuItem> getItems() {
         return items;
     }
 
-    //Добавляем новый номер в список
+    //Добавляем новый пункт меню в список
     public void addMenuItem(MenuItem menuItem) {
         Optional.ofNullable(menuItem).ifPresent(getItems()::add);
     }

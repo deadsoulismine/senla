@@ -1,19 +1,18 @@
-package com.senla.hotel.ui.model.action.service;
+package com.senla.hotel.ui.model.action.objects.service;
 
 import com.senla.hotel.backend.Application;
 import com.senla.hotel.ui.model.action.IAction;
-
-import java.util.Scanner;
+import com.senla.hotel.ui.model.action.util.UtilScanner;
 
 public class AddServiceAction implements IAction {
     //Добавляем новую услугу в список
     @Override
     public void execute() {
-        Scanner in = new Scanner(System.in);
         System.out.println("Enter title of new Service");
-        String title = in.nextLine();
+        String title = UtilScanner.stringScanner();
         System.out.println("Enter price of new Service");
-        int price = in.nextInt();
+        int price = UtilScanner.intScanner();
         Application.addService(title, price);
     }
+
 }

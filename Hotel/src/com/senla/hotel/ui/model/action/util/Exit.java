@@ -1,4 +1,6 @@
-package com.senla.hotel.ui.model.action;
+package com.senla.hotel.ui.model.action.util;
+
+import com.senla.hotel.ui.model.action.IAction;
 
 public class Exit implements IAction {
     @Override

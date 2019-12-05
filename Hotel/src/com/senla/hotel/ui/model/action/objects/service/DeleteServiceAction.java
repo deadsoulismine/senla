@@ -1,4 +1,4 @@
-package com.senla.hotel.ui.model.action.service;
+package com.senla.hotel.ui.model.action.objects.service;
 
 import com.senla.hotel.backend.Application;
 import com.senla.hotel.ui.model.action.IAction;
