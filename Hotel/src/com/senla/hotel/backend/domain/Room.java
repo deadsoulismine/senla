@@ -1,25 +1,32 @@
 package com.senla.hotel.backend.domain;
 
-public class Room {
-    private boolean status;
-    private boolean free;
-    private int price;
-    private int number;
-    private int guestId;
+import java.util.ArrayList;
 
-    public Room(int number, int price, boolean free, boolean status) {
+public class Room {
+    private static int idRoom = 0;
+
+    private int id;
+    private Integer idGuest;
+    private int number;
+    private int price;
+    private boolean status;
+    private ArrayList<Guest> history = new ArrayList<>();
+
+    public Room(int number, int price) {
+        this.id = idRoom;
+        idRoom++;
         this.number = number;
         this.price = price;
-        this.free = free;
-        this.status = status;
+        this.idGuest = null;
+        this.status = true;
     }
 
-    public int getGuestId() {
-        return guestId;
+    public ArrayList<Guest> getHistory() {
+        return history;
     }
 
-    public void setGuestId(int guestId) {
-        this.guestId = guestId;
+    public int getId() {
+        return id;
     }
 
     public boolean getStatus() {
@@ -38,20 +45,20 @@ public class Room {
         this.price = price;
     }
 
-    public Boolean getFree() {
-        return free;
-    }
-
-    public void setFree(boolean free) {
-        this.free = free;
-    }
-
     public int getNumber() {
         return number;
     }
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public Integer getIdGuest() {
+        return idGuest;
+    }
+
+    public void setIdGuest(Integer idGuest) {
+        this.idGuest = idGuest;
     }
 
 }

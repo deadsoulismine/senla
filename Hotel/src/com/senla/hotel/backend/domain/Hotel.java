@@ -1,15 +1,23 @@
 package com.senla.hotel.backend.domain;
 
+import com.senla.hotel.backend.service.HotelMethods;
+
 import java.util.ArrayList;
 
 public class Hotel {
-    private String name;
-    private ArrayList<Room> rooms = new ArrayList<>();
-    private ArrayList<Service> services = new ArrayList<>();
-    private ArrayList<Guest> guests = new ArrayList<>();
+    private ArrayList<Room> rooms;
+    private ArrayList<Service> services;
+    private ArrayList<Guest> guests;
+    private HotelMethods hotelMethods = new HotelMethods();
 
-    public Hotel(String name) {
-        this.name = name;
+    public Hotel(ArrayList<Room> rooms, ArrayList<Service> services, ArrayList<Guest> guests) {
+        this.rooms = rooms;
+        this.services = services;
+        this.guests = guests;
+    }
+
+    public HotelMethods getHotelMethods() {
+        return hotelMethods;
     }
 
     public ArrayList<Room> getRooms() {

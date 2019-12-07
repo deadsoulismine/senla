@@ -8,11 +8,6 @@ public class MenuItem {
     private IAction action;
     private String type;
 
-    public MenuItem(String title, Menu nextMenu) {
-        this.title = title;
-        this.nextMenu = nextMenu;
-    }
-
     public MenuItem(String title, Menu nextMenu, IAction action) {
         this.title = title;
         this.nextMenu = nextMenu;
@@ -27,10 +22,6 @@ public class MenuItem {
         return nextMenu;
     }
 
-    public void setNextMenu(Menu nextMenu) {
-        this.nextMenu = nextMenu;
-    }
-
     public IAction getAction() {
         return action;
     }
@@ -38,4 +29,5 @@ public class MenuItem {
     public void setAction(IAction action) {
         this.action = action;
     }
+
 }
