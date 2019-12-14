@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Task2/4/lec2Task4.iml" filepath="$PROJECT_DIR$/Task2/4/lec2Task4.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Task3/1/lec3Task1.iml" filepath="$PROJECT_DIR$/Task3/1/lec3Task1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Task3/2/lec3Task2.iml" filepath="$PROJECT_DIR$/Task3/2/lec3Task2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Task3/3/lec3Task3.iml" filepath="$PROJECT_DIR$/Task3/3/lec3Task3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Task3/4/lec3Task4.iml" filepath="$PROJECT_DIR$/Task3/4/lec3Task4.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Task4/1/lec4Task1.iml" filepath="$PROJECT_DIR$/Task4/1/lec4Task1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Task4/2/lec4Task2.iml" filepath="$PROJECT_DIR$/Task4/2/lec4Task2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Hotel/Hotel.iml" filepath="$PROJECT_DIR$/Hotel/Hotel.iml" />
       <module fileurl="file://$PROJECT_DIR$/tarasov_mikhail.iml" filepath="$PROJECT_DIR$/tarasov_mikhail.iml" />
     </modules>
   </component>

@@ -9,14 +9,14 @@ import java.io.IOException;
 
 public class FileLoadRoom {
     public static void fileLoadRoom(String name) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(name));
-        String currentLine;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(name))) {
+            String currentLine;
 
-        while ((currentLine = bufferedReader.readLine()) != null) {
-            String[] room = currentLine.split(", ");
-            Application.getHotel().roomList().add(new Room(Integer.parseInt(room[0]), Integer.parseInt(room[1])));
+            while ((currentLine = bufferedReader.readLine()) != null) {
+                String[] room = currentLine.split(", ");
+                Application.getHotel().roomList().add(new Room(Integer.parseInt(room[0]), Integer.parseInt(room[1])));
+            }
         }
-        bufferedReader.close();
     }
 
 }

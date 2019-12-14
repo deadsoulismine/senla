@@ -1,15 +1,18 @@
 package com.senla.hotel.backend.service;
 
-import com.senla.hotel.Main;
-import com.senla.hotel.backend.Application;
 import com.senla.hotel.backend.domain.Guest;
 import com.senla.hotel.backend.domain.Room;
 import com.senla.hotel.backend.domain.Service;
+import com.senla.hotel.ui.exception.ListIsEmptyException;
 import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.exception.SameObjectsException;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.senla.hotel.backend.Application.getHotel;
+import static com.senla.hotel.util.Data.getProp;
+import static java.lang.Integer.parseInt;
 
 public class HotelMethods implements IHotelMethods {
 
@@ -17,136 +20,178 @@ public class HotelMethods implements IHotelMethods {
     @Override
     public void addRoom(int number, int price) throws SameObjectsException {
         Room room = new Room(number, price);
-        for (Room n : Application.getHotel().roomList()) {
+        for (Room n : getHotel().roomList()) {
             if (room.getNumber() == n.getNumber()) {
                 throw new SameObjectsException("Apartments with this number already exist! Try again!");
             }
         }
-        Optional.ofNullable(room).ifPresent(Application.getHotel().roomList()::add);
-        printRoomList();
+        Optional.of(room).ifPresent(getHotel().roomList()::add);
     }
 
     //Добавляем нового постояльца в список
     @Override
     public void addGuest(String name, int age) {
-        Guest guest = new Guest(name, age);
-        Optional.ofNullable(guest).ifPresent(Application.getHotel().guestList()::add);
+        Optional.of(new Guest(name, age)).ifPresent(getHotel().guestList()::add);
     }
 
     //Добавляем новую услугу в список
     @Override
-    public void addService(int price, String title) {
+    public void addService(int price, String title) throws SameObjectsException {
         Service service = new Service(price, title);
-        Optional.ofNullable(service).ifPresent(Application.getHotel().serviceList()::add);
+        for (Service temp : getHotel().serviceList()) {
+            if (service.getTitle().equals(temp.getTitle()) && service.getPrice() == temp.getPrice()) {
+                throw new SameObjectsException("This service already exist! Try again!");
+            }
+        }
+        Optional.of(service).ifPresent(getHotel().serviceList()::add);
     }
 
     //Удаление комнаты из списка
     @Override
-    public void deleteRoom(int idRoom) throws ObjectNotExistException {
-        if (Application.getHotel().roomList().stream().anyMatch(p -> p.getId() == idRoom)) {
-            Application.getHotel().roomList().removeAll(Application.getHotel().roomList().
-                    stream().filter(p -> p.getId() == idRoom).collect(Collectors.toList()));
-        } else {
-            throw new ObjectNotExistException("This room is not exist! Try again!");
-        }
-
+    public void deleteRoom(int roomNumber) throws ObjectNotExistException {
+        Optional.of(checkRoom(roomNumber)).ifPresent(getHotel().roomList()::remove);
     }
 
     //Удаление постояльца из списка
     @Override
-    public void deleteGuest(int idGuest) {
-        Application.getHotel().guestList().removeAll(Application.getHotel().guestList().
-                stream().filter(p -> p.getId() == idGuest).collect(Collectors.toList()));
+    public void deleteGuest(int idGuest) throws ObjectNotExistException {
+        Optional.of(checkGuest(idGuest)).ifPresent(getHotel().guestList()::remove);
     }
 
     //Удаление услуги из списка
     @Override
-    public void deleteService(int idService) {
-        Application.getHotel().serviceList().removeAll(Application.getHotel().serviceList().stream().
-                filter(p -> p.getId() == idService).collect(Collectors.toList()));
+    public void deleteService(int idService) throws ObjectNotExistException {
+        Optional.of(checkService(idService)).ifPresent(getHotel().serviceList()::remove);
     }
 
     //Заселение
     @Override
-    public void settle(int idGuest, int idRoom) {
-        Application.getHotel().guestList().get(idGuest).setRoomId(idRoom);
-        Application.getHotel().roomList().get(idRoom).setIdGuest(idGuest);
-        System.out.println("Постоялец " + Application.getHotel().guestList().get(idGuest).getName() +
-                " заселен в номер: " + Application.getHotel().roomList().get(idRoom).getNumber());
+    public void settle(int idGuest, int roomNumber) throws ObjectNotExistException {
+        Guest settleGuest = checkGuest(idGuest);
+        Room settleRoom = checkRoom(roomNumber);
 
-        //Добавление постояльца в историю заселения номера
-        //Проверка на переполнение количества записей в истории
-        if (Application.getHotel().roomList().get(idRoom).getHistory().size() ==
-                Integer.parseInt(Main.prop.getProperty("history_size", "1"))) {
-            Application.getHotel().roomList().get(idRoom).getHistory().remove(0);
+        if (settleGuest.getRoomId() == null) {
+            if (settleRoom.getIdGuest() == null) {
+                settleGuest.setRoomId(settleRoom.getNumber());
+                settleRoom.setIdGuest(settleGuest.getId());
+                System.out.println("Guest " + settleGuest.getName() + " settled in room: " + settleRoom.getNumber());
+                //Проверка на переполнение количества записей в истории
+                if (settleRoom.getHistory().size() == parseInt(getProp().getProperty("history_size", "1"))) {
+                    settleRoom.getHistory().remove(0);
+                }
+                //Добавление постояльца в историю заселения номера
+                settleRoom.getHistory().add(getHotel().guestList().get(settleGuest.getId()));
+            } else {
+                System.out.println("This room is busy!");
+            }
+        } else {
+            System.out.println("This guest had settled!");
         }
-        //Запись
-        Application.getHotel().roomList().get(idRoom).getHistory().add(Application.getHotel().guestList().get(idGuest));
     }
 
     //Выселение
-    @Override
-    public void evict(int idGuest) {
-        System.out.println("Постоялец " + Application.getHotel().guestList().get(idGuest).getName() +
-                "выселен из номера: " + Application.getHotel().roomList().
-                get(Application.getHotel().guestList().get(idGuest).getRoomId()).getNumber());
-        Application.getHotel().guestList().get(idGuest).setRoomId(null);
+    public void evict(int idGuest) throws ObjectNotExistException {
+        Guest evictGuest = checkGuest(idGuest);
+        if (evictGuest.getRoomId() != null) {
+            System.out.println("Guest " + evictGuest.getName() + " evicted from room: " + evictGuest.getRoomId());
+            //Выселение
+            getHotel().guestList().get(evictGuest.getId()).setRoomId(null);
+        } else {
+            System.out.println("This guest don't settle!");
+        }
     }
 
     //Изменение статуса номера
     @Override
-    public void changeRoomStatus(int idRoom) {
-        if (Application.getHotel().roomList().get(idRoom).getStatus()) {
-            Application.getHotel().roomList().get(idRoom).setStatus(false);
+    public void changeRoomStatus(int roomNumber) throws ObjectNotExistException {
+        Room tempRoom = checkRoom(roomNumber);
+        if (tempRoom.getStatus()) {
+            tempRoom.setStatus(false);
         } else {
-            Application.getHotel().roomList().get(idRoom).setStatus(true);
+            tempRoom.setStatus(true);
         }
     }
 
+    //Изменение цены номера
     @Override
-    public void changeRoomPrice(int idRoom, int price) {
-        Application.getHotel().roomList().get(idRoom).setPrice(price);
+    public void changeRoomPrice(int idRoom, int price) throws ObjectNotExistException {
+        checkRoom(idRoom).setPrice(price);
     }
 
+    //Изменение цены услуги
     @Override
-    public void changeServicePrice(int idService, int price) {
-        Application.getHotel().serviceList().get(idService).setPrice(price);
+    public void changeServicePrice(int idService, int price) throws ObjectNotExistException {
+        checkService(idService).setPrice(price);
     }
 
-    public void printRoomList() {
+    //Список всех номеров
+    public void printRoomList() throws ListIsEmptyException {
+        if (getHotel().roomList().size() == 0) {
+            throw new ListIsEmptyException("List of rooms is empty!");
+        }
         System.out.println("List of Rooms: ");
-        Application.getHotel().roomList().stream().peek(n -> System.out.println("ID: " + n.getId() +
-                " | # " + n.getNumber() + " | Price: " + n.getPrice() + " | " + status(n) + " | " + free(n)))
-                .collect(Collectors.toList());
+        getHotel().roomList().stream().peek(n -> System.out.println("# " + n.getNumber() + " | Price: " +
+                n.getPrice() + " | " + status(n) + " | " + free(n))).collect(Collectors.toList());
     }
 
-    public void printGuestList() {
+    //Список постояльцев (всех)
+    public void printGuestList() throws ListIsEmptyException {
+        if (getHotel().guestList().size() == 0) {
+            throw new ListIsEmptyException("List of guests is empty!");
+        }
         System.out.println("List of Guests: ");
-        Application.getHotel().guestList().stream().peek(n -> System.out.println("ID: " + n.getId() +
-                " | Name: " + n.getName() + " | Age: " + n.getAge())).collect(Collectors.toList());
-    }
-
-    public void printServiceList() {
-        System.out.println("List of Services: ");
-        Application.getHotel().serviceList().stream().peek(n -> System.out.println("ID: " + n.getId() +
-                " | Name: " + n.getName() + " | Price: " + n.getPrice())).collect(Collectors.toList());
-    }
-
-    public void printFreeRoomList() {
-        System.out.println("List of free Rooms: ");
-        Application.getHotel().roomList().stream().filter(p -> p.getIdGuest() == null).
-                peek(n -> System.out.println("ID: " + n.getId() + " | # " + n.getNumber()
-                        + " | Price: " + n.getPrice() + " | " + status(n) + " | " + free(n))).
+        getHotel().guestList().stream().peek(n -> System.out.println("ID: " + n.getId() +
+                " | Name: " + n.getName() + " | Age: " + n.getAge() + " | Room: " + number(n))).
                 collect(Collectors.toList());
     }
 
-    //Поиск свободного номера
-    private Room getFreeRoom() {
-        return Application.getHotel().roomList().stream().filter(o -> o.getIdGuest() == null).
-                findFirst().orElse(null);
+    //Список услуг
+    public void printServiceList() throws ListIsEmptyException {
+        if (getHotel().serviceList().size() == 0) {
+            throw new ListIsEmptyException("List of services is empty!");
+        }
+        System.out.println("List of Services: ");
+        getHotel().serviceList().stream().peek(n -> System.out.println("ID: " + n.getId() +
+                " | Name: " + n.getTitle() + " | Price: " + n.getPrice())).collect(Collectors.toList());
     }
 
-    //Получение информации свободна ли номер
+    //Список пустых номеров
+    public void printFreeRoomList() throws ListIsEmptyException {
+        if (getHotel().roomList().stream().noneMatch(p -> p.getIdGuest() == null)) {
+            throw new ListIsEmptyException("Hotel haven't free rooms or list of rooms is empty!");
+        } else {
+            System.out.println("List of free Rooms: ");
+            getHotel().roomList().stream().filter(p -> p.getIdGuest() == null).peek(n -> System.out.println(
+                    "# " + n.getNumber() + " | Price: " + n.getPrice() + " | " + status(n) + " | " + free(n))).
+                    collect(Collectors.toList());
+        }
+    }
+
+    //Список незаселённых постояльцев
+    public void printWaitingGuests() throws ListIsEmptyException {
+        if (getHotel().guestList().stream().noneMatch(p -> p.getRoomId() == null)) {
+            throw new ListIsEmptyException("All residents is settled or list of guests is empty!");
+        } else {
+            System.out.println("List of waiting residents: ");
+            getHotel().guestList().stream().filter(p -> p.getRoomId() == null).peek(n -> System.out.println(
+                    "ID: " + n.getId() + " | Name: " + n.getName() + " | Age: " + n.getAge() +
+                            " | Room: " + number(n))).collect(Collectors.toList());
+        }
+    }
+
+    //Список заселённых постояльцев
+    public void printSettleGuests() throws ListIsEmptyException {
+        if (getHotel().guestList().stream().noneMatch(p -> p.getRoomId() != null)) {
+            throw new ListIsEmptyException("Residents hasn't been settled yet or list of guests is empty!");
+        } else {
+            System.out.println("List of settled residents: ");
+            getHotel().guestList().stream().filter(p -> p.getRoomId() != null).peek(n -> System.out.println(
+                    "ID: " + n.getId() + " | Name: " + n.getName() + " | Age: " + n.getAge() +
+                            " | Room: " + number(n))).collect(Collectors.toList());
+        }
+    }
+
+    //Получение информации свободен ли номер
     private String free(Room room) {
         if (room.getIdGuest() == null && room.getStatus()) {
             return "free";
@@ -161,6 +206,48 @@ public class HotelMethods implements IHotelMethods {
             return "serviced";
         } else {
             return "on repair";
+        }
+    }
+
+    //Получение информации о комнате постояльца
+    private String number(Guest guest) {
+        if (guest.getRoomId() != null) {
+            return guest.getRoomId().toString();
+        } else {
+            return "[without room]";
+        }
+    }
+
+    //Проверка на существование комнаты
+    private Room checkRoom(int roomNumber) throws ObjectNotExistException {
+        Room checkRoom = getHotel().roomList().stream().filter(p -> p.getNumber() == roomNumber).findFirst().
+                orElse(null);
+        if (checkRoom != null) {
+            return checkRoom;
+        } else {
+            throw new ObjectNotExistException("This room is not exist! Try again!");
+        }
+    }
+
+    //Проверка на существование постояльца
+    private Guest checkGuest(int idGuest) throws ObjectNotExistException {
+        Guest checkGuest = getHotel().guestList().stream().filter(p -> p.getId() == idGuest).findFirst().
+                orElse(null);
+        if (checkGuest != null) {
+            return checkGuest;
+        } else {
+            throw new ObjectNotExistException("This guest is not exist! Try again!");
+        }
+    }
+
+    //Проверка на существование услуги
+    private Service checkService(int idService) throws ObjectNotExistException {
+        Service checkService = getHotel().serviceList().stream().filter(p -> p.getId() == idService).findFirst().
+                orElse(null);
+        if (checkService != null) {
+            return checkService;
+        } else {
+            throw new ObjectNotExistException("This service is not exist! Try again!");
         }
     }
 

@@ -3,9 +3,6 @@ package com.senla.hotel.backend.domain;
 import java.util.ArrayList;
 
 public class Room {
-    private static int idRoom = 0;
-
-    private int id;
     private Integer idGuest;
     private int number;
     private int price;
@@ -13,8 +10,6 @@ public class Room {
     private ArrayList<Guest> history = new ArrayList<>();
 
     public Room(int number, int price) {
-        this.id = idRoom;
-        idRoom++;
         this.number = number;
         this.price = price;
         this.idGuest = null;
@@ -23,10 +18,6 @@ public class Room {
 
     public ArrayList<Guest> getHistory() {
         return history;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public boolean getStatus() {

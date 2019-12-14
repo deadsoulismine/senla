@@ -9,14 +9,15 @@ import java.io.IOException;
 
 public class FileLoadService {
     public static void fileLoadService(String name) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(name));
-        String currentLine;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(name))) {
+            String currentLine;
 
-        while ((currentLine = bufferedReader.readLine()) != null) {
-            String[] room = currentLine.split(", ");
+            while ((currentLine = bufferedReader.readLine()) != null) {
+                String[] room = currentLine.split(", ");
 
-            Application.getHotel().serviceList().add(new Service(Integer.parseInt(room[0]), room[1]));
+                Application.getHotel().serviceList().add(new Service(Integer.parseInt(room[0]), room[1]));
+            }
         }
-        bufferedReader.close();
     }
 }
+

@@ -20,28 +20,16 @@ public class Hotel {
         return hotelMethods;
     }
 
-    public ArrayList<Room> getRooms() {
+    public ArrayList<Room> roomList() {
         return rooms;
     }
 
-    public ArrayList<Room> roomList() {
-        return getRooms();
-    }
-
-    public ArrayList<Guest> getGuests() {
+    public ArrayList<Guest> guestList() {
         return guests;
     }
 
-    public ArrayList<Guest> guestList() {
-        return getGuests();
-    }
-
-    public ArrayList<Service> getServices() {
-        return services;
-    }
-
     public ArrayList<Service> serviceList() {
-        return getServices();
+        return services;
     }
 
 }

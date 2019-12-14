@@ -1,5 +1,8 @@
 package com.senla.hotel.ui.controller;
 
+import com.senla.hotel.ui.exception.ListIsEmptyException;
+import com.senla.hotel.ui.exception.ObjectNotExistException;
+import com.senla.hotel.ui.exception.SameObjectsException;
 import com.senla.hotel.ui.exception.TypeException;
 import com.senla.hotel.ui.model.builder.Builder;
 import com.senla.hotel.ui.model.navigator.Navigator;
@@ -7,8 +10,8 @@ import com.senla.hotel.ui.model.navigator.Navigator;
 import java.util.Scanner;
 
 public class MenuController {
-    Builder builder;
-    Navigator navigator;
+    private Builder builder;
+    private Navigator navigator;
 
     public MenuController(Builder builder, Navigator navigator) {
         this.builder = builder;
@@ -29,6 +32,8 @@ public class MenuController {
             } catch (TypeException e) {
                 System.out.println(e.getMessage());
                 in.next();
+            } catch (ObjectNotExistException | ListIsEmptyException | SameObjectsException e) {
+                System.out.println(e.getMessage());
             }
         } while (true);
     }

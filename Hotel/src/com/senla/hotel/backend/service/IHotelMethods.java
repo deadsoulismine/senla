@@ -1,5 +1,6 @@
 package com.senla.hotel.backend.service;
 
+import com.senla.hotel.ui.exception.ListIsEmptyException;
 import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.exception.SameObjectsException;
 
@@ -11,30 +12,27 @@ public interface IHotelMethods {
     void addGuest(String name, int age);
 
     //Добавляем новую услугу в список
-    void addService(int price, String title);
+    void addService(int price, String title) throws SameObjectsException;
 
     //Удаление номера из списка
-    void deleteRoom(int idRoom) throws ObjectNotExistException;
+    void deleteRoom(int idRoom) throws ObjectNotExistException, ListIsEmptyException;
 
     //Удаление постояльца из списка
-    void deleteGuest(int idGuest);
+    void deleteGuest(int idGuest) throws ObjectNotExistException;
 
     //Удаление услуги из списка
-    void deleteService(int idService);
+    void deleteService(int idService) throws ObjectNotExistException;
 
     //Заселение
-    void settle(int idGuest, int idRoom);
-
-    //Выселение
-    void evict(int idGuest);
+    void settle(int idGuest, int roomNumber) throws ObjectNotExistException;
 
     //Изменение статуса номера
-    void changeRoomStatus(int idRoom);
+    void changeRoomStatus(int idRoom) throws ObjectNotExistException;
 
     //Изменение цены номера
-    void changeRoomPrice(int idRoom, int price);
+    void changeRoomPrice(int idRoom, int price) throws ObjectNotExistException;
 
     //Изменение цены услуги
-    void changeServicePrice(int idRoom, int price);
+    void changeServicePrice(int idRoom, int price) throws ObjectNotExistException;
 }
 

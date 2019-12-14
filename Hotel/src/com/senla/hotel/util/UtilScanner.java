@@ -1,29 +1,17 @@
-package com.senla.hotel.ui.model.action.util;
+package com.senla.hotel.util;
 
 import com.senla.hotel.ui.exception.TypeException;
 
 import java.util.Scanner;
 
 public class UtilScanner {
+    private static Scanner in = new Scanner(System.in);
+
     public static String stringScanner() {
-        Scanner in = new Scanner(System.in);
-        do {
-            try {
-                if (!in.hasNextLine()) {
-                    throw new TypeException("Enter the right field!");
-                } else {
-                    return in.nextLine();
-                }
-            } catch (TypeException e) {
-                System.out.println(e.getMessage());
-                in.next();
-            }
-        } while (in.hasNextLine());
-        return in.nextLine();
+        return in.next();
     }
 
     public static int intScanner() {
-        Scanner in = new Scanner(System.in);
         do {
             try {
                 if (!in.hasNextInt()) {

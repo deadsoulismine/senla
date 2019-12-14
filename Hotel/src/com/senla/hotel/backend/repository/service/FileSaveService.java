@@ -8,11 +8,13 @@ import java.io.IOException;
 
 public class FileSaveService {
     public static void fileSaveService(String name) {
-        try (FileWriter fileWriter = new FileWriter(name)) {
-            for (Service service : Application.getHotel().serviceList()) {
-                fileWriter.write((service.getPrice()) + ", ");
-                fileWriter.write((service.getName()) + ", ");
-                fileWriter.write("\n");
+        try {
+            try (FileWriter fileWriter = new FileWriter(name)) {
+                for (Service service : Application.getHotel().serviceList()) {
+                    fileWriter.write((service.getPrice()) + ", ");
+                    fileWriter.write((service.getTitle()) + ", ");
+                    fileWriter.write("\n");
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

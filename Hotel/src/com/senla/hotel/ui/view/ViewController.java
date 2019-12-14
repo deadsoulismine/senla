@@ -14,12 +14,4 @@ public class ViewController {
         }
     }
 
-    public String checkPrint(Object object) {
-        if (object != null) {
-            return "[Не указано]";
-        } else {
-            return object.toString();
-        }
-    }
-
 }

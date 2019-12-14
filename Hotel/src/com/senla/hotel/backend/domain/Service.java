@@ -2,28 +2,27 @@ package com.senla.hotel.backend.domain;
 
 public class Service {
     private static int idService = 0;
-
     private int id;
     private int price;
-    private String name;
+    private String title;
 
-    public Service(int price, String name) {
+    public Service(int price, String title) {
         this.id = idService;
         idService++;
         this.price = price;
-        this.name = name;
+        this.title = title;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
     }
 
     public int getPrice() {

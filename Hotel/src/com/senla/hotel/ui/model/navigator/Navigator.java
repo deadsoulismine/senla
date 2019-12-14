@@ -1,6 +1,9 @@
 package com.senla.hotel.ui.model.navigator;
 
 import com.senla.hotel.ui.exception.IndexException;
+import com.senla.hotel.ui.exception.ListIsEmptyException;
+import com.senla.hotel.ui.exception.ObjectNotExistException;
+import com.senla.hotel.ui.exception.SameObjectsException;
 import com.senla.hotel.ui.model.menu.Menu;
 import com.senla.hotel.ui.view.ViewController;
 
@@ -25,7 +28,8 @@ public class Navigator implements INavigator {
     }
 
     @Override
-    public void navigate(byte index) throws IndexException {
+    public void navigate(byte index) throws IndexException, ObjectNotExistException, ListIsEmptyException,
+            SameObjectsException {
         index--;
         try {
             if (index >= currentMenu.getItems().size() || index < 0) {
@@ -37,10 +41,8 @@ public class Navigator implements INavigator {
                     currentMenu.getItems().get(index).getAction().execute();
                 }
             }
-        } catch (IndexException e) {
+        } catch (IndexException | IOException e) {
             System.out.println(e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
