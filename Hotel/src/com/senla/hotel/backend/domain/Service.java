@@ -1,14 +1,15 @@
 package com.senla.hotel.backend.domain;
 
+import com.senla.hotel.backend.repository.service.FileLoadService;
+
 public class Service {
-    private static int idService = 0;
+    public static int idService = FileLoadService.loadServiceId();
     private int id;
     private int price;
     private String title;
 
     public Service(int price, String title) {
-        this.id = idService;
-        idService++;
+        this.id = idService++;
         this.price = price;
         this.title = title;
     }

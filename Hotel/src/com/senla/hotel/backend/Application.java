@@ -33,7 +33,7 @@ public class Application {
         hotel.getHotelMethods().addService(price, title);
     }
 
-    public static void deleteRoom(int idRoom) throws ObjectNotExistException, ListIsEmptyException {
+    public static void deleteRoom(int idRoom) throws ObjectNotExistException {
         hotel.getHotelMethods().deleteRoom(idRoom);
     }
 
@@ -73,7 +73,7 @@ public class Application {
         FileLoadRoom.fileLoadRoom(name);
     }
 
-    public static void fileLoadGuest(String name) throws IOException {
+    public static void fileLoadGuest(String name) {
         FileLoadGuest.fileLoadGuest(name);
     }
 

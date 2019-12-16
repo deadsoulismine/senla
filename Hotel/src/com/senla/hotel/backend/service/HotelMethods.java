@@ -70,7 +70,7 @@ public class HotelMethods implements IHotelMethods {
         Guest settleGuest = checkGuest(idGuest);
         Room settleRoom = checkRoom(roomNumber);
 
-        if (settleGuest.getRoomId() == null) {
+        if (settleGuest.getRoomNumber() == null) {
             if (settleRoom.getIdGuest() == null) {
                 settleGuest.setRoomId(settleRoom.getNumber());
                 settleRoom.setIdGuest(settleGuest.getId());
@@ -80,7 +80,9 @@ public class HotelMethods implements IHotelMethods {
                     settleRoom.getHistory().remove(0);
                 }
                 //Добавление постояльца в историю заселения номера
-                settleRoom.getHistory().add(getHotel().guestList().get(settleGuest.getId()));
+                settleRoom.getHistory().add(
+                        getHotel().guestList().stream().filter
+                                (g -> g.getId() == idGuest).findFirst().orElse(null));
             } else {
                 System.out.println("This room is busy!");
             }
@@ -92,10 +94,16 @@ public class HotelMethods implements IHotelMethods {
     //Выселение
     public void evict(int idGuest) throws ObjectNotExistException {
         Guest evictGuest = checkGuest(idGuest);
-        if (evictGuest.getRoomId() != null) {
-            System.out.println("Guest " + evictGuest.getName() + " evicted from room: " + evictGuest.getRoomId());
+        if (evictGuest.getRoomNumber() != null) {
+            System.out.println("Guest " + evictGuest.getName() + " evicted from room: " + evictGuest.getRoomNumber());
             //Выселение
-            getHotel().guestList().get(evictGuest.getId()).setRoomId(null);
+            Guest guest = getHotel().guestList().stream().
+                    filter(g -> g.getId() == idGuest).findFirst().orElse(null);
+            getHotel().roomList().stream().
+                    filter(g -> g.getNumber() == guest.getRoomNumber()).findFirst().orElse(null).setIdGuest(null);
+            guest.setRoomId(null);
+
+
         } else {
             System.out.println("This guest don't settle!");
         }
@@ -169,11 +177,11 @@ public class HotelMethods implements IHotelMethods {
 
     //Список незаселённых постояльцев
     public void printWaitingGuests() throws ListIsEmptyException {
-        if (getHotel().guestList().stream().noneMatch(p -> p.getRoomId() == null)) {
+        if (getHotel().guestList().stream().noneMatch(p -> p.getRoomNumber() == null)) {
             throw new ListIsEmptyException("All residents is settled or list of guests is empty!");
         } else {
             System.out.println("List of waiting residents: ");
-            getHotel().guestList().stream().filter(p -> p.getRoomId() == null).peek(n -> System.out.println(
+            getHotel().guestList().stream().filter(p -> p.getRoomNumber() == null).peek(n -> System.out.println(
                     "ID: " + n.getId() + " | Name: " + n.getName() + " | Age: " + n.getAge() +
                             " | Room: " + number(n))).collect(Collectors.toList());
         }
@@ -181,11 +189,11 @@ public class HotelMethods implements IHotelMethods {
 
     //Список заселённых постояльцев
     public void printSettleGuests() throws ListIsEmptyException {
-        if (getHotel().guestList().stream().noneMatch(p -> p.getRoomId() != null)) {
+        if (getHotel().guestList().stream().noneMatch(p -> p.getRoomNumber() != null)) {
             throw new ListIsEmptyException("Residents hasn't been settled yet or list of guests is empty!");
         } else {
             System.out.println("List of settled residents: ");
-            getHotel().guestList().stream().filter(p -> p.getRoomId() != null).peek(n -> System.out.println(
+            getHotel().guestList().stream().filter(p -> p.getRoomNumber() != null).peek(n -> System.out.println(
                     "ID: " + n.getId() + " | Name: " + n.getName() + " | Age: " + n.getAge() +
                             " | Room: " + number(n))).collect(Collectors.toList());
         }
@@ -211,8 +219,8 @@ public class HotelMethods implements IHotelMethods {
 
     //Получение информации о комнате постояльца
     private String number(Guest guest) {
-        if (guest.getRoomId() != null) {
-            return guest.getRoomId().toString();
+        if (guest.getRoomNumber() != null) {
+            return guest.getRoomNumber().toString();
         } else {
             return "[without room]";
         }
