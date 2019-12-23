@@ -1,7 +1,10 @@
 package com.senla.hotel.backend.domain;
 
+import com.senla.hotel.util.DI.stereotype.Instance;
+
 import java.util.ArrayList;
 
+@Instance
 public class Room {
     private Integer idGuest;
     private int number;

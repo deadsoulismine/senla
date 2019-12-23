@@ -6,15 +6,24 @@ import com.senla.hotel.backend.domain.Service;
 import com.senla.hotel.ui.exception.ListIsEmptyException;
 import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.exception.SameObjectsException;
+import com.senla.hotel.util.DI.IBeanFactory;
+import com.senla.hotel.util.DI.annotation.Autowired;
+import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.data.Data;
+import com.senla.hotel.util.data.IData;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.senla.hotel.backend.Application.getHotel;
-import static com.senla.hotel.util.Data.getProp;
 import static java.lang.Integer.parseInt;
 
-public class HotelMethods implements IHotelMethods {
+@Component
+public class HotelMethodsImpl implements IHotelMethods {
+    @Autowired(className = "BeanFactory")
+    private IBeanFactory beanFactory;
+    @Autowired(className = "Data")
+    private IData data;
 
     //Добавляем новый номер в список
     @Override
@@ -30,8 +39,11 @@ public class HotelMethods implements IHotelMethods {
 
     //Добавляем нового постояльца в список
     @Override
-    public void addGuest(String name, int age) {
-        Optional.of(new Guest(name, age)).ifPresent(getHotel().guestList()::add);
+    public void addGuest(String name, int age) throws ReflectiveOperationException {
+        Guest guest = (Guest) beanFactory.instantiateInstance("Guest");
+        guest.setName(name);
+        guest.setAge(age);
+        Optional.of(guest).ifPresent(getHotel().guestList()::add);
     }
 
     //Добавляем новую услугу в список
@@ -76,7 +88,7 @@ public class HotelMethods implements IHotelMethods {
                 settleRoom.setIdGuest(settleGuest.getId());
                 System.out.println("Guest " + settleGuest.getName() + " settled in room: " + settleRoom.getNumber());
                 //Проверка на переполнение количества записей в истории
-                if (settleRoom.getHistory().size() == parseInt(getProp().getProperty("history_size", "1"))) {
+                if (settleRoom.getHistory().size() == parseInt(Data.getProp().getProperty("history_size", "1"))) {
                     settleRoom.getHistory().remove(0);
                 }
                 //Добавление постояльца в историю заселения номера

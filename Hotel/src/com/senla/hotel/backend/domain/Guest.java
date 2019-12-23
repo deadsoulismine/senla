@@ -1,8 +1,10 @@
 package com.senla.hotel.backend.domain;
 
 import com.senla.hotel.backend.repository.guest.FileLoadGuest;
-import com.senla.hotel.resources.FillGuest;
+import com.senla.hotel.util.DI.stereotype.Instance;
+import com.senla.hotel.util.FillGuest;
 
+@Instance
 public class Guest {
     private static int idGuest = FileLoadGuest.loadGuestId();
     private int id;
@@ -11,11 +13,9 @@ public class Guest {
     private String name;
     @FillGuest(propertyName = "ageOne")
     private int age;
-    public Guest(String name, int age) {
+
+    public Guest() {
         this.id = idGuest++;
-        this.roomNumber = null;
-        this.name = name;
-        this.age = age;
     }
 
     public static int getIdGuest() {
@@ -49,7 +49,6 @@ public class Guest {
     public void setRoomId(Integer roomNumber) {
         this.roomNumber = roomNumber;
     }
-
 }
 
 

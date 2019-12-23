@@ -1,17 +1,19 @@
-package com.senla.hotel.util;
+package com.senla.hotel.util.scanner;
 
 import com.senla.hotel.ui.exception.TypeException;
+import com.senla.hotel.util.DI.stereotype.Component;
 
 import java.util.Scanner;
 
-public class UtilScanner {
+@Component
+public class UtilScanner implements IUtilScanner {
     private static Scanner in = new Scanner(System.in);
 
-    public static String stringScanner() {
+    public String stringScanner() {
         return in.next();
     }
 
-    public static int intScanner() {
+    public int intScanner() {
         do {
             try {
                 if (!in.hasNextInt()) {

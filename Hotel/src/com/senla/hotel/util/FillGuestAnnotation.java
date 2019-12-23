@@ -2,7 +2,6 @@ package com.senla.hotel.util;
 
 import com.senla.hotel.backend.Application;
 import com.senla.hotel.backend.domain.Guest;
-import com.senla.hotel.resources.FillGuest;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,7 +15,7 @@ public class FillGuestAnnotation {
         FileInputStream fileInputStreamField = new FileInputStream(PATH_TO_PROPERTIES_OF_FIELD);
         propField.load(fileInputStreamField);
         //Обработка аннотации
-        Guest guest = new Guest("", 0);
+        Guest guest = new Guest();
         guest.setName(propField.getProperty(
                 Guest.class.getDeclaredField("name").getAnnotation(FillGuest.class).propertyName()));
         guest.setAge(Integer.parseInt(propField.getProperty(

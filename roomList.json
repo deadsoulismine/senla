@@ -1,66 +1,5 @@
 [
   {
-    "idGuest": 10,
-    "number": 101,
-    "price": 1500,
-    "status": true,
-    "history": [
-      {
-        "id": 7,
-        "roomNumber": 101,
-        "name": "2",
-        "age": 2
-      },
-      {
-        "id": 10,
-        "roomNumber": 101,
-        "name": "2",
-        "age": 3
-      }
-    ]
-  },
-  {
-    "idGuest": 12,
-    "number": 103,
-    "price": 3000,
-    "status": true,
-    "history": [
-      {
-        "id": 7,
-        "roomNumber": 103,
-        "name": "2",
-        "age": 2
-      },
-      {
-        "id": 12,
-        "roomNumber": 103,
-        "name": "Васян",
-        "age": 32
-      }
-    ]
-  },
-  {
-    "idGuest": 6,
-    "number": 102,
-    "price": 2000,
-    "status": true,
-    "history": [
-      {
-        "id": 6,
-        "roomNumber": 102,
-        "name": "1",
-        "age": 1
-      },
-      {
-        "id": 6,
-        "roomNumber": 102,
-        "name": "1",
-        "age": 1
-      }
-    ]
-  },
-  {
-    "idGuest": 26,
     "number": 104,
     "price": 4000,
     "status": true,
@@ -70,6 +9,32 @@
         "roomNumber": 104,
         "name": "Bob",
         "age": 20
+      },
+      {
+        "id": 54,
+        "roomNumber": 104,
+        "name": "Alex",
+        "age": 10
+      }
+    ]
+  },
+  {
+    "idGuest": 115,
+    "number": 201,
+    "price": 2050,
+    "status": true,
+    "history": [
+      {
+        "id": 373,
+        "roomNumber": 201,
+        "name": "Пётр",
+        "age": 23
+      },
+      {
+        "id": 115,
+        "roomNumber": 201,
+        "name": "Вася",
+        "age": 23
       }
     ]
   }

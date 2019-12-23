@@ -10,22 +10,27 @@ import com.senla.hotel.backend.repository.service.FileSaveService;
 import com.senla.hotel.ui.exception.ListIsEmptyException;
 import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.exception.SameObjectsException;
+import com.senla.hotel.util.DI.annotation.Autowired;
+import com.senla.hotel.util.DI.stereotype.Component;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
+@Component
 public class Application {
-    private static Hotel hotel = new Hotel(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    @Autowired
+    private static Hotel hotel;
 
     public static Hotel getHotel() {
         return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        Application.hotel = hotel;
     }
 
     public static void addRoom(int number, int price) throws SameObjectsException {
         hotel.getHotelMethods().addRoom(number, price);
     }
 
-    public static void addGuest(String name, int age) {
+    public static void addGuest(String name, int age) throws ReflectiveOperationException {
         hotel.getHotelMethods().addGuest(name, age);
     }
 
@@ -33,7 +38,7 @@ public class Application {
         hotel.getHotelMethods().addService(price, title);
     }
 
-    public static void deleteRoom(int idRoom) throws ObjectNotExistException {
+    public static void deleteRoom(int idRoom) throws ObjectNotExistException, ListIsEmptyException {
         hotel.getHotelMethods().deleteRoom(idRoom);
     }
 
@@ -69,7 +74,7 @@ public class Application {
         hotel.getHotelMethods().printSettleGuests();
     }
 
-    public static void fileLoadRoom(String name) throws IOException {
+    public static void fileLoadRoom(String name) {
         FileLoadRoom.fileLoadRoom(name);
     }
 
@@ -77,7 +82,7 @@ public class Application {
         FileLoadGuest.fileLoadGuest(name);
     }
 
-    public static void fileLoadService(String name) throws IOException {
+    public static void fileLoadService(String name) {
         FileLoadService.fileLoadService(name);
     }
 

@@ -1,9 +1,14 @@
 package com.senla.hotel.backend.domain;
 
 import com.senla.hotel.backend.repository.service.FileLoadService;
+import com.senla.hotel.util.DI.annotation.Autowired;
+import com.senla.hotel.util.DI.stereotype.Instance;
 
+@Instance
 public class Service {
     public static int idService = FileLoadService.loadServiceId();
+    @Autowired(className = "FileLoadService")
+    private FileLoadService fileLoadService;
     private int id;
     private int price;
     private String title;

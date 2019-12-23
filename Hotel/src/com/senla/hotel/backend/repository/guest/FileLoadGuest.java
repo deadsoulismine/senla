@@ -5,7 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.senla.hotel.backend.Application;
 import com.senla.hotel.backend.domain.Guest;
-import com.senla.hotel.util.Data;
+import com.senla.hotel.util.data.Data;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,12 +15,12 @@ import java.util.List;
 
 public class FileLoadGuest {
     public static void fileLoadGuest(String name) {
-        List<Guest> guestList;
+        List<Guest> jsonGuestList;
         try (JsonReader reader = new JsonReader(new FileReader(name))) {
             Type itemsType = new TypeToken<List<Guest>>() {
             }.getType();
-            guestList = new Gson().fromJson(reader, itemsType);
-            guestList.forEach(g -> Application.getHotel().guestList().add(g));
+            jsonGuestList = new Gson().fromJson(reader, itemsType);
+            jsonGuestList.forEach(g -> Application.getHotel().guestList().add(g));
         } catch (IOException e) {
             e.printStackTrace();
         }

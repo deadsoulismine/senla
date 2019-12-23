@@ -1,24 +1,30 @@
 package com.senla.hotel.ui.model.menu;
 
+import com.senla.hotel.util.DI.stereotype.Instance;
+
 import java.util.ArrayList;
 import java.util.Optional;
 
+@Instance
 public class Menu {
     private ArrayList<MenuItem> items = new ArrayList<>();
     private String title;
     private Menu prevMenu;
 
-    public Menu(String title, Menu prevMenu) {
-        this.title = title;
-        this.prevMenu = prevMenu;
-    }
-
     public Menu getPrevMenu() {
         return prevMenu;
     }
 
+    public void setPrevMenu(Menu prevMenu) {
+        this.prevMenu = prevMenu;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public ArrayList<MenuItem> getItems() {

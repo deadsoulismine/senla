@@ -1,22 +1,27 @@
 package com.senla.hotel.backend.domain;
 
-import com.senla.hotel.backend.service.HotelMethods;
+import com.senla.hotel.backend.service.IHotelMethods;
+import com.senla.hotel.util.DI.annotation.Autowired;
+import com.senla.hotel.util.DI.stereotype.Component;
 
 import java.util.ArrayList;
 
+@Component
 public class Hotel {
     private ArrayList<Room> rooms;
     private ArrayList<Service> services;
     private ArrayList<Guest> guests;
-    private HotelMethods hotelMethods = new HotelMethods();
 
-    public Hotel(ArrayList<Room> rooms, ArrayList<Service> services, ArrayList<Guest> guests) {
-        this.rooms = rooms;
-        this.services = services;
-        this.guests = guests;
+    @Autowired(className = "HotelMethodsImpl")
+    private IHotelMethods hotelMethods;
+
+    public Hotel() {
+        this.rooms = new ArrayList<>();
+        this.services = new ArrayList<>();
+        this.guests = new ArrayList<>();
     }
 
-    public HotelMethods getHotelMethods() {
+    public IHotelMethods getHotelMethods() {
         return hotelMethods;
     }
 

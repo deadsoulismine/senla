@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.senla.hotel.backend.Application;
 import com.senla.hotel.backend.domain.Service;
+import com.senla.hotel.util.data.Data;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,21 +13,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static com.senla.hotel.util.Data.getProp;
-
 public class FileLoadService {
-//    public static void fileLoadService(String name) throws IOException {
-//        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(name))) {
-//            String currentLine;
-//
-//            while ((currentLine = bufferedReader.readLine()) != null) {
-//                String[] room = currentLine.split(", ");
-//
-//                Application.getHotel().serviceList().add(new Service(Integer.parseInt(room[0]), room[1]));
-//            }
-//        }
-//    }
-
     public static void fileLoadService(String name) {
         List<Service> serviceList;
         try (JsonReader reader = new JsonReader(new FileReader(name))) {
@@ -40,7 +27,7 @@ public class FileLoadService {
     }
 
     public static int loadServiceId() {
-        try (BufferedReader buffRead = new BufferedReader(new FileReader(getProp().getProperty("pathIdService")))) {
+        try (BufferedReader buffRead = new BufferedReader(new FileReader(Data.getProp().getProperty("pathIdService")))) {
             return Integer.parseInt(buffRead.readLine());
         } catch (IOException e) {
             e.printStackTrace();

@@ -12,17 +12,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class FileLoadRoom {
-//    public static void fileLoadRoom(String name) throws IOException {
-//        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(name))) {
-//            String currentLine;
-//
-//            while ((currentLine = bufferedReader.readLine()) != null) {
-//                String[] room = currentLine.split(", ");
-//                Application.getHotel().roomList().add(new Room(Integer.parseInt(room[0]), Integer.parseInt(room[1])));
-//            }
-//        }
-//    }
-
     public static void fileLoadRoom(String name) {
         List<Room> roomList;
         try (JsonReader reader = new JsonReader(new FileReader(name))) {

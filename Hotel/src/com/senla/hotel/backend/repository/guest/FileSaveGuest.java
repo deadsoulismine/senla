@@ -5,13 +5,12 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonWriter;
 import com.senla.hotel.backend.Application;
 import com.senla.hotel.backend.domain.Guest;
+import com.senla.hotel.util.data.Data;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
-
-import static com.senla.hotel.util.Data.getProp;
 
 public class FileSaveGuest {
     public static void fileSaveGuest(String name) {
@@ -26,7 +25,7 @@ public class FileSaveGuest {
     }
 
     public static void saveGuestId() {
-        try (FileWriter fileWriter = new FileWriter(getProp().getProperty("pathIdGuest"))) {
+        try (FileWriter fileWriter = new FileWriter(Data.getProp().getProperty("pathIdGuest"))) {
             fileWriter.write(String.valueOf(Guest.getIdGuest()));
             fileWriter.write("\n");
         } catch (IOException e) {

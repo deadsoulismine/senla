@@ -8,5 +8,5 @@ import java.io.IOException;
 
 public interface IAction {
     void execute() throws IOException, RuntimeException, ListIsEmptyException, ObjectNotExistException,
-            SameObjectsException;
+            SameObjectsException, ReflectiveOperationException;
 }

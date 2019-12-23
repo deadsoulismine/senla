@@ -4,12 +4,12 @@ import com.senla.hotel.ui.exception.ListIsEmptyException;
 import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.exception.SameObjectsException;
 
-public interface IHotelMethods {
+public interface IHotelMethods<T> {
     //Добавляем новый номер в список
     void addRoom(int number, int price) throws SameObjectsException;
 
     //Добавляем новую услугу в список
-    void addGuest(String name, int age);
+    void addGuest(String name, int age) throws ReflectiveOperationException;
 
     //Добавляем новую услугу в список
     void addService(int price, String title) throws SameObjectsException;
@@ -26,6 +26,9 @@ public interface IHotelMethods {
     //Заселение
     void settle(int idGuest, int roomNumber) throws ObjectNotExistException;
 
+    //Выселение
+    void evict(int idGuest) throws ObjectNotExistException;
+
     //Изменение статуса номера
     void changeRoomStatus(int idRoom) throws ObjectNotExistException;
 
@@ -34,5 +37,23 @@ public interface IHotelMethods {
 
     //Изменение цены услуги
     void changeServicePrice(int idRoom, int price) throws ObjectNotExistException;
+
+    //Вывод списка всех номеров
+    void printRoomList() throws ListIsEmptyException;
+
+    //Вывод списка всех постояльцев
+    void printGuestList() throws ListIsEmptyException;
+
+    //Вывод списка всех услуг
+    void printServiceList() throws ListIsEmptyException;
+
+    //Вывод списка всех свободных номеров
+    void printFreeRoomList() throws ListIsEmptyException;
+
+    //Вывод списка всех постояльцев без комнаты
+    void printWaitingGuests() throws ListIsEmptyException;
+
+    //Вывод списка заселённых постольцев
+    void printSettleGuests() throws ListIsEmptyException;
 }
 
