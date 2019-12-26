@@ -1,22 +1,22 @@
 package com.senla.hotel.backend.domain;
 
-import com.senla.hotel.backend.repository.service.FileLoadService;
-import com.senla.hotel.util.DI.annotation.Autowired;
-import com.senla.hotel.util.DI.stereotype.Instance;
+import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.data.LoadID;
 
-@Instance
+@Component(type = "Instance")
 public class Service {
-    public static int idService = FileLoadService.loadServiceId();
-    @Autowired(className = "FileLoadService")
-    private FileLoadService fileLoadService;
+    private static int idService = LoadID.loadServiceId();
+
     private int id;
     private int price;
     private String title;
 
-    public Service(int price, String title) {
+    public Service() {
         this.id = idService++;
-        this.price = price;
-        this.title = title;
+    }
+
+    public static int getIdService() {
+        return idService;
     }
 
     public int getId() {

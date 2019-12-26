@@ -13,7 +13,7 @@ public class Navigator implements INavigator {
     private static Menu currentMenu;
 
     @Autowired(className = "ViewController")
-    IViewController viewController;
+    private IViewController viewController;
 
     public void setCurrentMenu(Menu currentMenu) {
         Navigator.currentMenu = currentMenu;

@@ -1,301 +1,96 @@
 package com.senla.hotel.ui.model.builder;
 
-import com.senla.hotel.ui.model.action.IAction;
+import com.senla.hotel.ui.model.action.Exit;
+import com.senla.hotel.ui.model.action.objects.guest.AddGuestAction;
+import com.senla.hotel.ui.model.action.objects.guest.DeleteGuestAction;
+import com.senla.hotel.ui.model.action.objects.room.AddRoomAction;
+import com.senla.hotel.ui.model.action.objects.room.ChangeRoomPriceAction;
+import com.senla.hotel.ui.model.action.objects.room.ChangeRoomStatusAction;
+import com.senla.hotel.ui.model.action.objects.room.DeleteRoomAction;
+import com.senla.hotel.ui.model.action.objects.service.AddServiceAction;
+import com.senla.hotel.ui.model.action.objects.service.ChangeServicePriceAction;
+import com.senla.hotel.ui.model.action.objects.service.DeleteServiceAction;
+import com.senla.hotel.ui.model.action.residence.EvictAction;
+import com.senla.hotel.ui.model.action.residence.SettleAction;
+import com.senla.hotel.ui.model.action.serialisation.guest.FileLoadGuestAction;
+import com.senla.hotel.ui.model.action.serialisation.guest.FileSaveGuestAction;
+import com.senla.hotel.ui.model.action.serialisation.room.FileLoadRoomAction;
+import com.senla.hotel.ui.model.action.serialisation.room.FileSaveRoomAction;
+import com.senla.hotel.ui.model.action.serialisation.service.FileLoadServiceAction;
+import com.senla.hotel.ui.model.action.serialisation.service.FileSaveServiceAction;
 import com.senla.hotel.ui.model.menu.Menu;
 import com.senla.hotel.ui.model.menu.MenuItem;
-import com.senla.hotel.util.DI.BeanFactory;
-import com.senla.hotel.util.DI.annotation.Autowired;
 import com.senla.hotel.util.DI.stereotype.Component;
 
 @Component
 public class Builder implements IBuilder {
-    @Autowired(className = "BeanFactory")
-    BeanFactory beanFactory;
-
     @Override
-    public Menu buildMenu() throws ReflectiveOperationException {
-        MenuItem tempMenuItem;
+    public Menu buildMenu() {
+        Menu mainMenu = new Menu("| Welcome to menu for manage Hotel. Choose the action: |", null);
+        Menu objectsAddMenu = new Menu("| Choose the item for add: |", mainMenu);
+        Menu objectsDeleteMenu = new Menu("| Choose the item for delete: |", mainMenu);
+        Menu changeMenu = new Menu("| Choose the item, which you need to change: |", mainMenu);
+        Menu residenceMenu = new Menu("| Choose the action: |", mainMenu);
+        Menu changeRoomMenu = new Menu("| Choose the change: |", changeMenu);
+        Menu changeGuestMenu = new Menu("| Choose the change: |", changeMenu);
+        Menu changeServiceMenu = new Menu("| Choose the change: |", changeMenu);
+        Menu serialisationMenu = new Menu("| Menu for choice Load or Save data |", mainMenu);
+        Menu loadObjects = new Menu("| Choose the object for load data |", mainMenu);
+        Menu saveObjects = new Menu("| Choose the object for save data |", mainMenu);
 
-        Menu mainMenu = (Menu) beanFactory.instantiateInstance("Menu");
-        mainMenu.setTitle("| Welcome to menu for manage Hotel. Choose the action: |");
-        mainMenu.setPrevMenu(null);
+        mainMenu.addMenuItem(new MenuItem("Add object", objectsAddMenu, null));
+        mainMenu.addMenuItem(new MenuItem("Delete object", objectsDeleteMenu, null));
+        mainMenu.addMenuItem(new MenuItem("Change object", changeMenu, null));
+        mainMenu.addMenuItem(new MenuItem("Settle/Evict guest", residenceMenu, null));
+        mainMenu.addMenuItem(new MenuItem("Load/Save data", serialisationMenu, null));
+        mainMenu.addMenuItem(new MenuItem("Exit", null, new Exit()));
 
-        Menu objectsAddMenu = (Menu) beanFactory.instantiateInstance("Menu");
-        objectsAddMenu.setTitle("| Choose the item for add: |");
-        objectsAddMenu.setPrevMenu(mainMenu);
+        objectsAddMenu.addMenuItem(new MenuItem("Add new room", null, new AddRoomAction()));
+        objectsAddMenu.addMenuItem(new MenuItem("Add new guest", null, new AddGuestAction()));
+        objectsAddMenu.addMenuItem(new MenuItem("Add new service", null, new AddServiceAction()));
+        objectsAddMenu.addMenuItem(new MenuItem("Back", objectsAddMenu.getPrevMenu(), null));
 
-        Menu objectsDeleteMenu = (Menu) beanFactory.instantiateInstance("Menu");
-        objectsDeleteMenu.setTitle("| Choose the item for delete: |");
-        objectsDeleteMenu.setPrevMenu(mainMenu);
+        objectsDeleteMenu.addMenuItem(new MenuItem("Delete room", null, new DeleteRoomAction()));
+        objectsDeleteMenu.addMenuItem(new MenuItem("Delete guest", null, new DeleteGuestAction()));
+        objectsDeleteMenu.addMenuItem(new MenuItem("Delete service", null, new DeleteServiceAction()));
+        objectsDeleteMenu.addMenuItem(new MenuItem("Back", objectsDeleteMenu.getPrevMenu(), null));
 
-        Menu changeMenu = (Menu) beanFactory.instantiateInstance("Menu");
-        changeMenu.setTitle("| Choose the item, which you need to change: |");
-        changeMenu.setPrevMenu(mainMenu);
+        changeMenu.addMenuItem(new MenuItem("Room", changeRoomMenu, null));
+        changeMenu.addMenuItem(new MenuItem("Guest", changeGuestMenu, null));
+        changeMenu.addMenuItem(new MenuItem("Service", changeServiceMenu, null));
+        changeMenu.addMenuItem(new MenuItem("Back", changeMenu.getPrevMenu(), null));
 
-        Menu residenceMenu = (Menu) beanFactory.instantiateInstance("Menu");
-        residenceMenu.setTitle("| Choose the action: |");
-        residenceMenu.setPrevMenu(mainMenu);
+        changeRoomMenu.addMenuItem(new MenuItem("Price of room", null, new ChangeRoomPriceAction()));
+        //changeRoomMenu.addMenuItem(new MenuItem("Number of room", null, null));
+        changeRoomMenu.addMenuItem(new MenuItem("Status of room", null, new ChangeRoomStatusAction()));
+        changeRoomMenu.addMenuItem(new MenuItem("Back", changeRoomMenu.getPrevMenu(), null));
 
-        Menu changeRoomMenu = (Menu) beanFactory.instantiateInstance("Menu");
-        changeRoomMenu.setTitle("| Choose the change: |");
-        changeRoomMenu.setPrevMenu(changeMenu);
+        //changeGuestMenu.addMenuItem(new MenuItem("Name of guest", null, null));
+        //changeGuestMenu.addMenuItem(new MenuItem("Age of guest", null, null));
+        changeGuestMenu.addMenuItem(new MenuItem("Back", changeGuestMenu.getPrevMenu(), null));
 
-        Menu changeGuestMenu = (Menu) beanFactory.instantiateInstance("Menu");
-        changeGuestMenu.setTitle("| Choose the change: |");
-        changeGuestMenu.setPrevMenu(changeMenu);
+        //changeServiceMenu.addMenuItem(new MenuItem("Title of service", null, null));
+        changeServiceMenu.addMenuItem(new MenuItem("Price of service", null, new ChangeServicePriceAction()));
+        changeServiceMenu.addMenuItem(new MenuItem("Back", changeServiceMenu.getPrevMenu(), null));
 
-        Menu changeServiceMenu = (Menu) beanFactory.instantiateInstance("Menu");
-        changeServiceMenu.setTitle("| Choose the change: |");
-        changeServiceMenu.setPrevMenu(changeMenu);
+        residenceMenu.addMenuItem(new MenuItem("Settle", null, new SettleAction()));
+        residenceMenu.addMenuItem(new MenuItem("Evict", null, new EvictAction()));
+        //residenceMenu.addMenuItem(new MenuItem("List of busy rooms", null, null));
+        residenceMenu.addMenuItem(new MenuItem("Back", residenceMenu.getPrevMenu(), null));
 
-        Menu serialisationMenu = (Menu) beanFactory.instantiateInstance("Menu");
-        serialisationMenu.setTitle("| Menu for choice Load or Save data |");
-        serialisationMenu.setPrevMenu(mainMenu);
+        serialisationMenu.addMenuItem(new MenuItem("Load data from file", loadObjects, null));
+        serialisationMenu.addMenuItem(new MenuItem("Save data to file", saveObjects, null));
+        serialisationMenu.addMenuItem(new MenuItem("Back", serialisationMenu.getPrevMenu(), null));
 
-        Menu loadObjects = (Menu) beanFactory.instantiateInstance("Menu");
-        loadObjects.setTitle("| Choose the object for load data |");
-        loadObjects.setPrevMenu(mainMenu);
+        loadObjects.addMenuItem(new MenuItem("Room", null, new FileLoadRoomAction()));
+        loadObjects.addMenuItem(new MenuItem("Guest", null, new FileLoadGuestAction()));
+        loadObjects.addMenuItem(new MenuItem("Service", null, new FileLoadServiceAction()));
+        loadObjects.addMenuItem(new MenuItem("Back", serialisationMenu, null));
 
-        Menu saveObjects = (Menu) beanFactory.instantiateInstance("Menu");
-        saveObjects.setTitle("| Choose the object for save data |");
-        saveObjects.setPrevMenu(mainMenu);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Add object");
-        tempMenuItem.setNextMenu(objectsAddMenu);
-        tempMenuItem.setAction(null);
-        mainMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Delete object");
-        tempMenuItem.setNextMenu(objectsDeleteMenu);
-        tempMenuItem.setAction(null);
-        mainMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Change object");
-        tempMenuItem.setNextMenu(changeMenu);
-        tempMenuItem.setAction(null);
-        mainMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Settle/Evict guest");
-        tempMenuItem.setNextMenu(residenceMenu);
-        tempMenuItem.setAction(null);
-        mainMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Load/Save data");
-        tempMenuItem.setNextMenu(serialisationMenu);
-        tempMenuItem.setAction(null);
-        mainMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Exit");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) BeanFactory.getBean("Exit"));
-        mainMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Add new room");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) BeanFactory.getBean("AddRoomAction"));
-        objectsAddMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Add new guest");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) BeanFactory.getBean("AddGuestAction"));
-        objectsAddMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Add new service");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) BeanFactory.getBean("AddServiceAction"));
-        objectsAddMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Back");
-        tempMenuItem.setNextMenu(objectsAddMenu.getPrevMenu());
-        tempMenuItem.setAction(null);
-        objectsAddMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Delete room");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) BeanFactory.getBean("DeleteRoomAction"));
-        objectsDeleteMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Delete guest");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) BeanFactory.getBean("DeleteGuestAction"));
-        objectsDeleteMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Delete service");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) BeanFactory.getBean("DeleteServiceAction"));
-        objectsDeleteMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Back");
-        tempMenuItem.setNextMenu(objectsDeleteMenu.getPrevMenu());
-        tempMenuItem.setAction(null);
-        objectsDeleteMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Room");
-        tempMenuItem.setNextMenu(changeRoomMenu);
-        tempMenuItem.setAction(null);
-        changeMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Guest");
-        tempMenuItem.setNextMenu(changeGuestMenu);
-        tempMenuItem.setAction(null);
-        changeMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Service");
-        tempMenuItem.setNextMenu(changeServiceMenu);
-        tempMenuItem.setAction(null);
-        changeMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Back");
-        tempMenuItem.setNextMenu(changeMenu.getPrevMenu());
-        tempMenuItem.setAction(null);
-        changeMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Price of room");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) beanFactory.getBean("ChangeRoomPriceAction"));
-        changeRoomMenu.addMenuItem(tempMenuItem);
-
-//        //changeRoomMenu.addMenuItem(new MenuItem("Number of room", null, null));
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Status of room");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) beanFactory.getBean("ChangeRoomStatusAction"));
-        changeRoomMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Back");
-        tempMenuItem.setNextMenu(changeRoomMenu.getPrevMenu());
-        tempMenuItem.setAction(null);
-        changeRoomMenu.addMenuItem(tempMenuItem);
-
-//        //changeGuestMenu.addMenuItem(new MenuItem("Name of guest", null, null));
-//        //changeGuestMenu.addMenuItem(new MenuItem("Age of guest", null, null));
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Back");
-        tempMenuItem.setNextMenu(changeGuestMenu.getPrevMenu());
-        tempMenuItem.setAction(null);
-        changeGuestMenu.addMenuItem(tempMenuItem);
-
-//        //changeServiceMenu.addMenuItem(new MenuItem("Title of service", null, null));
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Price of service");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) beanFactory.getBean("ChangeServicePriceAction"));
-        changeServiceMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Back");
-        tempMenuItem.setNextMenu(changeServiceMenu.getPrevMenu());
-        tempMenuItem.setAction(null);
-        changeServiceMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Settle");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) BeanFactory.getBean("SettleAction"));
-        residenceMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Evict");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) beanFactory.getBean("EvictAction"));
-        residenceMenu.addMenuItem(tempMenuItem);
-
-//        //residenceMenu.addMenuItem(new MenuItem("List of busy rooms", null, null));
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Back");
-        tempMenuItem.setNextMenu(residenceMenu.getPrevMenu());
-        tempMenuItem.setAction(null);
-        residenceMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Load data from file");
-        tempMenuItem.setNextMenu(loadObjects);
-        tempMenuItem.setAction(null);
-        serialisationMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Save data to file");
-        tempMenuItem.setNextMenu(saveObjects);
-        tempMenuItem.setAction(null);
-        serialisationMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Back");
-        tempMenuItem.setNextMenu(serialisationMenu.getPrevMenu());
-        tempMenuItem.setAction(null);
-        serialisationMenu.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Room");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) beanFactory.getBean("FileLoadRoomAction"));
-        loadObjects.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Guest");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) beanFactory.getBean("FileLoadGuestAction"));
-        loadObjects.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Service");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) beanFactory.getBean("FileLoadServiceAction"));
-        loadObjects.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Back");
-        tempMenuItem.setNextMenu(loadObjects.getPrevMenu());
-        tempMenuItem.setAction(null);
-        loadObjects.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Room");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) beanFactory.getBean("FileSaveRoomAction"));
-        saveObjects.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Guest");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) beanFactory.getBean("FileSaveGuestAction"));
-        saveObjects.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Service");
-        tempMenuItem.setNextMenu(null);
-        tempMenuItem.setAction((IAction) beanFactory.getBean("FileSaveServiceAction"));
-        saveObjects.addMenuItem(tempMenuItem);
-
-        tempMenuItem = (MenuItem) beanFactory.instantiateInstance("MenuItem");
-        tempMenuItem.setTitle("Back");
-        tempMenuItem.setNextMenu(saveObjects.getPrevMenu());
-        tempMenuItem.setAction(null);
-        saveObjects.addMenuItem(tempMenuItem);
+        saveObjects.addMenuItem(new MenuItem("Room", null, new FileSaveRoomAction()));
+        saveObjects.addMenuItem(new MenuItem("Guest", null, new FileSaveGuestAction()));
+        saveObjects.addMenuItem(new MenuItem("Service", null, new FileSaveServiceAction()));
+        saveObjects.addMenuItem(new MenuItem("Back", serialisationMenu, null));
 
         return mainMenu;
     }

@@ -6,7 +6,7 @@ import com.senla.hotel.util.DI.stereotype.Component;
 import java.util.Scanner;
 
 @Component
-public class UtilScanner implements IUtilScanner {
+public class ScannerService implements IScannerService {
     private static Scanner in = new Scanner(System.in);
 
     public String stringScanner() {

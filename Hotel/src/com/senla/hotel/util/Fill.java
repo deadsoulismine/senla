@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FillGuest {
+public @interface Fill {
     String configName() default "fillGuest.properties";
 
     String propertyName() default "";

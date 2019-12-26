@@ -1,12 +1,9 @@
 package com.senla.hotel.util.data;
 
-import com.senla.hotel.backend.Application;
-import com.senla.hotel.backend.repository.guest.FileLoadGuest;
-import com.senla.hotel.backend.repository.guest.FileSaveGuest;
-import com.senla.hotel.backend.repository.service.FileLoadService;
-import com.senla.hotel.backend.repository.service.FileSaveService;
+import com.senla.hotel.backend.service.IService;
+import com.senla.hotel.util.DI.annotation.Autowired;
 import com.senla.hotel.util.DI.stereotype.Component;
-import com.senla.hotel.util.FillGuestAnnotation;
+import com.senla.hotel.util.IFillField;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,34 +12,42 @@ import java.util.Properties;
 @Component
 public class Data implements IData {
     private static final String PATH_TO_PROPERTIES_OF_DATA = "Hotel/src/com/senla/hotel/resources/config.properties";
-    private static Properties propData = new Properties();
+    private Properties propData;
 
-    public static Properties getProp() {
+    @Autowired(className = "ServiceImpl")
+    private IService service;
+    @Autowired(className = "FillField")
+    private IFillField fillField;
+
+    public Data() {
+        this.propData = new Properties();
+    }
+
+    @Override
+    public Properties getProp() {
         return propData;
     }
 
     //Загрузка данных
-    public void load() throws IOException, NoSuchFieldException {
+    public void load() throws IOException, ReflectiveOperationException {
         FileInputStream fileInputStreamData = new FileInputStream(PATH_TO_PROPERTIES_OF_DATA);
         propData.load(fileInputStreamData);
 
-        Application.fileLoadGuest(propData.getProperty("pathGuestList"));
-        Application.fileLoadRoom(propData.getProperty("pathRoomList"));
-        Application.fileLoadService(propData.getProperty("pathServiceList"));
+        service.fileLoadGuest(propData.getProperty("pathGuestList"));
+        service.fileLoadRoom(propData.getProperty("pathRoomList"));
+        service.fileLoadService(propData.getProperty("pathServiceList"));
 
-        FileLoadGuest.loadGuestId();
-        FileLoadService.loadServiceId();
-
-        FillGuestAnnotation.action();
+        fillField.action();
     }
 
     //Сохранение данных
     @Override
     public void saveData() {
-        Application.fileSaveGuest(propData.getProperty("pathGuestList"));
-        Application.fileSaveRoom(propData.getProperty("pathRoomList"));
-        Application.fileSaveService(propData.getProperty("pathServiceList"));
-        FileSaveGuest.saveGuestId();
-        FileSaveService.saveServiceId();
+        service.fileSaveGuest(propData.getProperty("pathGuestList"));
+        service.fileSaveRoom(propData.getProperty("pathRoomList"));
+        service.fileSaveService(propData.getProperty("pathServiceList"));
+        service.saveGuestId();
+        service.saveServiceId();
     }
+
 }

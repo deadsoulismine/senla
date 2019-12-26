@@ -1,18 +1,18 @@
 package com.senla.hotel.backend.domain;
 
-import com.senla.hotel.backend.repository.guest.FileLoadGuest;
-import com.senla.hotel.util.DI.stereotype.Instance;
-import com.senla.hotel.util.FillGuest;
+import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.Fill;
+import com.senla.hotel.util.data.LoadID;
 
-@Instance
+@Component(type = "Instance")
 public class Guest {
-    private static int idGuest = FileLoadGuest.loadGuestId();
+    private static int idGuest = LoadID.loadGuestId();
+    @Fill(propertyName = "nameOne")
+    private String name;
+    @Fill(propertyName = "ageOne")
+    private int age;
     private int id;
     private Integer roomNumber;
-    @FillGuest(propertyName = "nameOne")
-    private String name;
-    @FillGuest(propertyName = "ageOne")
-    private int age;
 
     public Guest() {
         this.id = idGuest++;

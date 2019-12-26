@@ -1,10 +1,17 @@
 package com.senla.hotel.backend.service;
 
+import com.senla.hotel.backend.repository.guest.IGuestGeneral;
+import com.senla.hotel.backend.repository.guest.IGuestSerialisation;
+import com.senla.hotel.backend.repository.residence.IResidence;
+import com.senla.hotel.backend.repository.room.IRoomGeneral;
+import com.senla.hotel.backend.repository.room.IRoomSerialisation;
+import com.senla.hotel.backend.repository.service.IServiceGeneral;
+import com.senla.hotel.backend.repository.service.IServiceSerialisation;
 import com.senla.hotel.ui.exception.ListIsEmptyException;
 import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.exception.SameObjectsException;
 
-public interface IHotelMethods<T> {
+public interface IService {
     //Добавляем новый номер в список
     void addRoom(int number, int price) throws SameObjectsException;
 
@@ -55,5 +62,35 @@ public interface IHotelMethods<T> {
 
     //Вывод списка заселённых постольцев
     void printSettleGuests() throws ListIsEmptyException;
+
+    void fileLoadGuest(String stringScanner);
+
+    void fileSaveGuest(String stringScanner);
+
+    void fileLoadRoom(String stringScanner);
+
+    void fileSaveRoom(String stringScanner);
+
+    void fileLoadService(String stringScanner);
+
+    void fileSaveService(String stringScanner);
+
+    void saveGuestId();
+
+    void saveServiceId();
+
+    IGuestGeneral getGuestGeneral();
+
+    IGuestSerialisation getGuestSerialisation();
+
+    IRoomGeneral getRoomGeneral();
+
+    IRoomSerialisation getRoomSerialisation();
+
+    IServiceGeneral getServiceGeneral();
+
+    IServiceSerialisation getServiceSerialisation();
+
+    IResidence getResidence();
 }
 
