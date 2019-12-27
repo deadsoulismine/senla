@@ -1,17 +1,25 @@
 package com.senla.hotel.ui.model.action.objects.guest;
 
-import com.senla.hotel.backend.Application;
+import com.senla.hotel.backend.service.IService;
 import com.senla.hotel.ui.model.action.IAction;
-import com.senla.hotel.ui.model.action.util.UtilScanner;
+import com.senla.hotel.util.DI.annotation.Autowired;
+import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.scanner.IScannerService;
 
+@Component
 public class AddGuestAction implements IAction {
+    @Autowired(className = "ServiceImpl")
+    private IService service;
+    @Autowired(className = "ScannerService")
+    private IScannerService utilScanner;
+
     //Добавляем нового постояльца в список
     @Override
-    public void execute() {
-        System.out.println("Enter name of new Guest");
-        String name = UtilScanner.stringScanner();
-        System.out.println("Enter age of new Guest");
-        int age = UtilScanner.intScanner();
-        Application.addGuest(name, age);
+    public void execute() throws ReflectiveOperationException {
+        System.out.println("Enter name of new guest");
+        String name = utilScanner.stringScanner();
+        System.out.println("Enter age of new guest");
+        int age = utilScanner.intScanner();
+        service.addGuest(name, age);
     }
 }

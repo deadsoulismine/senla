@@ -1,32 +1,19 @@
 package com.senla.hotel.backend.domain;
 
+import com.senla.hotel.util.DI.stereotype.Component;
+
 import java.util.ArrayList;
 
+@Component(type = "Instance")
 public class Room {
-    private static int idRoom = 0;
-
-    private int id;
     private Integer idGuest;
     private int number;
     private int price;
     private boolean status;
     private ArrayList<Guest> history = new ArrayList<>();
 
-    public Room(int number, int price) {
-        this.id = idRoom;
-        idRoom++;
-        this.number = number;
-        this.price = price;
-        this.idGuest = null;
-        this.status = true;
-    }
-
     public ArrayList<Guest> getHistory() {
         return history;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public boolean getStatus() {

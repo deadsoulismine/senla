@@ -1,5 +1,6 @@
 package com.senla.hotel.ui.model.builder;
 
+import com.senla.hotel.ui.model.action.Exit;
 import com.senla.hotel.ui.model.action.objects.guest.AddGuestAction;
 import com.senla.hotel.ui.model.action.objects.guest.DeleteGuestAction;
 import com.senla.hotel.ui.model.action.objects.room.AddRoomAction;
@@ -17,15 +18,15 @@ import com.senla.hotel.ui.model.action.serialisation.room.FileLoadRoomAction;
 import com.senla.hotel.ui.model.action.serialisation.room.FileSaveRoomAction;
 import com.senla.hotel.ui.model.action.serialisation.service.FileLoadServiceAction;
 import com.senla.hotel.ui.model.action.serialisation.service.FileSaveServiceAction;
-import com.senla.hotel.ui.model.action.util.Exit;
 import com.senla.hotel.ui.model.menu.Menu;
 import com.senla.hotel.ui.model.menu.MenuItem;
+import com.senla.hotel.util.DI.stereotype.Component;
 
+@Component
 public class Builder implements IBuilder {
     @Override
     public Menu buildMenu() {
-        Menu mainMenu = new Menu("| Welcome to menu for manage Hotel. Choose the action: |",
-                null);
+        Menu mainMenu = new Menu("| Welcome to menu for manage Hotel. Choose the action: |", null);
         Menu objectsAddMenu = new Menu("| Choose the item for add: |", mainMenu);
         Menu objectsDeleteMenu = new Menu("| Choose the item for delete: |", mainMenu);
         Menu changeMenu = new Menu("| Choose the item, which you need to change: |", mainMenu);
@@ -74,10 +75,11 @@ public class Builder implements IBuilder {
 
         residenceMenu.addMenuItem(new MenuItem("Settle", null, new SettleAction()));
         residenceMenu.addMenuItem(new MenuItem("Evict", null, new EvictAction()));
+        //residenceMenu.addMenuItem(new MenuItem("List of busy rooms", null, null));
         residenceMenu.addMenuItem(new MenuItem("Back", residenceMenu.getPrevMenu(), null));
 
-        serialisationMenu.addMenuItem(new MenuItem("Load data from file", loadObjects, new FileLoadRoomAction()));
-        serialisationMenu.addMenuItem(new MenuItem("Save data to file", saveObjects, new FileSaveRoomAction()));
+        serialisationMenu.addMenuItem(new MenuItem("Load data from file", loadObjects, null));
+        serialisationMenu.addMenuItem(new MenuItem("Save data to file", saveObjects, null));
         serialisationMenu.addMenuItem(new MenuItem("Back", serialisationMenu.getPrevMenu(), null));
 
         loadObjects.addMenuItem(new MenuItem("Room", null, new FileLoadRoomAction()));

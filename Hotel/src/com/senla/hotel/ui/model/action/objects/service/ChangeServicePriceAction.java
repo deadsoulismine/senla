@@ -1,19 +1,29 @@
 package com.senla.hotel.ui.model.action.objects.service;
 
-import com.senla.hotel.backend.Application;
+import com.senla.hotel.backend.service.IService;
+import com.senla.hotel.ui.exception.ListIsEmptyException;
+import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.model.action.IAction;
-import com.senla.hotel.ui.model.action.util.UtilScanner;
+import com.senla.hotel.util.DI.annotation.Autowired;
+import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.scanner.IScannerService;
 
+@Component
 public class ChangeServicePriceAction implements IAction {
+    @Autowired(className = "ServiceImpl")
+    private IService service;
+    @Autowired(className = "ScannerService")
+    private IScannerService utilScanner;
+
     //Изменяем стоймость услуги
     @Override
-    public void execute() {
-        Application.printServiceList();
-        System.out.println("Enter ID of Service for change price");
-        int idService = UtilScanner.intScanner();
+    public void execute() throws ListIsEmptyException, ObjectNotExistException {
+        service.printServiceList();
+        System.out.println("Enter ID of service for change price");
+        int idService = utilScanner.intScanner();
         System.out.println("Enter new price");
-        int price = UtilScanner.intScanner();
-        Application.changeServicePrice(idService, price);
+        int price = utilScanner.intScanner();
+        service.changeServicePrice(idService, price);
     }
 
 }

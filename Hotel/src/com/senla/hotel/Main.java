@@ -1,29 +1,30 @@
 package com.senla.hotel;
 
 import com.senla.hotel.ui.controller.MenuController;
-import com.senla.hotel.ui.model.builder.Builder;
-import com.senla.hotel.ui.model.navigator.Navigator;
+import com.senla.hotel.util.DI.BeanFactory;
+import com.senla.hotel.util.DI.annotation.Autowired;
+import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.data.Data;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Properties;
-
+@Component
 public class Main {
-    public static final String PATH_TO_PROPERTIES = "src/com/senla/hotel/resources/config.properties";
-    public static FileInputStream fileInputStream;
-    public static Properties prop = new Properties();
+    @Autowired
+    private static MenuController menuController;
+    @Autowired
+    private static Data data;
 
-    static {
-        try {
-            fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: file " + PATH_TO_PROPERTIES + " is not found!");
-            e.printStackTrace();
-        }
+    public static void setMenuController(MenuController menuController) {
+        Main.menuController = menuController;
     }
 
-    public static void main(String[] args) {
-        MenuController menuController = new MenuController(new Builder(), new Navigator());
+    public static void setData(Data data) {
+        Main.data = data;
+    }
+
+    public static void main(String[] args) throws Exception {
+        BeanFactory beanFactory = new BeanFactory();
+        beanFactory.init();
+        data.load();
         menuController.run();
     }
 }

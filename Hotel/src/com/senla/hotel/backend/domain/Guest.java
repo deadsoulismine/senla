@@ -1,19 +1,25 @@
 package com.senla.hotel.backend.domain;
 
+import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.Fill;
+import com.senla.hotel.util.data.LoadID;
+
+@Component(type = "Instance")
 public class Guest {
-    private static int idGuest = 0;
-
-    private int id;
-    private Integer idRoom;
+    private static int idGuest = LoadID.loadGuestId();
+    @Fill(propertyName = "nameOne")
     private String name;
+    @Fill(propertyName = "ageOne")
     private int age;
+    private int id;
+    private Integer roomNumber;
 
-    public Guest(String name, int age) {
-        this.id = idGuest;
-        idGuest++;
-        this.idRoom = null;
-        this.name = name;
-        this.age = age;
+    public Guest() {
+        this.id = idGuest++;
+    }
+
+    public static int getIdGuest() {
+        return idGuest;
     }
 
     public int getId() {
@@ -36,12 +42,13 @@ public class Guest {
         this.age = age;
     }
 
-    public Integer getRoomId() {
-        return idRoom;
+    public Integer getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setRoomId(Integer idRoom) {
-        this.idRoom = idRoom;
+    public void setRoomId(Integer roomNumber) {
+        this.roomNumber = roomNumber;
     }
-
 }
+
+

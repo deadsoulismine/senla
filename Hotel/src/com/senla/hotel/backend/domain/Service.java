@@ -1,29 +1,34 @@
 package com.senla.hotel.backend.domain;
 
+import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.data.LoadID;
+
+@Component(type = "Instance")
 public class Service {
-    private static int idService = 0;
+    private static int idService = LoadID.loadServiceId();
 
     private int id;
     private int price;
-    private String name;
+    private String title;
 
-    public Service(int price, String name) {
-        this.id = idService;
-        idService++;
-        this.price = price;
-        this.name = name;
+    public Service() {
+        this.id = idService++;
+    }
+
+    public static int getIdService() {
+        return idService;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
     }
 
     public int getPrice() {

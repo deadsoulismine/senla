@@ -2,20 +2,21 @@ package com.senla.hotel.ui.model.navigator;
 
 import com.senla.hotel.ui.exception.IndexException;
 import com.senla.hotel.ui.model.menu.Menu;
-import com.senla.hotel.ui.view.ViewController;
+import com.senla.hotel.ui.view.IViewController;
+import com.senla.hotel.util.DI.annotation.Autowired;
+import com.senla.hotel.util.DI.stereotype.Component;
 
 import java.io.IOException;
 
+@Component
 public class Navigator implements INavigator {
     private static Menu currentMenu;
-    ViewController viewController = new ViewController();
 
-    public static Menu getCurrentMenu() {
-        return currentMenu;
-    }
+    @Autowired(className = "ViewController")
+    private IViewController viewController;
 
     public void setCurrentMenu(Menu currentMenu) {
-        this.currentMenu = currentMenu;
+        Navigator.currentMenu = currentMenu;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class Navigator implements INavigator {
     }
 
     @Override
-    public void navigate(byte index) throws IndexException {
+    public void navigate(byte index) throws Exception {
         index--;
         try {
             if (index >= currentMenu.getItems().size() || index < 0) {
@@ -37,10 +38,8 @@ public class Navigator implements INavigator {
                     currentMenu.getItems().get(index).getAction().execute();
                 }
             }
-        } catch (IndexException e) {
+        } catch (IndexException | IOException | ReflectiveOperationException e) {
             System.out.println(e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

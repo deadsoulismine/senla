@@ -1,8 +1,11 @@
 package com.senla.hotel.ui.model.menu;
 
+import com.senla.hotel.util.DI.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Optional;
 
+@Component(type = "Instance")
 public class Menu {
     private ArrayList<MenuItem> items = new ArrayList<>();
     private String title;
