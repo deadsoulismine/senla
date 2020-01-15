@@ -22,14 +22,27 @@ public class ChangeRoomStatusAction implements IAction {
 
     //Изменяем статус номера
     @Override
-    public void execute() throws ListIsEmptyException, ObjectNotExistException {
-        if (parseBoolean(data.getProp().getProperty("status"))) {
-            service.printRoomList();
-            System.out.println("Enter number of room for change status");
-            service.changeRoomStatus(utilScanner.intScanner());
-        } else {
-            System.out.println("Access to change this field is closed!");
-        }
+    public void execute() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            if (parseBoolean(data.getProp().getProperty("status"))) {
+                try {
+                    service.printRoomList();
+                } catch (ListIsEmptyException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Enter number of room for change status");
+                try {
+                    service.changeRoomStatus(utilScanner.intScanner());
+                } catch (ObjectNotExistException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Access to change this field is closed!");
+            }
+        });
+        thread.start();
+        thread.join();
+        thread.interrupt();
     }
 
 }

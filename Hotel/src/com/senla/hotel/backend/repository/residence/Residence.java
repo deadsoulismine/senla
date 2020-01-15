@@ -26,8 +26,7 @@ public class Residence implements IResidence {
             if (settleRoom.getIdGuest() == null) {
                 settleGuest.setRoomId(settleRoom.getNumber());
                 settleRoom.setIdGuest(settleGuest.getId());
-                System.out.println("GuestGeneral " + settleGuest.getName() +
-                        " settled in room: " + settleRoom.getNumber());
+                System.out.println("Guest " + settleGuest.getName() + " settled in room: " + settleRoom.getNumber());
                 //Проверка на переполнение количества записей в истории
                 if (settleRoom.getHistory().size() == parseInt(data.getProp().getProperty("history_size", "1"))) {
                     settleRoom.getHistory().remove(0);

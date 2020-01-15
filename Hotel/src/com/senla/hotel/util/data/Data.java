@@ -4,6 +4,7 @@ import com.senla.hotel.backend.service.IService;
 import com.senla.hotel.util.DI.annotation.Autowired;
 import com.senla.hotel.util.DI.stereotype.Component;
 import com.senla.hotel.util.IFillField;
+import com.senla.hotel.util.mail.IMail;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,6 +19,8 @@ public class Data implements IData {
     private IService service;
     @Autowired(className = "FillField")
     private IFillField fillField;
+    @Autowired(className = "Mail")
+    private IMail mail;
 
     public Data() {
         this.propData = new Properties();
@@ -38,6 +41,8 @@ public class Data implements IData {
         service.fileLoadService(propData.getProperty("pathServiceList"));
 
         fillField.action();
+
+        mail.sendMail();
     }
 
     //Сохранение данных
@@ -48,6 +53,7 @@ public class Data implements IData {
         service.fileSaveService(propData.getProperty("pathServiceList"));
         service.saveGuestId();
         service.saveServiceId();
+
     }
 
 }

@@ -15,8 +15,14 @@ public class FileSaveGuestAction implements IAction {
 
     //Сохранение данных постояльцев в файл
     @Override
-    public void execute() {
-        System.out.println("Enter name of file for save Guest data");
-        service.fileSaveGuest(utilScanner.stringScanner());
+    public void execute() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            System.out.println("Enter name of file for save Guest data");
+            service.fileSaveGuest(utilScanner.stringScanner());
+        });
+        thread.start();
+        thread.join();
+        thread.interrupt();
     }
+
 }

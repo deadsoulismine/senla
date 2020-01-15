@@ -17,9 +17,22 @@ public class DeleteServiceAction implements IAction {
 
     //Удаляем услугу из списка
     @Override
-    public void execute() throws ObjectNotExistException, ListIsEmptyException {
-        service.printServiceList();
-        System.out.println("Enter ID of service for delete");
-        service.deleteService(utilScanner.intScanner());
+    public void execute() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            try {
+                service.printServiceList();
+            } catch (ListIsEmptyException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Enter ID of service for delete");
+            try {
+                service.deleteService(utilScanner.intScanner());
+            } catch (ObjectNotExistException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+        thread.join();
+        thread.interrupt();
     }
 }

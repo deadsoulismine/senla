@@ -15,8 +15,13 @@ public class FileSaveServiceAction implements IAction {
 
     //Сохранение данных услуг в файл
     @Override
-    public void execute() {
-        System.out.println("Enter name of file for save Service data");
-        service.fileSaveService(utilScanner.stringScanner());
+    public void execute() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            System.out.println("Enter name of file for save Service data");
+            service.fileSaveService(utilScanner.stringScanner());
+        });
+        thread.start();
+        thread.join();
+        thread.interrupt();
     }
 }

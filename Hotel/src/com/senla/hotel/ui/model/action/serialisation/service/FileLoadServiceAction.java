@@ -17,8 +17,13 @@ public class FileLoadServiceAction implements IAction {
 
     //Загрузка данных услуг из файла
     @Override
-    public void execute() throws IOException {
-        System.out.println("Enter name of file for load Service data");
-        service.fileLoadService(utilScanner.stringScanner());
+    public void execute() throws IOException, InterruptedException {
+        Thread thread = new Thread(() -> {
+            System.out.println("Enter name of file for load Service data");
+            service.fileLoadService(utilScanner.stringScanner());
+        });
+        thread.start();
+        thread.join();
+        thread.interrupt();
     }
 }

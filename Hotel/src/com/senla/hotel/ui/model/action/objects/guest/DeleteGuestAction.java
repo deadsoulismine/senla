@@ -17,9 +17,22 @@ public class DeleteGuestAction implements IAction {
 
     //Удаляем постояльца из списка
     @Override
-    public void execute() throws ListIsEmptyException, ObjectNotExistException {
-        service.printGuestList();
-        System.out.println("Enter ID of guest for delete");
-        service.deleteGuest(utilScanner.intScanner());
+    public void execute() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            try {
+                service.printGuestList();
+            } catch (ListIsEmptyException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Enter ID of guest for delete");
+            try {
+                service.deleteGuest(utilScanner.intScanner());
+            } catch (ObjectNotExistException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+        thread.join();
+        thread.interrupt();
     }
 }

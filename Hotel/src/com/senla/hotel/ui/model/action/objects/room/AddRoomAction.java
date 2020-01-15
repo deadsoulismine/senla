@@ -16,12 +16,21 @@ public class AddRoomAction implements IAction {
 
     //Добавляем новую комнату в список
     @Override
-    public void execute() throws SameObjectsException {
-        System.out.println("Enter number of new room");
-        int number = utilScanner.intScanner();
-        System.out.println("Enter price of new room");
-        int price = utilScanner.intScanner();
-        service.addRoom(number, price);
+    public void execute() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            System.out.println("Enter number of new room");
+            int number = utilScanner.intScanner();
+            System.out.println("Enter price of new room");
+            int price = utilScanner.intScanner();
+            try {
+                service.addRoom(number, price);
+            } catch (SameObjectsException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+        thread.join();
+        thread.interrupt();
     }
 
 }

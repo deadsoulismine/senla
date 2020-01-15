@@ -17,12 +17,26 @@ public class ChangeRoomPriceAction implements IAction {
 
     //Изменяем цену номера
     @Override
-    public void execute() throws ListIsEmptyException, ObjectNotExistException {
-        service.printRoomList();
-        System.out.println("Enter number of room for change price");
-        int idRoom = utilScanner.intScanner();
-        System.out.println("Enter new price");
-        int price = utilScanner.intScanner();
-        service.changeRoomPrice(idRoom, price);
+    public void execute() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            try {
+                service.printRoomList();
+            } catch (ListIsEmptyException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Enter number of room for change price");
+            int idRoom = utilScanner.intScanner();
+            System.out.println("Enter new price");
+            int price = utilScanner.intScanner();
+            try {
+                service.changeRoomPrice(idRoom, price);
+            } catch (ObjectNotExistException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+        thread.join();
+        thread.interrupt();
     }
+
 }

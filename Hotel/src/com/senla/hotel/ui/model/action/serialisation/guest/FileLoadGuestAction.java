@@ -15,8 +15,14 @@ public class FileLoadGuestAction implements IAction {
 
     //Загрузка данных постояльцев из файла
     @Override
-    public void execute() {
-        System.out.println("Enter name of file for load Guest data");
-        service.fileLoadGuest(utilScanner.stringScanner());
+    public void execute() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            System.out.println("Enter name of file for load Guest data");
+            service.fileLoadGuest(utilScanner.stringScanner());
+        });
+        thread.start();
+        thread.join();
+        thread.interrupt();
     }
+
 }

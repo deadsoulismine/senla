@@ -15,8 +15,14 @@ public class FileLoadRoomAction implements IAction {
 
     //Загрузка данных номеров из файла
     @Override
-    public void execute() {
-        System.out.println("Enter name of file for load Room data");
-        service.fileLoadRoom(utilScanner.stringScanner());
+    public void execute() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            System.out.println("Enter name of file for load Room data");
+            service.fileLoadRoom(utilScanner.stringScanner());
+        });
+        thread.start();
+        thread.join();
+        thread.interrupt();
     }
+
 }
