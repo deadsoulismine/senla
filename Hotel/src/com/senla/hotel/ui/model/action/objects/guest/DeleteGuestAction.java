@@ -22,13 +22,13 @@ public class DeleteGuestAction implements IAction {
             try {
                 service.printGuestList();
             } catch (ListIsEmptyException e) {
-                e.printStackTrace();
+                System.out.println(e);
             }
             System.out.println("Enter ID of guest for delete");
             try {
                 service.deleteGuest(utilScanner.intScanner());
             } catch (ObjectNotExistException e) {
-                e.printStackTrace();
+                System.out.println(e);
             }
         });
         thread.start();

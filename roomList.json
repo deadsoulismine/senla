@@ -1,1 +1,48 @@
-[{"idGuest":26,"number":101,"price":1000,"status":true,"history":[{"name":"Bob","age":20,"id":26,"roomNumber":101}]},{"idGuest":-123,"number":404,"price":4000,"status":false,"history":[]},{"number":505,"price":5000,"status":true,"history":[{"name":"Alex","age":10,"id":599,"roomNumber":505}]}]
+[
+  {
+    "number": 101,
+    "price": 1000,
+    "status": true,
+    "history": [
+      {
+        "name": "Bob",
+        "age": 20,
+        "id": 26,
+        "roomNumber": 101
+      }
+    ]
+  },
+  {
+    "idGuest": -123,
+    "number": 404,
+    "price": 4000,
+    "status": false,
+    "history": []
+  },
+  {
+    "idGuest": 26,
+    "number": 505,
+    "price": 5000,
+    "status": true,
+    "history": [
+      {
+        "name": "Alex",
+        "age": 10,
+        "id": 599,
+        "roomNumber": 505
+      },
+      {
+        "name": "Bob",
+        "age": 20,
+        "id": 26,
+        "roomNumber": 505
+      }
+    ]
+  },
+  {
+    "number": 301,
+    "price": 3000,
+    "status": true,
+    "history": []
+  }
+]

@@ -1,4 +1,4 @@
-package com.senla.hotel.util;
+package com.senla.hotel.util.data;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.senla.hotel.util;
+package com.senla.hotel.util.data;
 
 import com.senla.hotel.backend.domain.Guest;
 import com.senla.hotel.backend.service.IService;

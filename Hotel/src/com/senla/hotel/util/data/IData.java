@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public interface IData {
 
-    void load() throws IOException, ReflectiveOperationException;
+    void load() throws IOException, ReflectiveOperationException, InterruptedException;
 
     void saveData();
 

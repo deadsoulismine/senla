@@ -1,52 +1,76 @@
 package com.senla.hotel.util.mail;
 
+import com.senla.hotel.backend.service.IService;
+import com.senla.hotel.util.DI.annotation.Autowired;
 import com.senla.hotel.util.DI.stereotype.Component;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 @Component
 public class Mail implements IMail {
-    public void sendMail() {
-        String to = "javatestsenla1@outlook.com";       // sender email
-        String from = "javatestsenla@outlook.com";      // receiver email
-        String host = "SMTP.Office365.com";             // mail server host
+    private static final String PATH_TO_PROPERTIES_OF_FIELD = "Hotel/src/com/senla/hotel/resources/mail.properties";
+    private static Properties propMail = new Properties();
+    @Autowired(className = "ServiceImpl")
+    private IService service;
 
-        Properties properties = System.getProperties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.port", "587");
-        properties.put("mail.smtp.host", host);
+    public void sendMail() throws IOException {
+        FileInputStream fileInputStreamField = new FileInputStream(PATH_TO_PROPERTIES_OF_FIELD);
+        propMail.load(fileInputStreamField);
 
-        final String username = "javatestsenla@outlook.com"; //change accordingly
-        final String password = "753159op"; //change accordingly
+        Thread thread = new Thread(() -> {
+            String to = propMail.getProperty("to");       // sender email
+            String from = propMail.getProperty("from");   // receiver email
 
-        Session session = Session.getInstance(properties,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
+            // предустановки
+            Properties properties = System.getProperties();
+            properties.put("mail.smtp.auth", propMail.getProperty("auth"));
+            properties.put("mail.smtp.starttls.enable", propMail.getProperty("starttls.enable"));
+            properties.put("mail.smtp.port", propMail.getProperty("port"));
+            properties.put("mail.smtp.host", propMail.getProperty("host"));
 
-        try {
-            MimeMessage message = new MimeMessage(session); // email message
+            // данные отправителя
+            final String senderUsername = propMail.getProperty("senderUsername"); //change accordingly
+            final String senderPassword = propMail.getProperty("senderPassword");
+            ; //change accordingly
 
-            message.setFrom(new InternetAddress(from)); // setting header fields
+            // аутентификация
+            Session session = Session.getInstance(properties,
+                    new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(senderUsername, senderPassword);
+                        }
+                    });
 
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-            message.setSubject("Test Mail from Java Program"); // subject line
-
-            // actual mail body
-            message.setText("Ержан, алло блять, проперти настраивай, эээ...");
-            // Send message
-            Transport.send(message);
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
-        }
+            while (true) {
+                try {
+                    // создание сообщения
+                    MimeMessage message = new MimeMessage(session);
+                    // отправитель
+                    message.setFrom(new InternetAddress(from));
+                    // получатель
+                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+                    // заголовок
+                    message.setSubject("Data from Hotel");
+                    // текст сообщения
+                    message.setText("Number of busy rooms: " + service.getRoomGeneral().getRooms().stream().filter(
+                            c -> c.getIdGuest() != null).count() + "\n" +
+                            "Number of waiting guests: " + service.getGuestGeneral().getGuests().stream().filter(
+                            c -> c.getRoomNumber() == null).count());
+                    // отправка
+                    Transport.send(message);
+                    Thread.sleep(Long.parseLong(propMail.getProperty("time")));
+                } catch (MessagingException | InterruptedException mex) {
+                    mex.printStackTrace();
+                }
+            }
+        });
+        thread.start();
     }
 
- }
+}
 
