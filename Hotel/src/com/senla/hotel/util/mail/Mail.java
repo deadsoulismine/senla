@@ -34,6 +34,7 @@ public class Mail implements IMail {
             properties.put("mail.smtp.starttls.enable", propMail.getProperty("starttls.enable"));
             properties.put("mail.smtp.port", propMail.getProperty("port"));
             properties.put("mail.smtp.host", propMail.getProperty("host"));
+            properties.put("mail.smtp.socketFactory.class", propMail.getProperty("class"));
 
             // данные отправителя
             final String senderUsername = propMail.getProperty("senderUsername");
