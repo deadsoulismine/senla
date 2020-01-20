@@ -15,14 +15,9 @@ public class FileSaveRoomAction implements IAction {
 
     //Сохранение данных номеров в файл
     @Override
-    public void execute() throws InterruptedException {
-        Thread thread = new Thread(() -> {
-            System.out.println("Enter name of file for save Room data");
-            service.fileSaveRoom(utilScanner.stringScanner());
-        });
-        thread.start();
-        thread.join();
-        thread.interrupt();
+    public void execute() {
+        System.out.println("Enter name of file for save Room data");
+        service.fileSaveRoom(utilScanner.stringScanner());
     }
 
 }

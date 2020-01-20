@@ -17,31 +17,14 @@ public class SettleAction implements IAction {
 
     //Заселение
     @Override
-    public void execute() throws InterruptedException {
-        Thread thread = new Thread(() -> {
-            try {
-                service.printWaitingGuests();
-            } catch (ListIsEmptyException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Enter ID of guest for settle");
-            int idGuest = utilScanner.intScanner();
-            try {
-                service.printFreeRoomList();
-            } catch (ListIsEmptyException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Enter number of free room");
-            int roomNumber = utilScanner.intScanner();
-            try {
-                service.settle(idGuest, roomNumber);
-            } catch (ObjectNotExistException e) {
-                e.printStackTrace();
-            }
-        });
-        thread.start();
-        thread.join();
-        thread.interrupt();
+    public void execute() throws ObjectNotExistException, ListIsEmptyException {
+        service.printWaitingGuests();
+        System.out.println("Enter ID of guest for settle");
+        int idGuest = utilScanner.intScanner();
+        service.printFreeRoomList();
+        System.out.println("Enter number of free room");
+        int roomNumber = utilScanner.intScanner();
+        service.settle(idGuest, roomNumber);
     }
 
 }

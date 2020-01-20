@@ -15,6 +15,8 @@ import java.util.Properties;
 public class Mail implements IMail {
     private static final String PATH_TO_PROPERTIES_OF_FIELD = "Hotel/src/com/senla/hotel/resources/mail.properties";
     private static Properties propMail = new Properties();
+    private Thread thread;
+
     @Autowired(className = "ServiceImpl")
     private IService service;
 
@@ -22,7 +24,7 @@ public class Mail implements IMail {
         FileInputStream fileInputStreamField = new FileInputStream(PATH_TO_PROPERTIES_OF_FIELD);
         propMail.load(fileInputStreamField);
 
-        Thread thread = new Thread(() -> {
+        thread = new Thread(() -> {
             String to = propMail.getProperty("to");       // sender email
             String from = propMail.getProperty("from");   // receiver email
 
@@ -34,9 +36,8 @@ public class Mail implements IMail {
             properties.put("mail.smtp.host", propMail.getProperty("host"));
 
             // данные отправителя
-            final String senderUsername = propMail.getProperty("senderUsername"); //change accordingly
+            final String senderUsername = propMail.getProperty("senderUsername");
             final String senderPassword = propMail.getProperty("senderPassword");
-            ; //change accordingly
 
             // аутентификация
             Session session = Session.getInstance(properties,
@@ -69,8 +70,13 @@ public class Mail implements IMail {
                 }
             }
         });
+
         thread.start();
     }
 
+    @Override
+    public void closeThread() {
+        thread.interrupt();
+    }
 }
 

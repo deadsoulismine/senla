@@ -1,6 +1,9 @@
 package com.senla.hotel.ui.model.navigator;
 
 import com.senla.hotel.ui.exception.IndexException;
+import com.senla.hotel.ui.exception.ListIsEmptyException;
+import com.senla.hotel.ui.exception.ObjectNotExistException;
+import com.senla.hotel.ui.exception.SameObjectsException;
 import com.senla.hotel.ui.model.menu.Menu;
 import com.senla.hotel.ui.view.IViewController;
 import com.senla.hotel.util.DI.annotation.Autowired;
@@ -35,10 +38,20 @@ public class Navigator implements INavigator {
                 if (currentMenu.getItems().get(index).getNextMenu() != null) {
                     currentMenu = currentMenu.getItems().get(index).getNextMenu();
                 } else {
-                    currentMenu.getItems().get(index).getAction().execute();
+                    byte finalIndex = index;
+                    Thread thread = new Thread(() -> {
+                        try {
+                            currentMenu.getItems().get(finalIndex).getAction().execute();
+                        } catch (IOException | InterruptedException | ReflectiveOperationException |
+                                SameObjectsException | ObjectNotExistException | ListIsEmptyException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    });
+                    thread.start();
+                    thread.join();
                 }
             }
-        } catch (IndexException | IOException | ReflectiveOperationException e) {
+        } catch (IndexException e) {
             System.out.println(e.getMessage());
         }
     }

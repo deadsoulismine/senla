@@ -17,26 +17,13 @@ public class ChangeServicePriceAction implements IAction {
 
     //Изменяем стоймость услуги
     @Override
-    public void execute() throws InterruptedException {
-        Thread thread = new Thread(() -> {
-            try {
-                service.printServiceList();
-            } catch (ListIsEmptyException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Enter ID of service for change price");
-            int idService = utilScanner.intScanner();
-            System.out.println("Enter new price");
-            int price = utilScanner.intScanner();
-            try {
-                service.changeServicePrice(idService, price);
-            } catch (ObjectNotExistException e) {
-                e.printStackTrace();
-            }
-        });
-        thread.start();
-        thread.join();
-        thread.interrupt();
+    public void execute() throws ObjectNotExistException, ListIsEmptyException {
+        service.printServiceList();
+        System.out.println("Enter ID of service for change price");
+        int idService = utilScanner.intScanner();
+        System.out.println("Enter new price");
+        int price = utilScanner.intScanner();
+        service.changeServicePrice(idService, price);
     }
 
 }

@@ -14,21 +14,12 @@ public class AddGuestAction implements IAction {
     private IService service;
 
     @Override
-    public void execute() throws InterruptedException {
-        Thread thread = new Thread(() -> {
-            System.out.println("Enter name of new guest");
-            String name = utilScanner.stringScanner();
-            System.out.println("Enter age of new guest");
-            int age = utilScanner.intScanner();
-            try {
-                service.addGuest(name, age);
-            } catch (ReflectiveOperationException e) {
-                e.printStackTrace();
-            }
-        });
-        thread.start();
-        thread.join();
-        thread.interrupt();
+    public void execute() throws ReflectiveOperationException {
+        System.out.println("Enter name of new guest");
+        String name = utilScanner.stringScanner();
+        System.out.println("Enter age of new guest");
+        int age = utilScanner.intScanner();
+        service.addGuest(name, age);
     }
 
 }

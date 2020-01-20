@@ -40,8 +40,6 @@ public class Data implements IData {
         service.fileLoadService(propData.getProperty("pathServiceList"));
 
         fillField.action();
-
-        mail.sendMail();
     }
 
     //Сохранение данных
