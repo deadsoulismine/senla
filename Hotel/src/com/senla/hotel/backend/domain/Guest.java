@@ -1,7 +1,7 @@
 package com.senla.hotel.backend.domain;
 
 import com.senla.hotel.util.DI.stereotype.Component;
-import com.senla.hotel.util.Fill;
+import com.senla.hotel.util.data.Fill;
 import com.senla.hotel.util.data.LoadID;
 
 @Component(type = "Instance")

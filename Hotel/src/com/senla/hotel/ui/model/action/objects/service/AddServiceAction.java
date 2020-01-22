@@ -22,6 +22,7 @@ public class AddServiceAction implements IAction {
         System.out.println("Enter price of new service");
         int price = utilScanner.intScanner();
         service.addService(price, title);
+
     }
 
 }

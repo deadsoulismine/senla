@@ -19,7 +19,6 @@ public class RoomGeneral implements IRoomGeneral {
 
     private ArrayList<Room> rooms;
 
-
     public RoomGeneral() {
         this.rooms = new ArrayList<>();
     }
@@ -35,6 +34,7 @@ public class RoomGeneral implements IRoomGeneral {
         Room room = (Room) beanFactory.instantiateInstance("Room");
         room.setNumber(number);
         room.setPrice(price);
+        room.setStatus(true);
         for (Room n : rooms) {
             if (room.getNumber() == n.getNumber()) {
                 throw new SameObjectsException("Apartments with this number already exist! Try again!");
@@ -46,17 +46,27 @@ public class RoomGeneral implements IRoomGeneral {
     //Удаление комнаты из списка
     @Override
     public void deleteRoom(int roomNumber) throws ObjectNotExistException {
-        Optional.of(checkRoom(roomNumber)).ifPresent(rooms::remove);
+        Room tempRoom = checkRoom(roomNumber);
+        if (tempRoom.getIdGuest() == null || !tempRoom.getStatus()) {
+            Optional.of(tempRoom).ifPresent(rooms::remove);
+        } else {
+            System.out.println("In this number exist the guest! Evict him and try again.");
+        }
+
     }
 
     //Изменение статуса номера
     @Override
     public void changeRoomStatus(int roomNumber) throws ObjectNotExistException {
         com.senla.hotel.backend.domain.Room tempRoom = checkRoom(roomNumber);
-        if (tempRoom.getStatus()) {
+        if (tempRoom.getStatus() && tempRoom.getIdGuest() == null) {
             tempRoom.setStatus(false);
-        } else {
+            tempRoom.setIdGuest((int) (Math.random() * (100 + 1)) - 200);
+        } else if (tempRoom.getIdGuest() < 0) {
             tempRoom.setStatus(true);
+            tempRoom.setIdGuest(null);
+        } else {
+            System.out.println("In this number exist the guest! Evict him and try again.");
         }
     }
 

@@ -1,4 +1,4 @@
-package com.senla.hotel.util;
+package com.senla.hotel.util.data;
 
 import com.senla.hotel.backend.domain.Guest;
 import com.senla.hotel.backend.service.IService;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Component
-public class FillField implements IFillField{
+public class FillField implements IFillField {
     private static final String PATH_TO_PROPERTIES_OF_FIELD = "Hotel/src/com/senla/hotel/resources/fillGuest.properties";
     private static Properties propField = new Properties();
     @Autowired(className = "ServiceImpl")

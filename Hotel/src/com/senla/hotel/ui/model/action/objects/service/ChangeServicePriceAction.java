@@ -17,7 +17,7 @@ public class ChangeServicePriceAction implements IAction {
 
     //Изменяем стоймость услуги
     @Override
-    public void execute() throws ListIsEmptyException, ObjectNotExistException {
+    public void execute() throws ObjectNotExistException, ListIsEmptyException {
         service.printServiceList();
         System.out.println("Enter ID of service for change price");
         int idService = utilScanner.intScanner();

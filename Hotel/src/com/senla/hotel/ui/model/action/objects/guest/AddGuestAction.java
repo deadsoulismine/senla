@@ -8,12 +8,11 @@ import com.senla.hotel.util.scanner.IScannerService;
 
 @Component
 public class AddGuestAction implements IAction {
-    @Autowired(className = "ServiceImpl")
-    private IService service;
     @Autowired(className = "ScannerService")
     private IScannerService utilScanner;
+    @Autowired(className = "ServiceImpl")
+    private IService service;
 
-    //Добавляем нового постояльца в список
     @Override
     public void execute() throws ReflectiveOperationException {
         System.out.println("Enter name of new guest");
@@ -22,4 +21,5 @@ public class AddGuestAction implements IAction {
         int age = utilScanner.intScanner();
         service.addGuest(name, age);
     }
+
 }

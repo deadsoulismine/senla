@@ -16,11 +16,12 @@ public class EvictAction implements IAction {
     private IScannerService utilScanner;
 
     @Override
-    public void execute() throws ListIsEmptyException, ObjectNotExistException {
+    public void execute() throws ObjectNotExistException, ListIsEmptyException {
         service.printSettleGuests();
         System.out.println("Enter ID of guest for evict");
         int idGuest = utilScanner.intScanner();
         service.evict(idGuest);
+
     }
 
 }

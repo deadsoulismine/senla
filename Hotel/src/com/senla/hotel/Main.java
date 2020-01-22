@@ -5,6 +5,7 @@ import com.senla.hotel.util.DI.BeanFactory;
 import com.senla.hotel.util.DI.annotation.Autowired;
 import com.senla.hotel.util.DI.stereotype.Component;
 import com.senla.hotel.util.data.Data;
+import com.senla.hotel.util.mail.Mail;
 
 @Component
 public class Main {
@@ -12,6 +13,8 @@ public class Main {
     private static MenuController menuController;
     @Autowired
     private static Data data;
+    @Autowired
+    private static Mail mail;
 
     public static void setMenuController(MenuController menuController) {
         Main.menuController = menuController;
@@ -21,10 +24,15 @@ public class Main {
         Main.data = data;
     }
 
+    public static void setMail(Mail mail) {
+        Main.mail = mail;
+    }
+
     public static void main(String[] args) throws Exception {
         BeanFactory beanFactory = new BeanFactory();
         beanFactory.init();
         data.load();
+        mail.sendMail();
         menuController.run();
     }
 }

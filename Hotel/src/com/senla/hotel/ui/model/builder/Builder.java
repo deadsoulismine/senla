@@ -1,29 +1,17 @@
 package com.senla.hotel.ui.model.builder;
 
-import com.senla.hotel.ui.model.action.Exit;
-import com.senla.hotel.ui.model.action.objects.guest.AddGuestAction;
-import com.senla.hotel.ui.model.action.objects.guest.DeleteGuestAction;
-import com.senla.hotel.ui.model.action.objects.room.AddRoomAction;
-import com.senla.hotel.ui.model.action.objects.room.ChangeRoomPriceAction;
-import com.senla.hotel.ui.model.action.objects.room.ChangeRoomStatusAction;
-import com.senla.hotel.ui.model.action.objects.room.DeleteRoomAction;
-import com.senla.hotel.ui.model.action.objects.service.AddServiceAction;
-import com.senla.hotel.ui.model.action.objects.service.ChangeServicePriceAction;
-import com.senla.hotel.ui.model.action.objects.service.DeleteServiceAction;
-import com.senla.hotel.ui.model.action.residence.EvictAction;
-import com.senla.hotel.ui.model.action.residence.SettleAction;
-import com.senla.hotel.ui.model.action.serialisation.guest.FileLoadGuestAction;
-import com.senla.hotel.ui.model.action.serialisation.guest.FileSaveGuestAction;
-import com.senla.hotel.ui.model.action.serialisation.room.FileLoadRoomAction;
-import com.senla.hotel.ui.model.action.serialisation.room.FileSaveRoomAction;
-import com.senla.hotel.ui.model.action.serialisation.service.FileLoadServiceAction;
-import com.senla.hotel.ui.model.action.serialisation.service.FileSaveServiceAction;
+import com.senla.hotel.ui.model.action.IAction;
 import com.senla.hotel.ui.model.menu.Menu;
 import com.senla.hotel.ui.model.menu.MenuItem;
+import com.senla.hotel.util.DI.IBeanFactory;
+import com.senla.hotel.util.DI.annotation.Autowired;
 import com.senla.hotel.util.DI.stereotype.Component;
 
 @Component
 public class Builder implements IBuilder {
+    @Autowired(className = "BeanFactory")
+    private IBeanFactory beanFactory;
+
     @Override
     public Menu buildMenu() {
         Menu mainMenu = new Menu("| Welcome to menu for manage Hotel. Choose the action: |", null);
@@ -43,16 +31,22 @@ public class Builder implements IBuilder {
         mainMenu.addMenuItem(new MenuItem("Change object", changeMenu, null));
         mainMenu.addMenuItem(new MenuItem("Settle/Evict guest", residenceMenu, null));
         mainMenu.addMenuItem(new MenuItem("Load/Save data", serialisationMenu, null));
-        mainMenu.addMenuItem(new MenuItem("Exit", null, new Exit()));
+        mainMenu.addMenuItem(new MenuItem("Exit", null, (IAction) beanFactory.getBean("Exit")));
 
-        objectsAddMenu.addMenuItem(new MenuItem("Add new room", null, new AddRoomAction()));
-        objectsAddMenu.addMenuItem(new MenuItem("Add new guest", null, new AddGuestAction()));
-        objectsAddMenu.addMenuItem(new MenuItem("Add new service", null, new AddServiceAction()));
+        objectsAddMenu.addMenuItem(new MenuItem("Add new room", null,
+                (IAction) beanFactory.getBean("AddRoomAction")));
+        objectsAddMenu.addMenuItem(new MenuItem("Add new guest", null,
+                (IAction) beanFactory.getBean("AddGuestAction")));
+        objectsAddMenu.addMenuItem(new MenuItem("Add new service", null,
+                (IAction) beanFactory.getBean("AddServiceAction")));
         objectsAddMenu.addMenuItem(new MenuItem("Back", objectsAddMenu.getPrevMenu(), null));
 
-        objectsDeleteMenu.addMenuItem(new MenuItem("Delete room", null, new DeleteRoomAction()));
-        objectsDeleteMenu.addMenuItem(new MenuItem("Delete guest", null, new DeleteGuestAction()));
-        objectsDeleteMenu.addMenuItem(new MenuItem("Delete service", null, new DeleteServiceAction()));
+        objectsDeleteMenu.addMenuItem(new MenuItem("Delete room", null,
+                (IAction) beanFactory.getBean("DeleteRoomAction")));
+        objectsDeleteMenu.addMenuItem(new MenuItem("Delete guest", null,
+                (IAction) beanFactory.getBean("DeleteGuestAction")));
+        objectsDeleteMenu.addMenuItem(new MenuItem("Delete service", null,
+                (IAction) beanFactory.getBean("DeleteServiceAction")));
         objectsDeleteMenu.addMenuItem(new MenuItem("Back", objectsDeleteMenu.getPrevMenu(), null));
 
         changeMenu.addMenuItem(new MenuItem("Room", changeRoomMenu, null));
@@ -60,9 +54,11 @@ public class Builder implements IBuilder {
         changeMenu.addMenuItem(new MenuItem("Service", changeServiceMenu, null));
         changeMenu.addMenuItem(new MenuItem("Back", changeMenu.getPrevMenu(), null));
 
-        changeRoomMenu.addMenuItem(new MenuItem("Price of room", null, new ChangeRoomPriceAction()));
+        changeRoomMenu.addMenuItem(new MenuItem("Price of room", null,
+                (IAction) beanFactory.getBean("ChangeRoomPriceAction")));
         //changeRoomMenu.addMenuItem(new MenuItem("Number of room", null, null));
-        changeRoomMenu.addMenuItem(new MenuItem("Status of room", null, new ChangeRoomStatusAction()));
+        changeRoomMenu.addMenuItem(new MenuItem("Status of room", null,
+                (IAction) beanFactory.getBean("ChangeRoomStatusAction")));
         changeRoomMenu.addMenuItem(new MenuItem("Back", changeRoomMenu.getPrevMenu(), null));
 
         //changeGuestMenu.addMenuItem(new MenuItem("Name of guest", null, null));
@@ -70,11 +66,12 @@ public class Builder implements IBuilder {
         changeGuestMenu.addMenuItem(new MenuItem("Back", changeGuestMenu.getPrevMenu(), null));
 
         //changeServiceMenu.addMenuItem(new MenuItem("Title of service", null, null));
-        changeServiceMenu.addMenuItem(new MenuItem("Price of service", null, new ChangeServicePriceAction()));
+        changeServiceMenu.addMenuItem(new MenuItem("Price of service", null,
+                (IAction) beanFactory.getBean("ChangeServicePriceAction")));
         changeServiceMenu.addMenuItem(new MenuItem("Back", changeServiceMenu.getPrevMenu(), null));
 
-        residenceMenu.addMenuItem(new MenuItem("Settle", null, new SettleAction()));
-        residenceMenu.addMenuItem(new MenuItem("Evict", null, new EvictAction()));
+        residenceMenu.addMenuItem(new MenuItem("Settle", null, (IAction) beanFactory.getBean("SettleAction")));
+        residenceMenu.addMenuItem(new MenuItem("Evict", null, (IAction) beanFactory.getBean("EvictAction")));
         //residenceMenu.addMenuItem(new MenuItem("List of busy rooms", null, null));
         residenceMenu.addMenuItem(new MenuItem("Back", residenceMenu.getPrevMenu(), null));
 
@@ -82,14 +79,14 @@ public class Builder implements IBuilder {
         serialisationMenu.addMenuItem(new MenuItem("Save data to file", saveObjects, null));
         serialisationMenu.addMenuItem(new MenuItem("Back", serialisationMenu.getPrevMenu(), null));
 
-        loadObjects.addMenuItem(new MenuItem("Room", null, new FileLoadRoomAction()));
-        loadObjects.addMenuItem(new MenuItem("Guest", null, new FileLoadGuestAction()));
-        loadObjects.addMenuItem(new MenuItem("Service", null, new FileLoadServiceAction()));
+        loadObjects.addMenuItem(new MenuItem("Room", null, (IAction) beanFactory.getBean("FileLoadRoomAction")));
+        loadObjects.addMenuItem(new MenuItem("Guest", null, (IAction) beanFactory.getBean("FileLoadGuestAction")));
+        loadObjects.addMenuItem(new MenuItem("Service", null, (IAction) beanFactory.getBean("FileLoadServiceAction")));
         loadObjects.addMenuItem(new MenuItem("Back", serialisationMenu, null));
 
-        saveObjects.addMenuItem(new MenuItem("Room", null, new FileSaveRoomAction()));
-        saveObjects.addMenuItem(new MenuItem("Guest", null, new FileSaveGuestAction()));
-        saveObjects.addMenuItem(new MenuItem("Service", null, new FileSaveServiceAction()));
+        saveObjects.addMenuItem(new MenuItem("Room", null, (IAction) beanFactory.getBean("FileSaveRoomAction")));
+        saveObjects.addMenuItem(new MenuItem("Guest", null, (IAction) beanFactory.getBean("FileSaveGuestAction")));
+        saveObjects.addMenuItem(new MenuItem("Service", null, (IAction) beanFactory.getBean("FileSaveServiceAction")));
         saveObjects.addMenuItem(new MenuItem("Back", serialisationMenu, null));
 
         return mainMenu;

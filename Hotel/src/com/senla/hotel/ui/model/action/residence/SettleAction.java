@@ -26,4 +26,5 @@ public class SettleAction implements IAction {
         int roomNumber = utilScanner.intScanner();
         service.settle(idGuest, roomNumber);
     }
+
 }

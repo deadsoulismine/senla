@@ -37,7 +37,13 @@ public class GuestGeneral implements IGuestGeneral {
     //Удаление постояльца из списка
     @Override
     public void deleteGuest(int idGuest) throws ObjectNotExistException {
-        Optional.of(checkGuest(idGuest)).ifPresent(guests::remove);
+        Guest tempGuest = checkGuest(idGuest);
+        if (tempGuest.getRoomNumber() == null) {
+            Optional.of(checkGuest(idGuest)).ifPresent(guests::remove);
+        } else {
+            System.out.println("This guest has number! Evict him and try again.");
+        }
+
     }
 
     //Список постояльцев (всех)
@@ -48,7 +54,7 @@ public class GuestGeneral implements IGuestGeneral {
         }
         System.out.println("List of Guests: ");
         guests.stream().peek(n -> System.out.println("ID: " + n.getId() + " | Name: " + n.getName() +
-                " | Age: " + n.getAge() + " | RoomGeneral: " + number(n))).collect(Collectors.toList());
+                " | Age: " + n.getAge() + " | Number: " + number(n))).collect(Collectors.toList());
     }
 
     //Список незаселённых постояльцев
@@ -59,8 +65,7 @@ public class GuestGeneral implements IGuestGeneral {
         } else {
             System.out.println("List of waiting residents: ");
             guests.stream().filter(p -> p.getRoomNumber() == null).peek(n -> System.out.println("ID: " + n.getId() +
-                    " | Name: " + n.getName() + " | Age: " + n.getAge() + " | RoomGeneral: " + number(n))).
-                    collect(Collectors.toList());
+                    " | Name: " + n.getName() + " | Age: " + n.getAge())).collect(Collectors.toList());
         }
     }
 
@@ -72,7 +77,7 @@ public class GuestGeneral implements IGuestGeneral {
         } else {
             System.out.println("List of settled residents: ");
             guests.stream().filter(p -> p.getRoomNumber() != null).peek(n -> System.out.println("ID: " + n.getId() +
-                    " | Name: " + n.getName() + " | Age: " + n.getAge() + " | RoomGeneral: " + number(n))).
+                    " | Name: " + n.getName() + " | Age: " + n.getAge() + " | Number: " + number(n))).
                     collect(Collectors.toList());
         }
     }

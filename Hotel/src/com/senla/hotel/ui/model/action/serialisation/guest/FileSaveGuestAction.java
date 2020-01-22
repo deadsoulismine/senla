@@ -19,4 +19,5 @@ public class FileSaveGuestAction implements IAction {
         System.out.println("Enter name of file for save Guest data");
         service.fileSaveGuest(utilScanner.stringScanner());
     }
+
 }

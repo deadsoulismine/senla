@@ -6,8 +6,6 @@ import com.senla.hotel.util.DI.annotation.Autowired;
 import com.senla.hotel.util.DI.stereotype.Component;
 import com.senla.hotel.util.scanner.IScannerService;
 
-import java.io.IOException;
-
 @Component
 public class FileLoadServiceAction implements IAction {
     @Autowired(className = "ServiceImpl")
@@ -17,8 +15,9 @@ public class FileLoadServiceAction implements IAction {
 
     //Загрузка данных услуг из файла
     @Override
-    public void execute() throws IOException {
+    public void execute() {
         System.out.println("Enter name of file for load Service data");
         service.fileLoadService(utilScanner.stringScanner());
     }
+
 }

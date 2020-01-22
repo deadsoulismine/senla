@@ -18,9 +18,10 @@ public class DeleteRoomAction implements IAction {
 
     //Удаляем номер из списка
     @Override
-    public void execute() throws ListIsEmptyException, ObjectNotExistException {
+    public void execute() throws ObjectNotExistException, ListIsEmptyException {
         service.printRoomList();
         System.out.println("Enter number of room for delete");
         service.deleteRoom(utilScanner.intScanner());
     }
+
 }

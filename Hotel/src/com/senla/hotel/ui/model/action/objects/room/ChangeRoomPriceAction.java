@@ -17,7 +17,7 @@ public class ChangeRoomPriceAction implements IAction {
 
     //Изменяем цену номера
     @Override
-    public void execute() throws ListIsEmptyException, ObjectNotExistException {
+    public void execute() throws ObjectNotExistException, ListIsEmptyException {
         service.printRoomList();
         System.out.println("Enter number of room for change price");
         int idRoom = utilScanner.intScanner();
@@ -25,4 +25,5 @@ public class ChangeRoomPriceAction implements IAction {
         int price = utilScanner.intScanner();
         service.changeRoomPrice(idRoom, price);
     }
+
 }

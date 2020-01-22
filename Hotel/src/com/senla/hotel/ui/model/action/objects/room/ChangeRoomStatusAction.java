@@ -22,7 +22,7 @@ public class ChangeRoomStatusAction implements IAction {
 
     //Изменяем статус номера
     @Override
-    public void execute() throws ListIsEmptyException, ObjectNotExistException {
+    public void execute() throws ObjectNotExistException, ListIsEmptyException {
         if (parseBoolean(data.getProp().getProperty("status"))) {
             service.printRoomList();
             System.out.println("Enter number of room for change status");

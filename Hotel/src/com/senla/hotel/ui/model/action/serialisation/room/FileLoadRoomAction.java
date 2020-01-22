@@ -19,4 +19,5 @@ public class FileLoadRoomAction implements IAction {
         System.out.println("Enter name of file for load Room data");
         service.fileLoadRoom(utilScanner.stringScanner());
     }
+
 }

@@ -17,9 +17,10 @@ public class DeleteServiceAction implements IAction {
 
     //Удаляем услугу из списка
     @Override
-    public void execute() throws ObjectNotExistException, ListIsEmptyException {
+    public void execute() throws ListIsEmptyException, ObjectNotExistException {
         service.printServiceList();
         System.out.println("Enter ID of service for delete");
         service.deleteService(utilScanner.intScanner());
     }
+
 }
