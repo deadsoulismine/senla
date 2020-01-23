@@ -15,7 +15,7 @@
         </module>
         <module name="LineLength">
             <!-- Custom value for check -->
-            <property name="max" value="120"/>
+            <property name="max" value="50"/>
         </module>
     </module>
 

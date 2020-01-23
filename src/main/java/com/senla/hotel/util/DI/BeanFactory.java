@@ -5,6 +5,8 @@ import com.senla.hotel.util.DI.stereotype.Component;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ScanResult;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -19,6 +21,10 @@ public class BeanFactory implements IBeanFactory {
 
     public Object getBean(String beanName) {
         return singletons.get(beanName);
+    }
+
+    public Map<String, Object> getSingletons() {
+        return singletons;
     }
 
     public void init() {
@@ -52,6 +58,8 @@ public class BeanFactory implements IBeanFactory {
                 if (classInfo.getAnnotationInfo(Component.class.getName()).getParameterValues().getValue("type").equals("null")) {
                     Object instance = Class.forName(classInfo.getName()).newInstance();
                     //Обработка имени
+                    Logger objectLogger = LogManager.getLogger(instance.getClass().getDeclaringClass());
+                    objectLogger.info("Object of class " + instance + " is created");
                     String beanName = classInfo.getSimpleName();
                     //Помещение инстанса в мап с ключом, который является обработанным названием класса
                     singletons.put(beanName, instance);
@@ -66,31 +74,42 @@ public class BeanFactory implements IBeanFactory {
     private void populateProperties() {
         String setterName;
         Method setter;
+
+
         try {
             for (Object object : singletons.values()) {
                 for (Field field : object.getClass().getDeclaredFields()) {
                     if (field.isAnnotationPresent(Autowired.class)) {
-                        for (Object dependency : singletons.values()) {
-                            String className = field.getAnnotation(Autowired.class).className();
-                            //Инициализация интерфейсов
-                            if (!className.equals("null")) {
-                                field.setAccessible(true);
-                                field.set(object, singletons.values().stream().filter(
-                                        c -> c.getClass().getSimpleName().equals(className)).findFirst().orElse(null));
-                                field.setAccessible(false);
-                            } else if (dependency.getClass().equals(field.getType())) {
-                                setterName = "set" + field.getName().substring(0, 1).toUpperCase() +
-                                        field.getName().substring(1);
-                                setter = object.getClass().getMethod(setterName, dependency.getClass());
-                                setter.invoke(object, dependency);
+                        String className = field.getAnnotation(Autowired.class).className();
+                        Logger objectLogger = LogManager.getLogger(object.getClass().getDeclaringClass());
+                        //Инициализация интерфейсов
+                        if (!className.equals("null")) {
+                            field.setAccessible(true);
+                            Object interfaceDependency = singletons.values().stream().filter(
+                                    c -> c.getClass().getSimpleName().equals(className)).findFirst().orElse(null);
+                            field.set(object, singletons.values().stream().filter(
+                                    c -> c.getClass().getSimpleName().equals(className)).findFirst().orElse(null));
+                            field.setAccessible(false);
+                            objectLogger.info("Class " + interfaceDependency + " is initialized by Interface");
+                            //Инициализация классов
+                        } else {
+                            for (Object dependency : singletons.values()) {
+                                if (dependency.getClass().equals(field.getType())) {
+                                    setterName = "set" + field.getName().substring(0, 1).toUpperCase() +
+                                            field.getName().substring(1);
+                                    setter = object.getClass().getMethod(setterName, dependency.getClass());
+                                    setter.invoke(object, dependency);
+                                    objectLogger.info("Class " + dependency + " is initialized by Class");
+                                    break;
+                                }
                             }
                         }
                     }
                 }
             }
+
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
-
 }
