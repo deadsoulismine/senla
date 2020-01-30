@@ -6,8 +6,8 @@ import com.senla.hotel.ui.exception.SameObjectsException;
 import com.senla.hotel.ui.exception.TypeException;
 import com.senla.hotel.ui.model.builder.IBuilder;
 import com.senla.hotel.ui.model.navigator.INavigator;
-import com.senla.hotel.util.DI.annotation.Autowired;
-import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.dependency.annotation.Autowired;
+import com.senla.hotel.util.dependency.stereotype.Component;
 
 import java.util.Scanner;
 

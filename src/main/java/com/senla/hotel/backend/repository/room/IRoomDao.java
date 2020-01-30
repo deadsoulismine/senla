@@ -5,10 +5,9 @@ import com.senla.hotel.ui.exception.ListIsEmptyException;
 import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.exception.SameObjectsException;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public interface IRoomGeneral {
-    ArrayList<Room> getRooms();
+public interface IRoomDao {
 
     //Добавляем новый номер в список
     void addRoom(int number, int price) throws SameObjectsException;
@@ -29,4 +28,6 @@ public interface IRoomGeneral {
     void printFreeRoomList() throws ListIsEmptyException;
 
     Room checkRoom(int roomNumber) throws ObjectNotExistException;
+
+    List<Room> findAllRoom();
 }

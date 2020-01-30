@@ -1,7 +1,7 @@
 package com.senla.hotel.util.scanner;
 
 import com.senla.hotel.ui.exception.TypeException;
-import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.dependency.stereotype.Component;
 
 import java.util.Scanner;
 

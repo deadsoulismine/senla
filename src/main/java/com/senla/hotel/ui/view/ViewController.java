@@ -1,7 +1,7 @@
 package com.senla.hotel.ui.view;
 
 import com.senla.hotel.ui.model.menu.Menu;
-import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.dependency.stereotype.Component;
 
 @Component
 public class ViewController implements IViewController {

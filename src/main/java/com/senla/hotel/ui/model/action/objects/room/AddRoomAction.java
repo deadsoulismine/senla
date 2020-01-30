@@ -3,8 +3,8 @@ package com.senla.hotel.ui.model.action.objects.room;
 import com.senla.hotel.backend.service.IService;
 import com.senla.hotel.ui.exception.SameObjectsException;
 import com.senla.hotel.ui.model.action.IAction;
-import com.senla.hotel.util.DI.annotation.Autowired;
-import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.dependency.annotation.Autowired;
+import com.senla.hotel.util.dependency.stereotype.Component;
 import com.senla.hotel.util.scanner.IScannerService;
 
 @Component

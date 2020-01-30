@@ -6,8 +6,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.senla.hotel.backend.domain.Room;
 import com.senla.hotel.backend.service.IService;
-import com.senla.hotel.util.DI.annotation.Autowired;
-import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.dependency.annotation.Autowired;
+import com.senla.hotel.util.dependency.stereotype.Component;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -27,7 +27,7 @@ public class RoomSerialisation implements IRoomSerialisation {
             Type itemsType = new TypeToken<List<Room>>() {
             }.getType();
             roomList = new Gson().fromJson(reader, itemsType);
-            roomList.forEach(r -> service.getRoomGeneral().getRooms().add(r));
+            roomList.forEach(r -> service.getRoomDao().findAllRoom().add(r));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,9 +38,10 @@ public class RoomSerialisation implements IRoomSerialisation {
         try (JsonWriter writer = new JsonWriter(new FileWriter(name))) {
             Type itemsType = new TypeToken<List<Room>>() {
             }.getType();
-            new Gson().toJson(service.getRoomGeneral().getRooms(), itemsType, writer);
+            new Gson().toJson(service.getRoomDao().findAllRoom(), itemsType, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

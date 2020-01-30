@@ -6,9 +6,9 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.senla.hotel.backend.domain.Service;
 import com.senla.hotel.backend.service.IService;
-import com.senla.hotel.util.DI.annotation.Autowired;
-import com.senla.hotel.util.DI.stereotype.Component;
 import com.senla.hotel.util.data.IData;
+import com.senla.hotel.util.dependency.annotation.Autowired;
+import com.senla.hotel.util.dependency.stereotype.Component;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -30,7 +30,7 @@ public class ServiceSerialisation implements IServiceSerialisation {
             Type itemsType = new TypeToken<List<Service>>() {
             }.getType();
             serviceList = new Gson().fromJson(reader, itemsType);
-            serviceList.forEach(s -> service.getServiceGeneral().getServices().add(s));
+            serviceList.forEach(s -> service.getServiceDao().findAllService().add(s));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,18 +41,7 @@ public class ServiceSerialisation implements IServiceSerialisation {
         try (JsonWriter writer = new JsonWriter(new FileWriter(name))) {
             Type itemsType = new TypeToken<List<Service>>() {
             }.getType();
-            new Gson().toJson(service.getServiceGeneral().getServices(), itemsType, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    @Override
-    public void saveServiceId() {
-        try (FileWriter fileWriter = new FileWriter(data.getProp().getProperty("pathIdService"))) {
-            fileWriter.write(String.valueOf(Service.getIdService()));
-            fileWriter.write("\n");
+            new Gson().toJson(service.getServiceDao().findAllService(), itemsType, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }

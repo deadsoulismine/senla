@@ -1,7 +1,7 @@
 package com.senla.hotel.ui.model.menu;
 
 import com.senla.hotel.ui.model.action.IAction;
-import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.dependency.stereotype.Component;
 
 @Component(type = "Instance")
 public class MenuItem {

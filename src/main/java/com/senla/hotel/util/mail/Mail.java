@@ -1,8 +1,8 @@
 package com.senla.hotel.util.mail;
 
 import com.senla.hotel.backend.service.IService;
-import com.senla.hotel.util.DI.annotation.Autowired;
-import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.dependency.annotation.Autowired;
+import com.senla.hotel.util.dependency.stereotype.Component;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -15,7 +15,6 @@ import java.util.Properties;
 public class Mail implements IMail {
     private static final String PATH_TO_PROPERTIES_OF_FIELD = "src/main/java/com/senla/hotel/resources/mail.properties";
     private static Properties propMail = new Properties();
-    private Thread thread;
 
     @Autowired(className = "ServiceImpl")
     private IService service;
@@ -24,7 +23,7 @@ public class Mail implements IMail {
         FileInputStream fileInputStreamField = new FileInputStream(PATH_TO_PROPERTIES_OF_FIELD);
         propMail.load(fileInputStreamField);
 
-        thread = new Thread(() -> {
+        Thread thread = new Thread(() -> {
             String to = propMail.getProperty("to");       // sender email
             String from = propMail.getProperty("from");   // receiver email
 
@@ -59,11 +58,10 @@ public class Mail implements IMail {
                     // заголовок
                     message.setSubject("Data from Hotel");
                     // текст сообщения
-                    message.setText("Number of busy rooms: " + service.getRoomGeneral().getRooms().stream().filter(
-                            c -> c.getIdGuest() != null).count() + "\n" +
-                            "Number of waiting guests: " + service.getGuestGeneral().getGuests().stream().filter(
+                    message.setText("Number of busy rooms: " + service.getRoomDao().findAllRoom().size() + "\n" +
+                            "Number of waiting guests: " + service.getGuestDao().findAllGuest().stream().filter(
                             c -> c.getRoomNumber() == null).count());
-                    // отправка
+
                     Transport.send(message);
                     Thread.sleep(Long.parseLong(propMail.getProperty("time")));
                 } catch (MessagingException | InterruptedException mex) {
@@ -71,12 +69,9 @@ public class Mail implements IMail {
                 }
             }
         });
+        thread.setDaemon(true);
         thread.start();
     }
 
-    @Override
-    public void closeThread() {
-        thread.interrupt();
-    }
 }
 

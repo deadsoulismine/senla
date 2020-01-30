@@ -4,11 +4,12 @@ import com.senla.hotel.backend.domain.Guest;
 import com.senla.hotel.ui.exception.ListIsEmptyException;
 import com.senla.hotel.ui.exception.ObjectNotExistException;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.List;
 
-public interface IGuestGeneral {
+public interface IGuestDao {
     //Добавляем нового постояльца в список
-    void addGuest(String name, int age) throws ReflectiveOperationException;
+    void addGuest(String name, int age) throws ReflectiveOperationException, SQLException;
 
     //Удаление постояльца из списка
     void deleteGuest(int idGuest) throws ObjectNotExistException;
@@ -22,7 +23,7 @@ public interface IGuestGeneral {
     //Список заселённых постояльцев
     void printSettleGuests() throws ListIsEmptyException;
 
-    ArrayList<Guest> getGuests();
-
     Guest checkGuest(int idGuest) throws ObjectNotExistException;
+
+    List<Guest> findAllGuest();
 }

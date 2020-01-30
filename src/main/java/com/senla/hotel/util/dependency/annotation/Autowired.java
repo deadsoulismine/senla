@@ -1,9 +1,9 @@
-package com.senla.hotel.util.DI.stereotype;
+package com.senla.hotel.util.dependency.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Component {
-    String type() default "null";
+public @interface Autowired {
+    String className() default "null";
 }

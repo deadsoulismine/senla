@@ -1,22 +1,24 @@
 package com.senla.hotel.backend.service;
 
-import com.senla.hotel.backend.repository.guest.IGuestGeneral;
+import com.senla.hotel.backend.repository.guest.IGuestDao;
 import com.senla.hotel.backend.repository.guest.IGuestSerialisation;
 import com.senla.hotel.backend.repository.residence.IResidence;
-import com.senla.hotel.backend.repository.room.IRoomGeneral;
+import com.senla.hotel.backend.repository.room.IRoomDao;
 import com.senla.hotel.backend.repository.room.IRoomSerialisation;
-import com.senla.hotel.backend.repository.service.IServiceGeneral;
+import com.senla.hotel.backend.repository.service.IServiceDao;
 import com.senla.hotel.backend.repository.service.IServiceSerialisation;
 import com.senla.hotel.ui.exception.ListIsEmptyException;
 import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.exception.SameObjectsException;
+
+import java.sql.SQLException;
 
 public interface IService {
     //Добавляем новый номер в список
     void addRoom(int number, int price) throws SameObjectsException;
 
     //Добавляем новую услугу в список
-    void addGuest(String name, int age) throws ReflectiveOperationException;
+    void addGuest(String name, int age) throws ReflectiveOperationException, SQLException;
 
     //Добавляем новую услугу в список
     void addService(int price, String title) throws SameObjectsException;
@@ -75,19 +77,15 @@ public interface IService {
 
     void fileSaveService(String stringScanner);
 
-    void saveGuestId();
-
-    void saveServiceId();
-
-    IGuestGeneral getGuestGeneral();
+    IGuestDao getGuestDao();
 
     IGuestSerialisation getGuestSerialisation();
 
-    IRoomGeneral getRoomGeneral();
+    IRoomDao getRoomDao();
 
     IRoomSerialisation getRoomSerialisation();
 
-    IServiceGeneral getServiceGeneral();
+    IServiceDao getServiceDao();
 
     IServiceSerialisation getServiceSerialisation();
 

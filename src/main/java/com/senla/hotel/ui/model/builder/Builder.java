@@ -3,9 +3,9 @@ package com.senla.hotel.ui.model.builder;
 import com.senla.hotel.ui.model.action.IAction;
 import com.senla.hotel.ui.model.menu.Menu;
 import com.senla.hotel.ui.model.menu.MenuItem;
-import com.senla.hotel.util.DI.IBeanFactory;
-import com.senla.hotel.util.DI.annotation.Autowired;
-import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.dependency.IBeanFactory;
+import com.senla.hotel.util.dependency.annotation.Autowired;
+import com.senla.hotel.util.dependency.stereotype.Component;
 
 @Component
 public class Builder implements IBuilder {

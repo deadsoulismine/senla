@@ -5,11 +5,9 @@ import com.senla.hotel.ui.exception.ListIsEmptyException;
 import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.exception.SameObjectsException;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public interface IServiceGeneral {
-    ArrayList<Service> getServices();
-
+public interface IServiceDao {
     //Добавляем новую услугу в список
     void addService(int price, String title) throws SameObjectsException;
 
@@ -24,4 +22,6 @@ public interface IServiceGeneral {
 
     //Проверка на существование услуги
     Service checkService(int idService) throws ObjectNotExistException;
+
+    List<Service> findAllService();
 }

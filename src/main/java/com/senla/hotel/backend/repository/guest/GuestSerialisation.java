@@ -6,9 +6,9 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.senla.hotel.backend.domain.Guest;
 import com.senla.hotel.backend.service.IService;
-import com.senla.hotel.util.DI.annotation.Autowired;
-import com.senla.hotel.util.DI.stereotype.Component;
 import com.senla.hotel.util.data.IData;
+import com.senla.hotel.util.dependency.annotation.Autowired;
+import com.senla.hotel.util.dependency.stereotype.Component;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -30,7 +30,7 @@ public class GuestSerialisation implements IGuestSerialisation {
             Type itemsType = new TypeToken<List<Guest>>() {
             }.getType();
             jsonGuestList = new Gson().fromJson(reader, itemsType);
-            jsonGuestList.forEach(g -> service.getGuestGeneral().getGuests().add(g));
+            jsonGuestList.forEach(g -> service.getGuestDao().findAllGuest().add(g));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,17 +41,7 @@ public class GuestSerialisation implements IGuestSerialisation {
         try (JsonWriter writer = new JsonWriter(new FileWriter(name))) {
             Type itemsType = new TypeToken<List<Guest>>() {
             }.getType();
-            new Gson().toJson(service.getGuestGeneral().getGuests(), itemsType, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void saveGuestId() {
-        try (FileWriter fileWriter = new FileWriter(data.getProp().getProperty("pathIdGuest"))) {
-            fileWriter.write(String.valueOf(Guest.getIdGuest()));
-            fileWriter.write("\n");
+            new Gson().toJson(service.getGuestDao().findAllGuest(), itemsType, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }

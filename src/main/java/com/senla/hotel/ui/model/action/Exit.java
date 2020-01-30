@@ -1,8 +1,8 @@
 package com.senla.hotel.ui.model.action;
 
-import com.senla.hotel.util.DI.annotation.Autowired;
-import com.senla.hotel.util.DI.stereotype.Component;
 import com.senla.hotel.util.data.IData;
+import com.senla.hotel.util.dependency.annotation.Autowired;
+import com.senla.hotel.util.dependency.stereotype.Component;
 import com.senla.hotel.util.mail.IMail;
 
 @Component
@@ -15,7 +15,6 @@ public class Exit implements IAction {
     @Override
     public void execute() {
         data.saveData();
-        mail.closeThread();
         System.exit(0);
     }
 }

@@ -5,6 +5,4 @@ public interface IGuestSerialisation {
 
     void fileSaveGuest(String name);
 
-    void saveGuestId();
-
 }

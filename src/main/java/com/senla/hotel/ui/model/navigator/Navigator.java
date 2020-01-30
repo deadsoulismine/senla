@@ -6,10 +6,11 @@ import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.exception.SameObjectsException;
 import com.senla.hotel.ui.model.menu.Menu;
 import com.senla.hotel.ui.view.IViewController;
-import com.senla.hotel.util.DI.annotation.Autowired;
-import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.dependency.annotation.Autowired;
+import com.senla.hotel.util.dependency.stereotype.Component;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @Component
 public class Navigator implements INavigator {
@@ -43,7 +44,8 @@ public class Navigator implements INavigator {
                         try {
                             currentMenu.getItems().get(finalIndex).getAction().execute();
                         } catch (IOException | InterruptedException | ReflectiveOperationException |
-                                SameObjectsException | ObjectNotExistException | ListIsEmptyException e) {
+                                SameObjectsException | ObjectNotExistException |
+                                ListIsEmptyException | SQLException e) {
                             System.out.println(e.getMessage());
                         }
                     });

@@ -1,4 +1,4 @@
-package com.senla.hotel.util.DI;
+package com.senla.hotel.util.dependency;
 
 import java.util.Map;
 

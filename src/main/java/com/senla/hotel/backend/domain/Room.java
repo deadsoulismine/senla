@@ -1,19 +1,46 @@
 package com.senla.hotel.backend.domain;
 
-import com.senla.hotel.util.DI.stereotype.Component;
+import com.senla.hotel.util.dependency.stereotype.Component;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+@Table(name = "hotel.rooms", schema = "hotel")
 @Component(type = "Instance")
 public class Room {
-    private Integer idGuest;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private int number;
     private int price;
     private boolean status;
-    private ArrayList<Guest> history = new ArrayList<>();
 
-    public ArrayList<Guest> getHistory() {
-        return history;
+    @OneToMany(mappedBy = "room")
+    private List<Guest> guests = new ArrayList<>();
+
+//    private ArrayList<Guest> history = new ArrayList<>();
+
+//    public ArrayList<Guest> getHistory() {
+//        return history;
+//    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public List<Guest> getGuests() {
+        return guests;
     }
 
     public boolean getStatus() {
@@ -40,12 +67,16 @@ public class Room {
         this.number = number;
     }
 
-    public Integer getIdGuest() {
-        return idGuest;
+//    public void setHistory(ArrayList<Guest> history) {
+//        this.history = history;
+//    }
+
+    public void setGuests(List<Guest> guests) {
+        this.guests = guests;
     }
 
-    public void setIdGuest(Integer idGuest) {
-        this.idGuest = idGuest;
+    public void setGuests(ArrayList<Guest> guests) {
+        this.guests = guests;
     }
 
 }
