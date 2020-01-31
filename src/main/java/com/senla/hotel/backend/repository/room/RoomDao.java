@@ -35,10 +35,9 @@ public class RoomDao implements IRoomDao {
 
         try {
             PreparedStatement preparedStatement = connect.getConnection().prepareStatement(
-                    "INSERT INTO hotel.rooms(number, price, id_guest) values(?,?,?)");
+                    "INSERT INTO hotel.rooms(number, price) values(?,?)");
             preparedStatement.setInt(1, number);
             preparedStatement.setInt(2, price);
-            preparedStatement.setNull(3, java.sql.Types.INTEGER);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -129,8 +128,8 @@ public class RoomDao implements IRoomDao {
     }
 
     //Проверка на существование комнаты
-    public Room checkRoom(int roomNumber) throws ObjectNotExistException {
-        Room checkRoom = findAllRoom().stream().filter(p -> p.getNumber() == roomNumber).findFirst().orElse(null);
+    public Room checkRoom(int id) throws ObjectNotExistException {
+        Room checkRoom = findAllRoom().stream().filter(p -> p.getId() == id).findFirst().orElse(null);
         if (checkRoom != null) {
             return checkRoom;
         } else {

@@ -25,12 +25,22 @@ public class Guest implements Serializable {
     @Column(name = "room_number")
     private Integer roomNumber;
 
-    @OneToMany(mappedBy = "guest")
+    @OneToMany(mappedBy = "guest", cascade = CascadeType.ALL)
     private List<Service> services;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
+
+    public Guest(String name, int age, Integer roomNumber, Room room) {
+        this.name = name;
+        this.age = age;
+        this.roomNumber = roomNumber;
+        this.room = room;
+    }
+
+    public Guest() {
+    }
 
     public Room getRoom() {
         return room;
@@ -62,10 +72,6 @@ public class Guest implements Serializable {
 
     public Integer getRoomNumber() {
         return roomNumber;
-    }
-
-    public void setRoomId(Integer roomNumber) {
-        this.roomNumber = roomNumber;
     }
 
     public void setId(int id) {

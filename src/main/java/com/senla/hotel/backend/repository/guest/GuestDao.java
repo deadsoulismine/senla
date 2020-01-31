@@ -39,7 +39,8 @@ public class GuestDao implements IGuestDao {
 
     //Удаление постояльца из списка
     @Override
-    public void deleteGuest(int idGuest) {
+    public void deleteGuest(int idGuest) throws ObjectNotExistException {
+        checkGuest(idGuest);
         try {
             PreparedStatement preparedStatement = connect.getConnection().prepareStatement(
                     "DELETE FROM hotel.guests WHERE id = ? AND room_number is null");

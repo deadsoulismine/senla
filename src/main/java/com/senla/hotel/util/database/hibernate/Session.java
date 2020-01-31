@@ -10,17 +10,21 @@ import org.hibernate.cfg.Configuration;
 
 @Component
 public class Session implements ISession {
+    private SessionFactory sessionFactory = null;
+
     public SessionFactory getSessionFactory() {
-        SessionFactory sessionFactory = null;
-        try {
-            Configuration configuration = new Configuration().configure();
-            configuration.addAnnotatedClass(Guest.class);
-            configuration.addAnnotatedClass(Service.class);
-            configuration.addAnnotatedClass(Room.class);
-            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            sessionFactory = configuration.buildSessionFactory(builder.build());
-        } catch (Exception e) {
-            System.out.println("Исключение!" + e);
+        if (sessionFactory == null) {
+            try {
+                Configuration configuration = new Configuration().configure();
+                configuration.addAnnotatedClass(Guest.class);
+                configuration.addAnnotatedClass(Room.class);
+                configuration.addAnnotatedClass(Service.class);
+                StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+                sessionFactory = configuration.buildSessionFactory(builder.build());
+
+            } catch (Exception e) {
+                System.out.println("Исключение!" + e);
+            }
         }
         return sessionFactory;
     }

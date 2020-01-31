@@ -18,8 +18,31 @@ public class Room {
     private int price;
     private boolean status;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Guest> guests = new ArrayList<>();
+
+    public Room(int number, int price, boolean status, List<Guest> guests) {
+        this.number = number;
+        this.price = price;
+        this.status = status;
+        this.guests = guests;
+    }
+
+    public Room() {
+    }
+
+    public void addGuest(Guest guest) {
+        guest.setRoom(this);
+        guest.setRoomNumber(this.number);
+        guests.add(guest);
+    }
+
+    public void removeGuest(Guest guest) {
+        guest.setRoom(null);
+        guest.setRoomNumber(null);
+        guests.remove(guest);
+    }
+
 
 //    private ArrayList<Guest> history = new ArrayList<>();
 
