@@ -6,7 +6,6 @@ import com.senla.hotel.util.dependency.BeanFactory;
 import com.senla.hotel.util.dependency.annotation.Autowired;
 import com.senla.hotel.util.dependency.stereotype.Component;
 
-
 @Component
 public class Main {
     @Autowired
@@ -27,7 +26,6 @@ public class Main {
         beanFactory.init();
         util.load();
         menuController.run();
-
     }
 
 }

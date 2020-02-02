@@ -43,7 +43,6 @@ public class Room {
         guests.remove(guest);
     }
 
-
 //    private ArrayList<Guest> history = new ArrayList<>();
 
 //    public ArrayList<Guest> getHistory() {

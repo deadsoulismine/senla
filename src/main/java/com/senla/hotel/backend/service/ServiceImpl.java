@@ -29,8 +29,8 @@ public class ServiceImpl implements IService {
     private IServiceDao serviceDao;
     @Autowired(className = "ServiceSerialisation")
     private IServiceSerialisation serviceSerialisation;
-    @Autowired(className = "Residence")
-    private IResidence residence;
+    @Autowired(className = "ResidenceDao")
+    private IResidence residenceDao;
 
     @Override
     public void addRoom(int number, int price) throws SameObjectsException {
@@ -64,12 +64,12 @@ public class ServiceImpl implements IService {
 
     @Override
     public void settle(int idGuest, int roomNumber) throws ObjectNotExistException {
-        getResidence().settle(idGuest, roomNumber);
+        getResidenceDao().settle(idGuest, roomNumber);
     }
 
     @Override
     public void evict(int idGuest) throws ObjectNotExistException {
-        getResidence().evict(idGuest);
+        getResidenceDao().evict(idGuest);
     }
 
     @Override
@@ -178,7 +178,37 @@ public class ServiceImpl implements IService {
     }
 
     @Override
-    public IResidence getResidence() {
-        return residence;
+    public IResidence getResidenceDao() {
+        return residenceDao;
+    }
+
+    @Override
+    public void changeRoomNumber(int idRoom, int number) throws ObjectNotExistException {
+        getRoomDao().changeRoomNumber(idRoom, number);
+    }
+
+    @Override
+    public void changeGuestName(int idGuest, String name) throws ObjectNotExistException {
+        getGuestDao().changeGuestName(idGuest, name);
+    }
+
+    @Override
+    public void changeGuestAge(int idGuest, int age) throws ObjectNotExistException {
+        getGuestDao().changeGuestAge(idGuest, age);
+    }
+
+    @Override
+    public void changeServiceTitle(int idService, String title) throws ObjectNotExistException {
+        getServiceDao().changeServiceTitle(idService, title);
+    }
+
+    @Override
+    public void addServices(int idGuest, int idService) {
+        getResidenceDao().addServices(idGuest, idService);
+    }
+
+    @Override
+    public void deleteServices(int idGuest, int idService) {
+        getResidenceDao().deleteServices(idGuest, idService);
     }
 }

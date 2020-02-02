@@ -2,6 +2,13 @@ package com.senla.hotel.util.database.hibernate;
 
 import org.hibernate.SessionFactory;
 
+import java.util.List;
+
 public interface ISession {
-    public SessionFactory getSessionFactory();
+    SessionFactory getSessionFactory();
+
+    void updateObject(Object object);
+
+    void updateList(List list);
+
 }

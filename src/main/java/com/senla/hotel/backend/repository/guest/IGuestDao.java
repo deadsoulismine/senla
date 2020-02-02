@@ -26,4 +26,8 @@ public interface IGuestDao {
     Guest checkGuest(int idGuest) throws ObjectNotExistException;
 
     List<Guest> findAllGuest();
+
+    void changeGuestName(int idGuest, String name) throws ObjectNotExistException;
+
+    void changeGuestAge(int idGuest, int age) throws ObjectNotExistException;
 }

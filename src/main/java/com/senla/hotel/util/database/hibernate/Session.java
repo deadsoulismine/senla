@@ -5,8 +5,11 @@ import com.senla.hotel.backend.domain.Room;
 import com.senla.hotel.backend.domain.Service;
 import com.senla.hotel.util.dependency.stereotype.Component;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+
+import java.util.List;
 
 @Component
 public class Session implements ISession {
@@ -27,5 +30,23 @@ public class Session implements ISession {
             }
         }
         return sessionFactory;
+    }
+
+    public void updateObject(Object object) {
+        org.hibernate.Session tempSession = getSessionFactory().openSession();
+        Transaction transaction = tempSession.beginTransaction();
+        tempSession.merge(object);
+        transaction.commit();
+        tempSession.close();
+    }
+
+    public void updateList(List list) {
+        org.hibernate.Session tempSession = getSessionFactory().openSession();
+        Transaction transaction = tempSession.beginTransaction();
+        for (Object object : list) {
+            tempSession.merge(object);
+        }
+        transaction.commit();
+        tempSession.close();
     }
 }

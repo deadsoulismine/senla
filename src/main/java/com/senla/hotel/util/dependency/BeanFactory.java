@@ -74,8 +74,6 @@ public class BeanFactory implements IBeanFactory {
     private void populateProperties() {
         String setterName;
         Method setter;
-
-
         try {
             for (Object object : singletons.values()) {
                 for (Field field : object.getClass().getDeclaredFields()) {

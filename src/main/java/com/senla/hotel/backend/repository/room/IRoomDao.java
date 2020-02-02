@@ -21,6 +21,8 @@ public interface IRoomDao {
     //Изменение цены номера
     void changeRoomPrice(int idRoom, int price) throws ObjectNotExistException;
 
+    void changeRoomNumber(int idRoom, int number) throws ObjectNotExistException;
+
     //Список всех номеров
     void printRoomList() throws ListIsEmptyException;
 

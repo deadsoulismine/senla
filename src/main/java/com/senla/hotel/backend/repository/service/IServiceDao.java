@@ -24,4 +24,6 @@ public interface IServiceDao {
     Service checkService(int idService) throws ObjectNotExistException;
 
     List<Service> findAllService();
+
+    void changeServiceTitle(int idService, String title) throws ObjectNotExistException;
 }

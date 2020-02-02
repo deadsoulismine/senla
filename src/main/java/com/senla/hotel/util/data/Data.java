@@ -46,9 +46,9 @@ public class Data implements IData {
     //Сохранение данных
     @Override
     public void saveData() {
-        service.fileSaveGuest(propData.getProperty("pathGuestList"));
-        service.fileSaveRoom(propData.getProperty("pathRoomList"));
-        service.fileSaveService(propData.getProperty("pathServiceList"));
+//        service.fileSaveGuest(propData.getProperty("pathGuestList"));
+//        service.fileSaveRoom(propData.getProperty("pathRoomList"));
+//        service.fileSaveService(propData.getProperty("pathServiceList"));
     }
 
 }

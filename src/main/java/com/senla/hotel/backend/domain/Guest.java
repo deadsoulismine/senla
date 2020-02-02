@@ -42,6 +42,16 @@ public class Guest implements Serializable {
     public Guest() {
     }
 
+    public void addService(Service service) {
+        service.setGuest(this);
+        services.add(service);
+    }
+
+    public void removeService(Service service) {
+        service.setGuest(null);
+        services.remove(service);
+    }
+
     public Room getRoom() {
         return room;
     }

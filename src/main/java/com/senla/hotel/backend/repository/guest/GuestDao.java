@@ -116,4 +116,18 @@ public class GuestDao implements IGuestDao {
         return session.getSessionFactory().openSession().createQuery("From Guest").list();
     }
 
+    @Override
+    public void changeGuestName(int idGuest, String name) throws ObjectNotExistException {
+        Guest tempGuest = checkGuest(idGuest);
+        tempGuest.setName(name);
+        session.updateObject(tempGuest);
+    }
+
+    @Override
+    public void changeGuestAge(int idGuest, int age) throws ObjectNotExistException {
+        Guest tempGuest = checkGuest(idGuest);
+        tempGuest.setAge(age);
+        session.updateObject(tempGuest);
+    }
+
 }

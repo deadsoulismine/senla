@@ -2,17 +2,18 @@ package com.senla.hotel.backend.repository.residence;
 
 import com.senla.hotel.backend.domain.Guest;
 import com.senla.hotel.backend.domain.Room;
+import com.senla.hotel.backend.domain.Service;
 import com.senla.hotel.backend.service.IService;
 import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.util.data.IData;
 import com.senla.hotel.util.database.hibernate.ISession;
 import com.senla.hotel.util.dependency.annotation.Autowired;
 import com.senla.hotel.util.dependency.stereotype.Component;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
+import java.util.Objects;
 
 @Component
-public class Residence implements IResidence {
+public class ResidenceDao implements IResidence {
     @Autowired(className = "ServiceImpl")
     private IService service;
     @Autowired(className = "Data")
@@ -30,12 +31,7 @@ public class Residence implements IResidence {
 
                 settleRoom.addGuest(settleGuest);
 
-                Session tempSession = session.getSessionFactory().openSession();
-                Transaction transaction = tempSession.beginTransaction();
-                tempSession.merge(settleGuest);
-                tempSession.merge(settleRoom);
-                transaction.commit();
-                tempSession.close();
+                session.updateObject(settleGuest);
 
                 //Проверка на переполнение количества записей в истории
 //                if (settleRoom.getHistory().size() == parseInt(data.getProp().getProperty("history_size", "1"))) {
@@ -44,6 +40,7 @@ public class Residence implements IResidence {
 //                //Добавление постояльца в историю заселения номера
 //                settleRoom.getHistory().add(service.getGuestDao().findAllGuest().stream().filter(
 //                        g -> g.getId() == idGuest).findFirst().orElse(null));
+
                 System.out.println("Guest " + settleGuest.getName() + " settled in room: " + settleRoom.getNumber());
             } else {
                 System.out.println("This room is busy!");
@@ -63,18 +60,35 @@ public class Residence implements IResidence {
             Room evictRoom = service.getRoomDao().findAllRoom().stream().filter(
                     room -> room.getNumber() == evictGuest.getRoomNumber()).findFirst().orElse(null);
 
-            evictRoom.removeGuest(evictGuest);
+            Objects.requireNonNull(evictRoom).removeGuest(evictGuest);
 
-            Session tempSession = session.getSessionFactory().openSession();
-            Transaction transaction = tempSession.beginTransaction();
-            tempSession.merge(evictRoom);
-            tempSession.merge(evictGuest);
-            transaction.commit();
-            tempSession.close();
+            session.updateObject(evictGuest);
 
         } else {
             System.out.println("This guest don't settle!");
         }
+    }
+
+    @Override
+    public void addServices(int idGuest, int idService) {
+        Service tempService = service.getServiceDao().findAllService().stream().filter(
+                s -> s.getId() == idService).findFirst().orElse(null);
+        Guest tempGuest = service.getGuestDao().findAllGuest().stream().filter(
+                g -> g.getId() == idGuest).findFirst().orElse(null);
+        tempGuest.addService(tempService);
+
+        session.updateObject(tempService);
+    }
+
+    @Override
+    public void deleteServices(int idGuest, int idService) {
+        Service tempService = service.getServiceDao().findAllService().stream().filter(
+                s -> s.getId() == idService).findFirst().orElse(null);
+        Guest tempGuest = service.getGuestDao().findAllGuest().stream().filter(
+                g -> g.getId() == idGuest).findFirst().orElse(null);
+        tempGuest.removeService(tempService);
+
+        session.updateObject(tempService);
     }
 
 }

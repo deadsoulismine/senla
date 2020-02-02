@@ -61,7 +61,6 @@ public class Mail implements IMail {
                     message.setText("Number of busy rooms: " + service.getRoomDao().findAllRoom().size() + "\n" +
                             "Number of waiting guests: " + service.getGuestDao().findAllGuest().stream().filter(
                             c -> c.getRoomNumber() == null).count());
-
                     Transport.send(message);
                     Thread.sleep(Long.parseLong(propMail.getProperty("time")));
                 } catch (MessagingException | InterruptedException mex) {

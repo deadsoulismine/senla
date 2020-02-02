@@ -89,6 +89,18 @@ public interface IService {
 
     IServiceSerialisation getServiceSerialisation();
 
-    IResidence getResidence();
+    IResidence getResidenceDao();
+
+    void changeRoomNumber(int idRoom, int number) throws ObjectNotExistException;
+
+    void changeGuestName(int idGuest, String name) throws ObjectNotExistException;
+
+    void changeGuestAge(int idGuest, int age) throws ObjectNotExistException;
+
+    void changeServiceTitle(int idService, String title) throws ObjectNotExistException;
+
+    void addServices(int idGuest, int idService);
+
+    void deleteServices(int idGuest, int idService);
 }
 

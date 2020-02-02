@@ -64,7 +64,9 @@ public class ServiceDao implements IServiceDao {
     //Изменение цены услуги
     @Override
     public void changeServicePrice(int idService, int price) throws ObjectNotExistException {
-        checkService(idService).setPrice(price);
+        Service tempService = checkService(idService);
+        tempService.setPrice(price);
+        session.updateObject(tempService);
     }
 
     //Список услуг
@@ -93,6 +95,13 @@ public class ServiceDao implements IServiceDao {
     @Override
     public List<Service> findAllService() {
         return session.getSessionFactory().openSession().createQuery("From Service").list();
+    }
+
+    @Override
+    public void changeServiceTitle(int idService, String title) throws ObjectNotExistException {
+        Service tempService = checkService(idService);
+        tempService.setTitle(title);
+        session.updateObject(tempService);
     }
 
 }

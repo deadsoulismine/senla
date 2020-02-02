@@ -14,7 +14,6 @@ public class Exit implements IAction {
 
     @Override
     public void execute() {
-        data.saveData();
         System.exit(0);
     }
 }

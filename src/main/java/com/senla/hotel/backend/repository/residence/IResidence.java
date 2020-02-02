@@ -8,4 +8,8 @@ public interface IResidence {
 
     //Выселение
     void evict(int idGuest) throws ObjectNotExistException;
+
+    void addServices(int idGuest, int idService);
+
+    void deleteServices(int idGuest, int idService);
 }

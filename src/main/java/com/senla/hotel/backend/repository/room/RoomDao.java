@@ -70,17 +70,32 @@ public class RoomDao implements IRoomDao {
         Room tempRoom = checkRoom(roomNumber);
         if ((tempRoom.getStatus()) && (tempRoom.getGuests().size() == 0)) {
             tempRoom.setStatus(false);
-        } else if (tempRoom.getGuests().size() != 0) {
+        } else if ((!tempRoom.getStatus()) && tempRoom.getGuests().size() == 0) {
             tempRoom.setStatus(true);
         } else {
             System.out.println("In this number exist the guest! Evict him and try again.");
         }
+        session.updateObject(tempRoom);
     }
 
     //Изменение цены номера
     @Override
     public void changeRoomPrice(int idRoom, int price) throws ObjectNotExistException {
-        checkRoom(idRoom).setPrice(price);
+        Room tempRoom = checkRoom(idRoom);
+        tempRoom.setPrice(price);
+        session.updateObject(tempRoom);
+    }
+
+    //Изменение номера комнаты
+    @Override
+    public void changeRoomNumber(int idRoom, int number) throws ObjectNotExistException {
+        Room tempRoom = checkRoom(idRoom);
+        if (tempRoom.getGuests().size() != 0) {
+            System.out.println("In this number exist the guest! Evict him and try again.");
+        } else {
+            tempRoom.setNumber(number);
+            session.updateObject(tempRoom);
+        }
     }
 
     //Список всех номеров
