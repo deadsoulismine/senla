@@ -8,7 +8,5 @@ public interface IData {
 
     void load() throws IOException, ReflectiveOperationException, InterruptedException, SQLException;
 
-    void saveData();
-
     Properties getProp();
 }

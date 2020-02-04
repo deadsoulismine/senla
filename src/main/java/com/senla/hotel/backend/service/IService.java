@@ -65,6 +65,10 @@ public interface IService {
     //Вывод списка заселённых постольцев
     void printSettleGuests() throws ListIsEmptyException;
 
+    void printListUnusedServices(int idGuest) throws ObjectNotExistException;
+
+    void printListUsedServices(int idGuest) throws ObjectNotExistException;
+
     void fileLoadGuest(String stringScanner);
 
     void fileSaveGuest(String stringScanner);
@@ -99,8 +103,8 @@ public interface IService {
 
     void changeServiceTitle(int idService, String title) throws ObjectNotExistException;
 
-    void addServices(int idGuest, int idService);
+    void addServices(int idGuest, int idService) throws ObjectNotExistException;
 
-    void deleteServices(int idGuest, int idService);
+    void deleteServices(int idGuest, int idService) throws ObjectNotExistException;
 }
 

@@ -10,7 +10,10 @@ import com.senla.hotel.util.database.hibernate.ISession;
 import com.senla.hotel.util.dependency.annotation.Autowired;
 import com.senla.hotel.util.dependency.stereotype.Component;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class ResidenceDao implements IResidence {
@@ -34,12 +37,14 @@ public class ResidenceDao implements IResidence {
                 session.updateObject(settleGuest);
 
                 //Проверка на переполнение количества записей в истории
-//                if (settleRoom.getHistory().size() == parseInt(data.getProp().getProperty("history_size", "1"))) {
-//                    settleRoom.getHistory().remove(0);
-//                }
-//                //Добавление постояльца в историю заселения номера
-//                settleRoom.getHistory().add(service.getGuestDao().findAllGuest().stream().filter(
-//                        g -> g.getId() == idGuest).findFirst().orElse(null));
+                if (settleRoom.getHistory().size() == Integer.parseInt(data.getProp().getProperty("history_size", "1"))) {
+                    settleRoom.removeRecord();
+                }
+                //Добавление постояльца в историю заселения номера
+                settleRoom.addRecord(service.getGuestDao().findAllGuest().stream().filter(
+                        g -> g.getId() == idGuest).findFirst().orElse(null));
+
+                session.updateObject(settleRoom);
 
                 System.out.println("Guest " + settleGuest.getName() + " settled in room: " + settleRoom.getNumber());
             } else {
@@ -70,25 +75,58 @@ public class ResidenceDao implements IResidence {
     }
 
     @Override
-    public void addServices(int idGuest, int idService) {
-        Service tempService = service.getServiceDao().findAllService().stream().filter(
-                s -> s.getId() == idService).findFirst().orElse(null);
-        Guest tempGuest = service.getGuestDao().findAllGuest().stream().filter(
-                g -> g.getId() == idGuest).findFirst().orElse(null);
-        tempGuest.addService(tempService);
+    public void addServices(int idGuest, int idService) throws ObjectNotExistException {
+        Guest tempGuest = service.getGuestDao().checkGuest(idGuest);
+        Service tempService = service.getServiceDao().checkService(idService);
+        if (tempGuest.getServices().size() == service.getServiceDao().findAllService().size()) {
+            System.out.println("This guest has all services!");
 
-        session.updateObject(tempService);
+
+
+        } else if (tempGuest.getServices().stream().noneMatch(s -> s.getId() == idService)) {
+            tempGuest.addService(tempService);
+            session.updateObject(tempGuest);
+        } else {
+            System.out.println("This guest has this service!");
+        }
     }
 
     @Override
-    public void deleteServices(int idGuest, int idService) {
-        Service tempService = service.getServiceDao().findAllService().stream().filter(
-                s -> s.getId() == idService).findFirst().orElse(null);
-        Guest tempGuest = service.getGuestDao().findAllGuest().stream().filter(
-                g -> g.getId() == idGuest).findFirst().orElse(null);
-        tempGuest.removeService(tempService);
+    public void deleteServices(int idGuest, int idService) throws ObjectNotExistException {
+        Service tempService = service.getServiceDao().checkService(idService);
+        Guest tempGuest = service.getGuestDao().checkGuest(idGuest);
+        if (tempGuest.getServices().size() == 0) {
+            System.out.println("This guest hasn't services!");
+        } else if (tempGuest.getServices().stream().anyMatch(s -> s.getId() == idService)) {
+            tempGuest.removeService(tempService);
+            session.updateObject(tempGuest);
+        } else {
+            System.out.println("This guest hasn't this service!");
+        }
+    }
 
-        session.updateObject(tempService);
+    @Override
+    public void printListUnusedServices(int idGuest) throws ObjectNotExistException {
+        Guest tempGuest = service.getGuestDao().checkGuest(idGuest);
+
+        Set<Integer> id = tempGuest.getServices().stream()
+                .map(Service::getId)
+                .collect(Collectors.toSet());
+
+        List<Service> listOfDifference = service.getServiceDao().findAllService().stream()
+                .filter(s -> !id.contains(s.getId()))
+                .collect(Collectors.toList());
+
+        listOfDifference.stream().peek(s -> System.out.println("ID: " + s.getId() + " | Title: " + s.getTitle() +
+                " | Price: " + s.getPrice())).collect(Collectors.toList());
+    }
+
+    @Override
+    public void printListUsedServices(int idGuest) throws ObjectNotExistException {
+        Guest tempGuest = service.getGuestDao().checkGuest(idGuest);
+
+        tempGuest.getServices().stream().peek(s -> System.out.println("ID: " + s.getId() + " | Title: " + s.getTitle() +
+                " | Price: " + s.getPrice())).collect(Collectors.toList());
     }
 
 }

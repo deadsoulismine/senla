@@ -36,19 +36,7 @@ public class Data implements IData {
         FileInputStream fileInputStreamData = new FileInputStream(PATH_TO_PROPERTIES_OF_DATA);
         propData.load(fileInputStreamData);
 
-//        service.fileLoadGuest(propData.getProperty("pathGuestList"));
-//        service.fileLoadRoom(propData.getProperty("pathRoomList"));
-//        service.fileLoadService(propData.getProperty("pathServiceList"));
-
         fillField.action();
-    }
-
-    //Сохранение данных
-    @Override
-    public void saveData() {
-//        service.fileSaveGuest(propData.getProperty("pathGuestList"));
-//        service.fileSaveRoom(propData.getProperty("pathRoomList"));
-//        service.fileSaveService(propData.getProperty("pathServiceList"));
     }
 
 }

@@ -25,30 +25,38 @@ public class Guest implements Serializable {
     @Column(name = "room_number")
     private Integer roomNumber;
 
-    @OneToMany(mappedBy = "guest", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable (name="hotel.service_order",
+            joinColumns=@JoinColumn (name="guest_id"),
+            inverseJoinColumns=@JoinColumn(name="service_id"))
     private List<Service> services;
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    @ManyToMany
+    @JoinTable (name="hotel.room_history",
+            joinColumns=@JoinColumn (name="guest_id"),
+            inverseJoinColumns=@JoinColumn(name="room_id"))
+    private List<Room> rooms;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
 
-    public Guest(String name, int age, Integer roomNumber, Room room) {
-        this.name = name;
-        this.age = age;
-        this.roomNumber = roomNumber;
-        this.room = room;
-    }
-
     public Guest() {
     }
 
     public void addService(Service service) {
-        service.setGuest(this);
         services.add(service);
     }
 
     public void removeService(Service service) {
-        service.setGuest(null);
         services.remove(service);
     }
 

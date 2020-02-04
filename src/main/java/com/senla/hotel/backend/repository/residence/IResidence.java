@@ -9,7 +9,11 @@ public interface IResidence {
     //Выселение
     void evict(int idGuest) throws ObjectNotExistException;
 
-    void addServices(int idGuest, int idService);
+    void addServices(int idGuest, int idService) throws ObjectNotExistException;
 
-    void deleteServices(int idGuest, int idService);
+    void deleteServices(int idGuest, int idService) throws ObjectNotExistException;
+
+    void printListUnusedServices(int idGuest) throws ObjectNotExistException;
+
+    void printListUsedServices(int idGuest) throws ObjectNotExistException;
 }

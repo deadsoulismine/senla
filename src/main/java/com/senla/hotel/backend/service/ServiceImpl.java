@@ -118,6 +118,16 @@ public class ServiceImpl implements IService {
     }
 
     @Override
+    public void printListUnusedServices(int idGuest) throws ObjectNotExistException {
+        getResidenceDao().printListUnusedServices(idGuest);
+    }
+
+    @Override
+    public void printListUsedServices(int idGuest) throws ObjectNotExistException {
+        getResidenceDao().printListUsedServices(idGuest);
+    }
+
+    @Override
     public void fileLoadGuest(String stringScanner) {
         getGuestSerialisation().fileLoadGuest(stringScanner);
     }
@@ -203,12 +213,12 @@ public class ServiceImpl implements IService {
     }
 
     @Override
-    public void addServices(int idGuest, int idService) {
+    public void addServices(int idGuest, int idService) throws ObjectNotExistException {
         getResidenceDao().addServices(idGuest, idService);
     }
 
     @Override
-    public void deleteServices(int idGuest, int idService) {
+    public void deleteServices(int idGuest, int idService) throws ObjectNotExistException {
         getResidenceDao().deleteServices(idGuest, idService);
     }
 }

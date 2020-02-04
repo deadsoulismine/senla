@@ -21,13 +21,6 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Guest> guests = new ArrayList<>();
 
-    public Room(int number, int price, boolean status, List<Guest> guests) {
-        this.number = number;
-        this.price = price;
-        this.status = status;
-        this.guests = guests;
-    }
-
     public Room() {
     }
 
@@ -43,11 +36,23 @@ public class Room {
         guests.remove(guest);
     }
 
-//    private ArrayList<Guest> history = new ArrayList<>();
+    public void addRecord(Guest guest) {
+        history.add(guest);
+    }
 
-//    public ArrayList<Guest> getHistory() {
-//        return history;
-//    }
+    public void removeRecord() {
+        history.remove(0);
+    }
+
+    @ManyToMany
+    @JoinTable (name="hotel.room_history",
+            joinColumns=@JoinColumn (name="room_id"),
+            inverseJoinColumns=@JoinColumn(name="guest_id"))
+    private List<Guest> history = new ArrayList<>();
+
+    public List<Guest> getHistory() {
+        return history;
+    }
 
     public int getId() {
         return id;
@@ -89,15 +94,11 @@ public class Room {
         this.number = number;
     }
 
-//    public void setHistory(ArrayList<Guest> history) {
-//        this.history = history;
-//    }
-
-    public void setGuests(List<Guest> guests) {
-        this.guests = guests;
+    public void setHistory(List<Guest> history) {
+        this.history = history;
     }
 
-    public void setGuests(ArrayList<Guest> guests) {
+    public void setGuests(List<Guest> guests) {
         this.guests = guests;
     }
 
