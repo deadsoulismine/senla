@@ -18,6 +18,7 @@ import java.util.Objects;
 @Component
 public class BeanFactory implements IBeanFactory {
     private static Map<String, Object> singletons = new HashMap<>();
+    private Logger objectLogger;
 
     public Object getBean(String beanName) {
         return singletons.get(beanName);
@@ -58,7 +59,7 @@ public class BeanFactory implements IBeanFactory {
                 if (classInfo.getAnnotationInfo(Component.class.getName()).getParameterValues().getValue("type").equals("null")) {
                     Object instance = Class.forName(classInfo.getName()).newInstance();
                     //Обработка имени
-                    Logger objectLogger = LogManager.getLogger(instance.getClass().getDeclaringClass());
+                    objectLogger = LogManager.getLogger(instance.getClass().getDeclaringClass());
                     objectLogger.info("Object of class " + instance + " is created");
                     String beanName = classInfo.getSimpleName();
                     //Помещение инстанса в мап с ключом, который является обработанным названием класса
@@ -79,7 +80,7 @@ public class BeanFactory implements IBeanFactory {
                 for (Field field : object.getClass().getDeclaredFields()) {
                     if (field.isAnnotationPresent(Autowired.class)) {
                         String className = field.getAnnotation(Autowired.class).className();
-                        Logger objectLogger = LogManager.getLogger(object.getClass().getDeclaringClass());
+                        objectLogger = LogManager.getLogger(object.getClass().getDeclaringClass());
                         //Инициализация интерфейсов
                         if (!className.equals("null")) {
                             field.setAccessible(true);
