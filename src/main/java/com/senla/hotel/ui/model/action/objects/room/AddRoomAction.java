@@ -5,7 +5,7 @@ import com.senla.hotel.ui.exception.SameObjectsException;
 import com.senla.hotel.ui.model.action.IAction;
 import com.senla.hotel.util.dependency.annotation.Autowired;
 import com.senla.hotel.util.dependency.stereotype.Component;
-import com.senla.hotel.util.scanner.IScannerService;
+import scanner.IScannerService;
 
 @Component
 public class AddRoomAction implements IAction {

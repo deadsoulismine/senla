@@ -1,4 +1,4 @@
-package com.senla.hotel.util.scanner;
+package scanner;
 
 public interface IScannerService {
     String stringScanner();

@@ -4,7 +4,7 @@ import com.senla.hotel.backend.service.IService;
 import com.senla.hotel.ui.model.action.IAction;
 import com.senla.hotel.util.dependency.annotation.Autowired;
 import com.senla.hotel.util.dependency.stereotype.Component;
-import com.senla.hotel.util.scanner.IScannerService;
+import scanner.IScannerService;
 
 import java.sql.SQLException;
 

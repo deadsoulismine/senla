@@ -1,4 +1,4 @@
-package com.senla.hotel.util.scanner;
+package scanner;
 
 import com.senla.hotel.ui.exception.TypeException;
 import com.senla.hotel.util.dependency.stereotype.Component;

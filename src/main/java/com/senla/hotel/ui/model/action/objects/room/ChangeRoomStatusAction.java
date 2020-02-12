@@ -7,7 +7,7 @@ import com.senla.hotel.ui.model.action.IAction;
 import com.senla.hotel.util.data.IData;
 import com.senla.hotel.util.dependency.annotation.Autowired;
 import com.senla.hotel.util.dependency.stereotype.Component;
-import com.senla.hotel.util.scanner.IScannerService;
+import scanner.IScannerService;
 
 import static java.lang.Boolean.parseBoolean;
 

@@ -6,7 +6,7 @@ import com.senla.hotel.ui.exception.ObjectNotExistException;
 import com.senla.hotel.ui.model.action.IAction;
 import com.senla.hotel.util.dependency.annotation.Autowired;
 import com.senla.hotel.util.dependency.stereotype.Component;
-import com.senla.hotel.util.scanner.IScannerService;
+import scanner.IScannerService;
 
 @Component
 public class AddServicesAction implements IAction {
