@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<rss version="0.91">
+  <channel>
+    <title>senla.com - Checkstyle report</title>
+    <link>${project.url}</link>
+    <description>senla.com - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2020</copyright>
+    <item>
+      <title>File: 68,
+             Errors: 0,
+             Warnings: 1214,
+             Infos: 0
+      </title>
+            <link>${project.url}/checkstyle.html</link>
+      <description>
+        <p>Click <a href="${project.url}/checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.builder.IBuilder.java">com/senla/hotel/ui/model/builder/IBuilder.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.serialisation.room.FileSaveRoomAction.java">com/senla/hotel/ui/model/action/serialisation/room/FileSaveRoomAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.exception.SameObjectsException.java">com/senla/hotel/ui/exception/SameObjectsException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.service.ServiceSerialisation.java">com/senla/hotel/backend/repository/service/ServiceSerialisation.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  32
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.DI.annotation.Autowired.java">com/senla/hotel/util/DI/annotation/Autowired.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.DI.BeanFactory.java">com/senla/hotel/util/DI/BeanFactory.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  75
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.objects.service.DeleteServiceAction.java">com/senla/hotel/ui/model/action/objects/service/DeleteServiceAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  7
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.objects.guest.AddGuestAction.java">com/senla/hotel/ui/model/action/objects/guest/AddGuestAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  9
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.service.ServiceImpl.java">com/senla/hotel/backend/service/ServiceImpl.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  103
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.IAction.java">com/senla/hotel/ui/model/action/IAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.objects.room.ChangeRoomStatusAction.java">com/senla/hotel/ui/model/action/objects/room/ChangeRoomStatusAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  13
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.serialisation.guest.FileLoadGuestAction.java">com/senla/hotel/ui/model/action/serialisation/guest/FileLoadGuestAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.scanner.ScannerService.java">com/senla/hotel/util/scanner/ScannerService.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  21
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.service.IServiceGeneral.java">com/senla/hotel/backend/repository/service/IServiceGeneral.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.room.IRoomSerialisation.java">com/senla/hotel/backend/repository/room/IRoomSerialisation.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.DI.stereotype.Component.java">com/senla/hotel/util/DI/stereotype/Component.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.guest.GuestGeneral.java">com/senla/hotel/backend/repository/guest/GuestGeneral.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  72
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.DI.IBeanFactory.java">com/senla/hotel/util/DI/IBeanFactory.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  5
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.room.RoomSerialisation.java">com/senla/hotel/backend/repository/room/RoomSerialisation.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  22
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.menu.Menu.java">com/senla/hotel/ui/model/menu/Menu.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  19
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.mail.Mail.java">com/senla/hotel/util/mail/Mail.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  52
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.objects.service.ChangeServicePriceAction.java">com/senla/hotel/ui/model/action/objects/service/ChangeServicePriceAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  10
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.data.IData.java">com/senla/hotel/util/data/IData.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.navigator.Navigator.java">com/senla/hotel/ui/model/navigator/Navigator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  37
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.objects.guest.DeleteGuestAction.java">com/senla/hotel/ui/model/action/objects/guest/DeleteGuestAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  21
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.view.IViewController.java">com/senla/hotel/ui/view/IViewController.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.mail.IMail.java">com/senla/hotel/util/mail/IMail.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.room.IRoomGeneral.java">com/senla/hotel/backend/repository/room/IRoomGeneral.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  8
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.exception.ListIsEmptyException.java">com/senla/hotel/ui/exception/ListIsEmptyException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.guest.GuestSerialisation.java">com/senla/hotel/backend/repository/guest/GuestSerialisation.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  32
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.residence.IResidence.java">com/senla/hotel/backend/repository/residence/IResidence.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.view.ViewController.java">com/senla/hotel/ui/view/ViewController.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  8
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.data.LoadID.java">com/senla/hotel/util/data/LoadID.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  48
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.domain.Service.java">com/senla/hotel/backend/domain/Service.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  25
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.controller.MenuController.java">com/senla/hotel/ui/controller/MenuController.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  24
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.domain.Room.java">com/senla/hotel/backend/domain/Room.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  32
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.residence.Residence.java">com/senla/hotel/backend/repository/residence/Residence.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  41
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.residence.EvictAction.java">com/senla/hotel/ui/model/action/residence/EvictAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  8
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.Main.java">com/senla/hotel/Main.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  20
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.menu.MenuItem.java">com/senla/hotel/ui/model/menu/MenuItem.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  21
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.navigator.INavigator.java">com/senla/hotel/ui/model/navigator/INavigator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.room.RoomGeneral.java">com/senla/hotel/backend/repository/room/RoomGeneral.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  87
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.guest.IGuestGeneral.java">com/senla/hotel/backend/repository/guest/IGuestGeneral.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  7
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.exception.IndexException.java">com/senla/hotel/ui/exception/IndexException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.data.FillField.java">com/senla/hotel/util/data/FillField.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  13
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.controller.IMenuController.java">com/senla/hotel/ui/controller/IMenuController.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.objects.room.AddRoomAction.java">com/senla/hotel/ui/model/action/objects/room/AddRoomAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  9
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.service.IService.java">com/senla/hotel/backend/service/IService.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  32
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.residence.SettleAction.java">com/senla/hotel/ui/model/action/residence/SettleAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  11
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.objects.service.AddServiceAction.java">com/senla/hotel/ui/model/action/objects/service/AddServiceAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  9
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.exception.ObjectNotExistException.java">com/senla/hotel/ui/exception/ObjectNotExistException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.serialisation.room.FileLoadRoomAction.java">com/senla/hotel/ui/model/action/serialisation/room/FileLoadRoomAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.service.IServiceSerialisation.java">com/senla/hotel/backend/repository/service/IServiceSerialisation.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.serialisation.guest.FileSaveGuestAction.java">com/senla/hotel/ui/model/action/serialisation/guest/FileSaveGuestAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.domain.Guest.java">com/senla/hotel/backend/domain/Guest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  32
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.objects.room.ChangeRoomPriceAction.java">com/senla/hotel/ui/model/action/objects/room/ChangeRoomPriceAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  10
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.scanner.IScannerService.java">com/senla/hotel/util/scanner/IScannerService.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.data.Fill.java">com/senla/hotel/util/data/Fill.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.service.ServiceGeneral.java">com/senla/hotel/backend/repository/service/ServiceGeneral.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  44
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.objects.room.DeleteRoomAction.java">com/senla/hotel/ui/model/action/objects/room/DeleteRoomAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  7
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.backend.repository.guest.IGuestSerialisation.java">com/senla/hotel/backend/repository/guest/IGuestSerialisation.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.data.IFillField.java">com/senla/hotel/util/data/IFillField.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.serialisation.service.FileSaveServiceAction.java">com/senla/hotel/ui/model/action/serialisation/service/FileSaveServiceAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.builder.Builder.java">com/senla/hotel/ui/model/builder/Builder.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  66
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.serialisation.service.FileLoadServiceAction.java">com/senla/hotel/ui/model/action/serialisation/service/FileLoadServiceAction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.exception.TypeException.java">com/senla/hotel/ui/exception/TypeException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.ui.model.action.Exit.java">com/senla/hotel/ui/model/action/Exit.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  7
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#com.senla.hotel.util.data.Data.java">com/senla/hotel/util/data/Data.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  28
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+
