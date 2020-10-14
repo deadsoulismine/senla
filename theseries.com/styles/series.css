@@ -1,0 +1,40 @@
+#content {
+	margin: 20px 0px 20px 20px;
+	height: 600px;
+}
+
+#picture {
+	margin-right: 20px;
+	display: block;
+	float: left;
+}
+
+#describe {
+	font-size: 120%;
+	text-align: justify;
+	width: 840px;
+}
+
+table {
+	margin: 0 auto;
+	width: 550px;
+	border: 1px solid #9d9ba8;
+	border-collapse: collapse;
+	color: #606060;
+}
+
+th {
+	background-color: #cbc9d5;
+}
+
+td,th {
+	border: 1px solid #9d9ba8;
+	padding: 2px;
+	height: 40px;
+	border: 1px solid #9d9ba8;
+}
+
+#icons_series {
+	width: 70px;
+	margin: 0 auto;
+}

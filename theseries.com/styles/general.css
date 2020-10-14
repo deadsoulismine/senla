@@ -1,0 +1,105 @@
+@font-face {
+    font-family: Blogger Sans;
+    src: url('../font/Blogger_Sans.otf');
+}
+
+body {
+	background-color: #c7c7c7;
+	margin: 0;
+	text-align: center;
+}
+
+#main {
+	background-color: #fff;
+	font: 14px/1.5 'Blogger Sans', Arial, Verdana, sans-serif;
+	width: 1200px;
+	margin: 30px auto;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+header {
+	text-align: center;
+	font-size: 450%;
+	padding: 10px;
+	background-image: url(../images/background.jpg);
+	user-select: none; 
+	color: #fff;
+}
+
+#describe_but {
+	font-size: 200%;
+	text-align: center;
+	margin: 20px 0px 0px 190px;
+	width: 500px;
+}
+
+.buttons {
+  text-decoration: none; 
+  user-select: none; 
+  background: #717075; 
+  padding: 10px;
+  display: block;
+  width: 300px;
+  margin: 10px auto;
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  border-radius: 3px;
+} 
+
+.buttons:hover { background-color: #a4a4a4; color: #000000; }
+.buttons:active { background-color: #d0d0d0; color: #000000; }
+
+#icons {
+	width: 150px;
+	margin: 10px auto;
+}
+
+.areas{
+	background: #2b2b2b;
+	color: #fff;
+	float: right;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+#add_but {
+	width: 470px;	
+	margin: 0 auto; 	
+}
+
+#add_form {
+	color: #000;
+	width: 270px;
+}
+
+#upd_form {
+	width: 270px;
+}
+
+.form {
+	font: 12px/1.25 'Blogger Sans', Arial, Verdana, sans-serif;
+	width: 450px;
+	margin: 0 auto;
+	padding: 10px auto;
+}
+
+input[type = "text"], textarea{
+	font: 14px/1.5 'Blogger Sans', Arial, Verdana, sans-serif;
+	border: 1px solid #78777d;
+	padding: 0 3px;
+}
+
+input[type = "text"] {
+	font: 14px/1.5 'Blogger Sans', Arial, Verdana, sans-serif;
+	border: 1px solid #717075;
+	padding: 0 3px;
+	width: 200px;
+	height: 20px;
+}
+
+footer {
+	margin-top: 450px;
+	padding: 20px;
+	font-size: 100%;
+	background-color: #78777d;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}

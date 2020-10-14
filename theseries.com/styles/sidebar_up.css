@@ -1,0 +1,41 @@
+#sidebar_up {
+	font-size: 150%;
+	padding: 10px;
+	background-color: #717075;
+	height: 40px;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1);
+}
+
+#main_href {
+	width: 100px;
+	padding: 2px 2px 2px 2px;
+	margin-left: 20px;
+	margin-top: 3px;
+	float: left;
+}
+
+#search_form {
+	float: right;
+	width: 250px;
+	position: relative;
+}
+
+#search_area {
+	padding: 6px 32px 6px 8px;
+	margin-top: 4px;
+	width: 200px;
+	border: 0;
+	outline: 0;
+}
+
+#search_pic {
+	background: url(/images/search.png) no-repeat;
+	width: 24px;
+	height: 24px;
+	border: 0;
+	outline: 0;
+	position: absolute;
+	top: 8px;
+	right: 6px;
+	cursor: pointer;
+}
